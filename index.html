@@ -1,0 +1,1533 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Crucero Mediterráneo — Guía Cultural Profunda</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Inter:wght@300;400;500&display=swap');
+
+  :root {
+    --aegean: #1a3a5c;
+    --marble: #f5f0e8;
+    --terracotta: #b85c38;
+    --gold: #c9a84c;
+    --sand: #e8dfc8;
+    --ink: #1c1c1c;
+    --mist: #7a8a9a;
+    --parchment: #faf6ef;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Inter', sans-serif;
+    background: var(--parchment);
+    color: var(--ink);
+    font-size: 15px;
+    line-height: 1.7;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0;
+    background: var(--aegean);
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    padding: 0 1.5rem;
+    height: 52px;
+    gap: 0;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+  nav::-webkit-scrollbar { display: none; }
+  nav a {
+    color: rgba(255,255,255,0.65);
+    text-decoration: none;
+    font-size: 11.5px;
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    padding: 0 0.85rem;
+    white-space: nowrap;
+    transition: color 0.2s;
+    height: 52px;
+    display: flex;
+    align-items: center;
+    border-bottom: 2px solid transparent;
+  }
+  nav a:hover, nav a.active {
+    color: var(--gold);
+    border-bottom-color: var(--gold);
+  }
+  .nav-title {
+    color: white;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 16px;
+    font-weight: 300;
+    letter-spacing: 0.08em;
+    margin-right: 1.5rem;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+  .nav-sep {
+    color: rgba(255,255,255,0.2);
+    margin-right: 0.5rem;
+  }
+
+  /* HERO */
+  .hero {
+    margin-top: 52px;
+    background: linear-gradient(165deg, var(--aegean) 0%, #0d2240 55%, #1a1a2e 100%);
+    color: white;
+    padding: 5rem 2rem 4rem;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.025'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+  }
+  .hero h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2.2rem, 5vw, 3.8rem);
+    font-weight: 300;
+    letter-spacing: 0.05em;
+    line-height: 1.2;
+    margin-bottom: 1rem;
+    position: relative;
+  }
+  .hero h1 em {
+    font-style: italic;
+    color: var(--gold);
+  }
+  .hero-sub {
+    font-size: 13px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.55);
+    margin-bottom: 2.5rem;
+    position: relative;
+  }
+  .route-line {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0;
+    flex-wrap: wrap;
+    max-width: 820px;
+    margin: 0 auto;
+    position: relative;
+  }
+  .route-stop {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+  }
+  .route-dot {
+    width: 9px; height: 9px;
+    background: var(--gold);
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+  .route-stop span {
+    font-size: 10px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.6);
+    text-align: center;
+  }
+  .route-stop .date {
+    font-size: 9px;
+    color: var(--gold);
+    opacity: 0.75;
+  }
+  .route-connector {
+    width: 30px; height: 1px;
+    background: rgba(255,255,255,0.2);
+    flex-shrink: 0;
+    margin-bottom: 20px;
+  }
+
+  /* MAIN LAYOUT */
+  .container { max-width: 860px; margin: 0 auto; padding: 0 1.5rem; }
+
+  /* DESTINATION SECTIONS */
+  .destination {
+    margin: 3rem 0 0;
+    scroll-margin-top: 60px;
+  }
+  .dest-header {
+    background: var(--aegean);
+    color: white;
+    padding: 2.5rem 2rem 2rem;
+    position: relative;
+    overflow: hidden;
+  }
+  .dest-header::after {
+    content: '';
+    position: absolute;
+    right: -20px; top: -20px;
+    width: 120px; height: 120px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.04);
+  }
+  .dest-number {
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 0.4rem;
+  }
+  .dest-header h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2.4rem;
+    font-weight: 300;
+    line-height: 1.1;
+    margin-bottom: 0.3rem;
+  }
+  .dest-header h2 em {
+    font-style: italic;
+    color: rgba(255,255,255,0.6);
+    font-size: 1.4rem;
+  }
+  .dest-date {
+    font-size: 11px;
+    color: rgba(255,255,255,0.4);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+  .dest-tagline {
+    font-size: 14px;
+    color: rgba(255,255,255,0.7);
+    margin-top: 0.8rem;
+    font-style: italic;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 18px;
+    font-weight: 300;
+  }
+
+  .dest-body {
+    background: white;
+    border: 1px solid #e8e2d8;
+    border-top: none;
+  }
+
+  /* SECTION BLOCKS */
+  .section-block {
+    border-bottom: 1px solid #ede8df;
+    padding: 2rem 2rem;
+  }
+  .section-block:last-child { border-bottom: none; }
+
+  .section-label {
+    display: flex;
+    align-items: center;
+    gap: 0.7rem;
+    margin-bottom: 1.2rem;
+  }
+  .section-icon {
+    width: 28px; height: 28px;
+    background: var(--sand);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 13px;
+    flex-shrink: 0;
+  }
+  .section-label h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--aegean);
+    letter-spacing: 0.02em;
+  }
+
+  p { margin-bottom: 0.85rem; }
+  p:last-child { margin-bottom: 0; }
+
+  /* PRIORITY PLACES */
+  .priority-group { margin-bottom: 1.2rem; }
+  .priority-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 3px 10px;
+    border-radius: 20px;
+    margin-bottom: 0.7rem;
+  }
+  .badge-must { background: #fef3e2; color: #a05c00; border: 1px solid #f5c842; }
+  .badge-rec { background: #edf4ff; color: #1a4a8a; border: 1px solid #b3cfef; }
+  .badge-opt { background: #f0f4f0; color: #3a6a3a; border: 1px solid #aecaae; }
+
+  .place-item {
+    padding: 0.8rem 1rem;
+    background: var(--parchment);
+    border-left: 3px solid var(--sand);
+    margin-bottom: 0.5rem;
+    border-radius: 0 4px 4px 0;
+  }
+  .place-item.must { border-left-color: var(--gold); }
+  .place-item.rec { border-left-color: var(--aegean); }
+  .place-item.opt { border-left-color: #7ab87a; }
+  .place-name {
+    font-weight: 500;
+    font-size: 14px;
+    color: var(--ink);
+    margin-bottom: 2px;
+  }
+  .place-desc { font-size: 13px; color: #555; line-height: 1.5; }
+
+  /* ROUTE TABLE */
+  .route-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+  .route-table th {
+    background: var(--aegean);
+    color: white;
+    padding: 8px 12px;
+    text-align: left;
+    font-weight: 400;
+    letter-spacing: 0.05em;
+    font-size: 11px;
+    text-transform: uppercase;
+  }
+  .route-table td {
+    padding: 9px 12px;
+    border-bottom: 1px solid #ede8df;
+    vertical-align: top;
+  }
+  .route-table tr:nth-child(even) td { background: var(--parchment); }
+  .route-table .time { color: var(--terracotta); font-weight: 500; white-space: nowrap; }
+  .route-table .dur { color: var(--mist); white-space: nowrap; }
+
+  /* FOOD */
+  .food-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.6rem; }
+  @media (max-width: 500px) { .food-grid { grid-template-columns: 1fr; } }
+  .food-item {
+    background: var(--parchment);
+    border: 1px solid #e8e2d8;
+    border-radius: 6px;
+    padding: 0.75rem 1rem;
+  }
+  .food-name { font-weight: 500; font-size: 13.5px; color: var(--terracotta); margin-bottom: 2px; }
+  .food-desc { font-size: 12.5px; color: #555; }
+  .food-type { font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--mist); margin-bottom: 3px; }
+
+  /* SCORES */
+  .scores-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); gap: 0.8rem; }
+  .score-card {
+    text-align: center;
+    padding: 1rem 0.5rem;
+    background: var(--parchment);
+    border: 1px solid #e8e2d8;
+    border-radius: 6px;
+  }
+  .score-label { font-size: 10px; text-transform: uppercase; letter-spacing: 0.1em; color: var(--mist); margin-bottom: 6px; }
+  .score-val {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2.4rem;
+    font-weight: 600;
+    line-height: 1;
+    color: var(--aegean);
+  }
+  .score-val span { font-size: 1rem; color: var(--mist); font-weight: 300; }
+  .score-stars { color: var(--gold); font-size: 10px; letter-spacing: 2px; }
+
+  /* TIPS */
+  .tip-item {
+    display: flex;
+    gap: 0.7rem;
+    margin-bottom: 0.65rem;
+    font-size: 13.5px;
+  }
+  .tip-icon { flex-shrink: 0; font-size: 15px; }
+
+  /* PHOTO SPOTS */
+  .photo-item {
+    background: var(--parchment);
+    border: 1px solid #e8e2d8;
+    border-radius: 6px;
+    padding: 0.75rem 1rem;
+    margin-bottom: 0.5rem;
+  }
+  .photo-name { font-weight: 500; color: var(--ink); font-size: 14px; }
+  .photo-tip { font-size: 12.5px; color: var(--mist); margin-top: 2px; }
+
+  /* SPECIAL SECTION: DARDANELOS */
+  .navigation-section {
+    background: linear-gradient(135deg, #0d2240, #1a3a5c);
+    color: white;
+    margin: 3rem 0 0;
+    padding: 3rem 2rem;
+    scroll-margin-top: 60px;
+  }
+  .navigation-section h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2rem;
+    font-weight: 300;
+    margin-bottom: 0.4rem;
+  }
+  .nav-section-date { font-size: 11px; color: var(--gold); letter-spacing: 0.15em; text-transform: uppercase; margin-bottom: 1.5rem; }
+  .nav-col-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-top: 1.5rem; }
+  @media (max-width: 600px) { .nav-col-grid { grid-template-columns: 1fr; } }
+  .nav-col h4 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.1rem;
+    color: var(--gold);
+    margin-bottom: 0.7rem;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+    padding-bottom: 0.4rem;
+  }
+  .nav-col p { font-size: 13.5px; color: rgba(255,255,255,0.75); }
+  .strait-fact {
+    background: rgba(255,255,255,0.07);
+    border: 1px solid rgba(255,255,255,0.12);
+    border-radius: 6px;
+    padding: 0.7rem 1rem;
+    margin-bottom: 0.5rem;
+    font-size: 13px;
+    color: rgba(255,255,255,0.8);
+  }
+  .strait-fact strong { color: var(--gold); }
+
+  /* FINAL SECTIONS */
+  .final-section {
+    background: var(--aegean);
+    color: white;
+    padding: 3rem 2rem;
+    margin: 3rem 0 0;
+    scroll-margin-top: 60px;
+  }
+  .final-section h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.8rem;
+    font-weight: 300;
+    color: var(--gold);
+    margin-bottom: 0.3rem;
+  }
+  .final-section h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.3rem;
+    font-weight: 400;
+    color: white;
+    margin: 1.5rem 0 0.8rem;
+    border-bottom: 1px solid rgba(255,255,255,0.12);
+    padding-bottom: 0.4rem;
+  }
+  .final-section p { font-size: 13.5px; color: rgba(255,255,255,0.75); }
+  .ranking-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+    padding: 0.9rem 0;
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+  }
+  .rank-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2rem;
+    font-weight: 300;
+    color: var(--gold);
+    opacity: 0.8;
+    line-height: 1;
+    min-width: 2rem;
+    text-align: right;
+  }
+  .rank-body h4 { font-size: 15px; font-weight: 500; margin-bottom: 2px; }
+  .rank-body p { font-size: 12.5px; color: rgba(255,255,255,0.6); }
+  .must-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.7rem;
+    padding: 0.6rem 0;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+    font-size: 13.5px;
+    color: rgba(255,255,255,0.8);
+  }
+  .must-num {
+    color: var(--gold);
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1rem;
+    min-width: 1.5rem;
+    font-weight: 600;
+  }
+  .unmissable-item {
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(201,168,76,0.3);
+    border-radius: 8px;
+    padding: 1.2rem 1.5rem;
+    margin-bottom: 0.8rem;
+  }
+  .unmissable-item h4 {
+    color: var(--gold);
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.15rem;
+    margin-bottom: 0.3rem;
+  }
+  .unmissable-item p { font-size: 13px; color: rgba(255,255,255,0.7); }
+
+  /* HIGHLIGHT BOX */
+  .highlight-box {
+    background: #fff8e8;
+    border: 1px solid #f0d080;
+    border-radius: 6px;
+    padding: 1rem 1.2rem;
+    margin-bottom: 1rem;
+    font-size: 13.5px;
+  }
+  .highlight-box strong { color: var(--terracotta); }
+
+  .anecdote {
+    background: #f0f5ff;
+    border-left: 3px solid var(--aegean);
+    border-radius: 0 6px 6px 0;
+    padding: 0.9rem 1.2rem;
+    margin: 0.8rem 0;
+    font-size: 13.5px;
+    font-style: italic;
+    color: #334;
+  }
+
+  /* CURIOSITY */
+  .curiosity {
+    background: #fff3ee;
+    border-left: 3px solid var(--terracotta);
+    border-radius: 0 6px 6px 0;
+    padding: 0.9rem 1.2rem;
+    margin: 0.8rem 0;
+    font-size: 13.5px;
+    color: #443;
+  }
+  .curiosity::before {
+    content: '🏛 ';
+  }
+
+  footer {
+    background: #0d1a2a;
+    color: rgba(255,255,255,0.35);
+    text-align: center;
+    padding: 2rem;
+    font-size: 12px;
+    letter-spacing: 0.05em;
+    margin-top: 3rem;
+  }
+  footer span { color: var(--gold); }
+</style>
+</head>
+<body>
+
+<nav>
+  <span class="nav-title">Mare Nostrum</span>
+  <span class="nav-sep">·</span>
+  <a href="#atenas">Atenas</a>
+  <a href="#dardanelos">Dardanelos</a>
+  <a href="#estambul">Estambul</a>
+  <a href="#mykonos">Mykonos</a>
+  <a href="#creta">Creta</a>
+  <a href="#rodas">Rodas</a>
+  <a href="#santorini">Santorini</a>
+  <a href="#ranking">Ranking</a>
+  <a href="#imprescindibles">Top 25</a>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-sub">Guía cultural profunda · Junio 2025</div>
+  <h1>Crucero por el <em>Mare Nostrum</em><br>Grecia · Turquía · El Egeo</h1>
+  <p style="color:rgba(255,255,255,0.5);font-size:13px;margin:1rem 0 2.5rem;font-style:italic;">Del Pireo a Santorini · 8 jornadas · Historia, arqueología y cultura mediterránea</p>
+  <div class="route-line">
+    <div class="route-stop"><div class="route-dot"></div><span>El Pireo<br>Atenas</span><span class="date">19 jun</span></div>
+    <div class="route-connector"></div>
+    <div class="route-stop"><div class="route-dot" style="background:rgba(255,255,255,0.3)"></div><span>Dardanelos</span><span class="date">20 jun</span></div>
+    <div class="route-connector"></div>
+    <div class="route-stop"><div class="route-dot"></div><span>Estambul</span><span class="date">21 jun</span></div>
+    <div class="route-connector"></div>
+    <div class="route-stop"><div class="route-dot"></div><span>Mykonos</span><span class="date">22 jun</span></div>
+    <div class="route-connector"></div>
+    <div class="route-stop"><div class="route-dot"></div><span>Heraklion<br>Creta</span><span class="date">23 jun</span></div>
+    <div class="route-connector"></div>
+    <div class="route-stop"><div class="route-dot"></div><span>Rodas</span><span class="date">24 jun</span></div>
+    <div class="route-connector"></div>
+    <div class="route-stop"><div class="route-dot"></div><span>Santorini</span><span class="date">25 jun</span></div>
+    <div class="route-connector"></div>
+    <div class="route-stop"><div class="route-dot"></div><span>Atenas</span><span class="date">26 jun</span></div>
+  </div>
+</div>
+
+<div class="container">
+
+<!-- ================================ -->
+<!-- DESTINO 1: ATENAS / EL PIREO -->
+<!-- ================================ -->
+<div class="destination" id="atenas">
+  <div class="dest-header">
+    <div class="dest-number">Escala 01 · 19 de junio</div>
+    <h2>El Pireo — <em>Atenas</em></h2>
+    <div class="dest-tagline">"La cuna de la democracia, la filosofía y la razón occidental"</div>
+    <div class="dest-date" style="margin-top:0.8rem">Puerto de entrada · ~25 km del centro de Atenas</div>
+  </div>
+  <div class="dest-body">
+
+    <!-- HISTORIA -->
+    <div class="section-block">
+      <div class="section-label"><div class="section-icon">🏛</div><h3>Contexto histórico y cultural</h3></div>
+      <p>Atenas es la ciudad habitada de forma continua más antigua del mundo occidental. Sus orígenes se remontan al Neolítico (5000 a.C.), pero su esplendor llega con la Edad Clásica, entre los siglos V y IV a.C., cuando la ciudad-estado ática —bajo líderes como Pericles, Temístocles y Solón— se convirtió en el epicentro intelectual, artístico y político del mundo conocido.</p>
+      <p>Fue aquí donde nacieron la democracia, la tragedia griega, la filosofía occidental (Sócrates, Platón, Aristóteles), la historiografía (Tucídides, Heródoto) y los fundamentos del arte y la arquitectura que aún inspiran el mundo moderno. El siglo de Pericles (461–429 a.C.) vio la construcción del Partenón y la consolidación de Atenas como capital cultural del Egeo.</p>
+      <div class="anecdote">
+        El nombre de la ciudad viene de Atenea, diosa de la sabiduría. Según el mito, Atenea y Poseidón compitieron por ser patronos de la ciudad: Poseidón ofreció agua salada, Atenea ofreció un olivo. Los ciudadanos eligieron el olivo —símbolo de paz y prosperidad— y la ciudad adoptó su nombre.
+      </div>
+      <p>Tras el período macedonio (Alejandro Magno), Atenas cayó bajo dominio romano en 86 a.C., pero Roma reverenciaba su cultura: los emperadores construyeron monumentos en su honor. Luego llegaron los bizantinos, los cruzados francos (Ducado de Atenas, siglo XIII), los catalanes y, finalmente, el Imperio Otomano, que la controló desde 1458 hasta la independencia griega en 1822. La Acrópolis misma albergó una mezquita otomana durante más de tres siglos.</p>
+      <div class="curiosity">
+        Durante la ocupación otomana, el Partenón fue usado como mezquita, la Erechtión como harén y el Propileos como polvorín. En 1687, durante un ataque veneciano, un proyectil detonó el polvorín del Partenón destruyendo su estructura central y convirtiendo en ruina lo que hasta entonces era uno de los edificios mejor conservados de la Antigüedad.
+      </div>
+      <p>El Puerto del Pireo, donde atraca tu crucero, fue el puerto más poderoso del mundo antiguo. En el siglo V a.C. albergaba 400 trirremes y conectaba Atenas con todo el Mediterráneo. Temístocles lo fortaleció tras las Guerras Médicas, y Pericles construyó los Muros Largos que unían ciudad y puerto en un corredor inexpugnable.</p>
+    </div>
+
+    <!-- QUÉ VER -->
+    <div class="section-block">
+      <div class="section-label"><div class="section-icon">📍</div><h3>Qué ver prioritariamente</h3></div>
+
+      <div class="priority-group">
+        <div class="priority-badge badge-must">⭐ Imprescindibles</div>
+        <div class="place-item must">
+          <div class="place-name">La Acrópolis y el Partenón</div>
+          <div class="place-desc">El monumento más importante del mundo occidental. Construido entre 447 y 432 a.C. bajo la dirección del escultor Fidias y el arquitecto Ictino. Es imposible estar en Atenas sin subir a la Acrópolis, aunque haya cola. El Partenón estaba originalmente pintado con colores vivos —azul, rojo y dorado— y albergaba una estatua criselefantina de Atenea de 12 metros. El conjunto arquitectónico incluye además los Propileos, el Erecteion (con las cariátides) y el Templo de Atenea Niké.</div>
+        </div>
+        <div class="place-item must">
+          <div class="place-name">Museo de la Acrópolis (Nuevo Museo)</div>
+          <div class="place-desc">Inaugurado en 2009, es uno de los mejores museos del mundo. Alberga las cariátides originales, fragmentos del friso del Partenón y miles de piezas del santuario. Su arquitectura —con el pavimento de cristal sobre restos arqueológicos— es en sí misma una experiencia. Imprescindible para entender lo que estás viendo en la colina.</div>
+        </div>
+        <div class="place-item must">
+          <div class="place-name">Ágora Antigua y Templo de Hefesto</div>
+          <div class="place-desc">El corazón político y comercial de la Atenas clásica, donde Sócrates discutía con los ciudadanos. El Templo de Hefesto (siglo V a.C.) es el templo dórico mejor conservado del mundo, incluso más que el Partenón. El stoa de Átalo, reconstruido, alberga el Museo del Ágora.</div>
+        </div>
+      </div>
+
+      <div class="priority-group">
+        <div class="priority-badge badge-rec">👍 Muy recomendables</div>
+        <div class="place-item rec">
+          <div class="place-name">Barrio de Monastiráki y Plaka</div>
+          <div class="place-desc">El casco histórico de Atenas, laberíntico y colorido, al pie de la Acrópolis. Plaka es el barrio más antiguo habitado continuamente. Encontrarás tabernas tradicionales, tiendas de artesanía y restos arqueológicos integrados en las calles.</div>
+        </div>
+        <div class="place-item rec">
+          <div class="place-name">Museo Arqueológico Nacional</div>
+          <div class="place-desc">El museo de arqueología más importante del mundo griego. Alberga la Máscara de Agamenón (hallada por Schliemann en Micenas), estatuas kouroi arcaicas, el tesoro de Vafio y miles de objetos que abarcan 7000 años de historia griega. Si tienes tiempo de calidad, no te lo pierdas.</div>
+        </div>
+        <div class="place-item rec">
+          <div class="place-name">Odeón de Herodes Ático</div>
+          <div class="place-desc">Teatro romano del siglo II d.C. construido al pie de la Acrópolis. Sigue siendo utilizado para conciertos y espectáculos. Su visión nocturna, si el crucero lo permite, es espectacular.</div>
+        </div>
+      </div>
+
+      <div class="priority-group">
+        <div class="priority-badge badge-opt">✦ Opcionales si sobra tiempo</div>
+        <div class="place-item opt">
+          <div class="place-name">Colina del Licabeto</div>
+          <div class="place-desc">El punto más alto de Atenas (277 m). Vistas panorámicas de la ciudad, la Acrópolis, el Pireo y el mar Egeo. Se puede subir en funicular.</div>
+        </div>
+        <div class="place-item opt">
+          <div class="place-name">Templo de Zeus Olímpico y Arco de Adriano</div>
+          <div class="place-desc">Las columnas colosales del mayor templo de Grecia (siglo II d.C.). Solo quedan 15 de las 104 columnas originales, pero su escala impone respeto.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- RUTA -->
+    <div class="section-block">
+      <div class="section-label"><div class="section-icon">🗺</div><h3>Ruta optimizada para la escala</h3></div>
+      <div class="highlight-box">
+        <strong>Transporte desde el puerto:</strong> El Pireo está a 25 km de Atenas. Lo más eficiente es el metro línea 1 (verde) desde la estación Pireo hasta Monastiráki (≈ 25 min, muy económico). También hay taxis pero el tráfico puede triplicar el tiempo.
+      </div>
+      <table class="route-table">
+        <tr><th>Hora</th><th>Lugar</th><th>Duración</th><th>Nota</th></tr>
+        <tr><td class="time">07:30</td><td>Salida del puerto → Metro</td><td class="dur">25 min</td><td>Metro línea 1, estación Pireo</td></tr>
+        <tr><td class="time">08:00</td><td>Acrópolis (entrada)</td><td class="dur">1h 30min</td><td>Abrir a las 8h. Llegar temprano evita cola y calor</td></tr>
+        <tr><td class="time">09:30</td><td>Nuevo Museo de la Acrópolis</td><td class="dur">1h</td><td>A pie, 5 minutos. Fundamental para contextualizar</td></tr>
+        <tr><td class="time">10:30</td><td>Ágora Antigua y Templo de Hefesto</td><td class="dur">45 min</td><td>Bajando desde la Acrópolis</td></tr>
+        <tr><td class="time">11:15</td><td>Plaka / Monastiráki</td><td class="dur">45 min</td><td>Paseo, fotografía, compras rápidas</td></tr>
+        <tr><td class="time">12:00</td><td>Almuerzo en Monastiráki</td><td class="dur">45 min</td><td>Taberna tradicional junto al mercado de pulgas</td></tr>
+        <tr><td class="time">12:45</td><td>Templo de Zeus Olímpico (exterior)</td><td class="dur">20 min</td><td>Solo ver desde fuera si hay tiempo</td></tr>
+        <tr><td class="time">13:15</td><td>Regreso metro → Puerto</td><td class="dur">25 min</td><td>Calcular con holgura según hora de zarpe</td></tr>
+      </table>
+    </div>
+
+    <!-- PATRIMONIO -->
+    <div class="section-block">
+      <div class="section-label"><div class="section-icon">🏺</div><h3>Patrimonio, arqueología y arte</h3></div>
+      <p>El Partenón fue diseñado para crear una ilusión óptica de perfección: sus columnas son ligeramente curvas, el suelo es cóncavo y las columnas de las esquinas son algo más gruesas —todo calculado para que el ojo humano lo perciba como absolutamente recto. Es matemáticamente el edificio más sofisticado jamás construido en piedra.</p>
+      <p>Las cariátides del Erecteion son seis figuras femeninas que actúan como columnas. Cinco originales están en el Nuevo Museo de la Acrópolis; la sexta se la llevó Lord Elgin a Londres (hoy en el Museo Británico). Grecia lleva décadas reclamando su devolución.</p>
+      <div class="curiosity">
+        Los mármoles del Partenón en el Museo Británico —conocidos como "Mármoles de Elgin"— representan el 40% del friso original. Elgin los desmontó entre 1801 y 1812. El debate sobre su restitución es uno de los más importantes en la diplomacia cultural del siglo XXI.
+      </div>
+    </div>
+
+    <!-- GASTRONOMÍA -->
+    <div class="section-block">
+      <div class="section-label"><div class="section-icon">🍽</div><h3>Gastronomía</h3></div>
+      <div class="food-grid">
+        <div class="food-item"><div class="food-type">Plato</div><div class="food-name">Souvlaki</div><div class="food-desc">Brocheta de cerdo o pollo con pita, tomate y tzatziki. El fast food griego por excelencia, delicioso y barato en Monastiráki.</div></div>
+        <div class="food-item"><div class="food-type">Plato</div><div class="food-name">Moussaka</div><div class="food-desc">Capas de berenjena, carne picada y bechamel. El plato más representativo de la cocina casera ateniense.</div></div>
+        <div class="food-item"><div class="food-type">Aperitivo</div><div class="food-name">Taramosalata</div><div class="food-desc">Crema de huevas de pescado con aceite de oliva y limón. Imprescindible como meze.</div></div>
+        <div class="food-item"><div class="food-type">Dulce</div><div class="food-name">Loukoumades</div><div class="food-desc">Buñuelos fritos con miel y canela. La receta más antigua del mundo: se servían a los vencedores olímpicos en la Antigua Grecia.</div></div>
+        <div class="food-item"><div class="food-type">Dulce</div><div class="food-name">Baklava</div><div class="food-desc">Herencia otomana: pasta filo, frutos secos y miel. Se vende en todas las pastelerías de Plaka.</div></div>
+        <div class="food-item"><div class="food-type">Bebida</div><div class="food-name">Ouzo / Retsina</div><div class="food-desc">Ouzo: anisado tradicional. Retsina: vino con resina de pino, sabor único e histórico. Mejor con meze.</div></div>
+      </div>
+      <p style="margin-top:1rem;font-size:13px;color:var(--mist);">📍 Zona recomendada: Mercado de Monastiráki y las calles de Psyrri tienen las tabernas más auténticas y asequibles. Evitar los restaurantes con manteles turísticos en Plaka —son caros y mediocres.</p>
+    </div>
+
+    <!-- FOTOGRAFÍA -->
+    <div class="section-block">
+      <div class="section-label"><div class="section-icon">📷</div><h3>Miradores y fotografía</h3></div>
+      <div class="photo-item"><div class="photo-name">Colina de Filopapou (frente a la Acrópolis)</div><div class="photo-tip">La mejor vista frontal del Partenón. Ideal entre las 8 y las 10h con luz dorada del este iluminando el mármol.</div></div>
+      <div class="photo-item"><div class="photo-name">Terraza del Nuevo Museo de la Acrópolis</div><div class="photo-tip">Vista única con la Acrópolis como fondo. Muy limpia y sin masas de turistas en el encuadre.</div></div>
+      <div class="photo-item"><div class="photo-name">Calles de Anafiotika (barrio dentro de Plaka)</div><div class="photo-tip">Casitas blancas y ciclamores rosas al pie de la Acrópolis. Las calles más fotogénicas de Atenas. Antes de las 9h está vacío.</div></div>
+      <div class="photo-item"><div class="photo-name">Colina del Areópago</div><div class="photo-tip">Roca histórica donde el Apóstol Pablo predicó en Atenas. Vistas perfectas de la Acrópolis y la ciudad. Atardecer espectacular.</div></div>
+    </div>
+
+    <!-- CONSEJOS -->
+    <div class="section-block">
+      <div class="section-label"><div class="section-icon">💡</div><h3>Consejos prácticos</h3></div>
+      <div class="tip-item"><span class="tip-icon">🌡</span><span><strong>Temperatura en junio:</strong> 28–35°C, sol intenso. Imprescindible sombrero, protección solar y agua abundante. La Acrópolis es completamente descubierta.</span></div>
+      <div class="tip-item"><span class="tip-icon">👟</span><span><strong>Calzado:</strong> La Acrópolis tiene escalones y piedras pulidas por millones de pies —son resbaladizas. Zapatillas cómodas con suela de goma, nunca chanclas.</span></div>
+      <div class="tip-item"><span class="tip-icon">⏰</span><span><strong>Horarios:</strong> La Acrópolis abre a las 8h. Compra las entradas online con antelación para evitar filas larguísimas en verano.</span></div>
+      <div class="tip-item"><span class="tip-icon">⚠️</span><span><strong>Estafas:</strong> En Monastiráki, cuidado con el juego de las tres cartas y con los hombres que ofrecen "flores gratis" y luego exigen pago. Los taxistas sin taxímetro son otra trampa; el metro es la alternativa perfecta.</span></div>
+      <div class="tip-item"><span class="tip-icon">🎟</span><span><strong>Entrada combinada:</strong> El ticket combinado de la Acrópolis incluye el Ágora, el Teatro de Dioniso, la Biblioteca de Adriano y otros sitios. Vale la pena si visitas varios.</span></div>
+      <div class="tip-item"><span class="tip-icon">🚢</span><span><strong>Gestión del tiempo:</strong> Calcular siempre 30 minutos extra de margen para el regreso al barco. El metro es puntual pero puede haber espera.</span></div>
+    </div>
+
+    <!-- VALORACIÓN -->
+    <div class="section-block">
+      <div class="section-label"><div class="section-icon">⭐</div><h3>Valoración</h3></div>
+      <div class="scores-grid">
+        <div class="score-card"><div class="score-label">Historia</div><div class="score-val">10<span>/10</span></div><div class="score-stars">★★★★★</div></div>
+        <div class="score-card"><div class="score-label">Cultura</div><div class="score-val">10<span>/10</span></div><div class="score-stars">★★★★★</div></div>
+        <div class="score-card"><div class="score-label">Paisaje</div><div class="score-val">8<span>/10</span></div><div class="score-stars">★★★★☆</div></div>
+        <div class="score-card"><div class="score-label">Gastronomía</div><div class="score-val">9<span>/10</span></div><div class="score-stars">★★★★★</div></div>
+        <div class="score-card"><div class="score-label">Experiencia</div><div class="score-val">10<span>/10</span></div><div class="score-stars">★★★★★</div></div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ================================ -->
+<!-- DARDANELOS (NAVEGACIÓN) -->
+<!-- ================================ -->
+<div class="navigation-section" id="dardanelos">
+  <div class="dest-number" style="color:var(--gold);font-size:10px;letter-spacing:0.2em;text-transform:uppercase;margin-bottom:0.5rem;">Jornada de navegación · 20 de junio</div>
+  <h2>El Estrecho de los Dardanelos</h2>
+  <div class="nav-section-date">Navegación desde el Mar Egeo hacia el Mar de Mármara</div>
+  <p style="color:rgba(255,255,255,0.7);max-width:640px;font-size:14px;line-height:1.7;margin-bottom:1.5rem;">Uno de los pasos marítimos más estratégicamente decisivos de la historia de la humanidad. Solo 1,2 km de ancho en su punto más estrecho, ha sido escenario de batallas que cambiaron el curso de la civilización.</p>
+
+  <div class="nav-col-grid">
+    <div class="nav-col">
+      <h4>Contexto histórico</h4>
+      <div class="strait-fact"><strong>Antigüedad:</strong> Los griegos lo llamaban Helesponto ("Mar de Hele"). Según el mito, aquí cruzó Leandro a nado cada noche para visitar a Hero. Lord Byron repitió la hazaña en 1810 —tardó 1 hora 10 minutos.</div>
+      <div class="strait-fact"><strong>480 a.C.:</strong> Jerjes I de Persia construyó un puente de barcos para cruzar su ejército hacia Europa. Herodoto describe 700 barcos unidos con cables y madera.</div>
+      <div class="strait-fact"><strong>334 a.C.:</strong> Alejandro Magno cruzó aquí con su ejército hacia Asia, iniciando la conquista del Imperio Persa. Realizó libaciones en el mar y lanzó su lanza hacia suelo asiático reclamando la tierra.</div>
+      <div class="strait-fact"><strong>1915:</strong> La Campaña de Gallípoli —uno de los episodios más sangrientos de la Primera Guerra Mundial. Los aliados (incluyendo ANZACs australianos y neozelandeses) intentaron tomar el estrecho para abrir una ruta hacia Rusia. 250.000 bajas aliadas; los turcos, liderados por Mustafa Kemal (el futuro Atatürk), resistieron.</div>
+    </div>
+    <div class="nav-col">
+      <h4>Qué observar desde cubierta</h4>
+      <div class="strait-fact"><strong>Cabo Hellas (lado europeo):</strong> El cementerio y monumento de Gallípoli son visibles desde el barco. Un lugar de silencio y reflexión.</div>
+      <div class="strait-fact"><strong>Çanakkale (lado asiático):</strong> La ciudad otomana al lado del estrecho. En ella estaba la antigua Troya —a solo 30 km al sur.</div>
+      <div class="strait-fact"><strong>Los castillos:</strong> Los castillos de Çimenlik (europeo) y Kilitbahir (asiático) fueron construidos por el sultán Mehmed II en 1452, justo antes de la conquista de Constantinopla, para controlar el tráfico naval.</div>
+      <div class="strait-fact"><strong>El caballo de Troya:</strong> Una réplica del caballo de madera de la película Troy (2004, con Brad Pitt) está en el paseo marítimo de Çanakkale, visible desde el barco.</div>
+      <h4 style="margin-top:1rem;">Consejo fotográfico</h4>
+      <p>El tránsito por los Dardanelos suele ocurrir de madrugada o al amanecer. Comprueba la hora exacta con la tripulación del crucero y sube a cubierta —las vistas de ambas orillas iluminadas, con la carga de historia que conllevan, son únicas.</p>
+    </div>
+  </div>
+</div>
+
+<!-- ================================ -->
+<!-- ESTAMBUL -->
+<!-- ================================ -->
+<div class="destination" id="estambul">
+  <div class="dest-header">
+    <div class="dest-number">Escala 02 · 21 de junio</div>
+    <h2>Estambul <em>— Turquía</em></h2>
+    <div class="dest-tagline">"La ciudad que fue tres imperios: Roma, Bizancio y el Islam"</div>
+    <div class="dest-date" style="margin-top:0.8rem">Puerto de Karaköy / Galata · Corazón histórico a pie</div>
+  </div>
+  <div class="dest-body">
+
+    <div class="section-block">
+      <div class="section-label"><div class="section-icon">🏛</div><h3>Contexto histórico y cultural</h3></div>
+      <p>Estambul es, sin exageración, la ciudad más históricamente densa del mundo. Fundada como Bizancio por colonos griegos en el siglo VII a.C., rebautizada Constantinopla por Constantino I en 330 d.C. al convertirla en capital del Imperio Romano de Oriente, y conquistada en 1453 por el sultán Mehmed II, que la hizo capital del Imperio Otomano bajo el nombre de İstanbul —es la única gran ciudad del mundo que fue capital de tres imperios sucesivos durante más de 1.600 años.</p>
+      <p>El Imperio Bizantino (la continuación del Imperio Romano en Oriente) duró desde 330 hasta 1453 d.C. —más de 1.100 años ininterrumpidos. Durante ese período, Constantinopla fue la ciudad más grande y rica de Europa, el custodio de la cultura greco-romana mientras el oeste europeo vivía la Edad Media, y el núcleo del cristianismo oriental (Ortodoxa) frente al catolicismo romano.</p>
+      <div class="anecdote">
+        El 29 de mayo de 1453, Mehmed II entró a caballo en Santa Sofía. La leyenda dice que detuvo su caballo, descendió, tomó un puñado de tierra y lo derramó sobre su turbante como señal de humildad ante Dios. Esa noche convirtió la basílica en mezquita. Nueve siglos de catedral cristiana terminaron en cuestión de horas.
+      </div>
+      <p>El legado de Estambul es una superposición extraordinaria: bajo las calles otomanas hay estructuras romanas, bajo éstas hay griegas. El Gran Bazar fue construido por Mehmed II sobre los mercados bizantinos. El Hipódromo de Constantino (hoy la plaza Sultanahmet) fue construido por el emperador Septimio Severo y ampliado por Constantino siguiendo el modelo del Circo Máximo de Roma. Sus obeliscos siguen en pie.</p>
+      <div class="curiosity">
+        La columna de serpientes que hay en la plaza Sultanahmet fue traída desde Delfos —donde conmemoraba la victoria griega contra los persas en Platea (479 a.C.). Lleva más de 2.500 años en pie. Es el objeto más antiguo de Estambul y uno de los más antiguos del mundo aún in situ.
+      </div>
+    </div>
+
+    <div class="section-block">
+      <div class="section-label"><div class="section-icon">📍</div><h3>Qué ver prioritariamente</h3></div>
+      <div class="priority-group">
+        <div class="priority-badge badge-must">⭐ Imprescindibles</div>
+        <div class="place-item must">
+          <div class="place-name">Santa Sofía (Hagia Sophia)</div>
+          <div class="place-desc">Construida por Justiniano I entre 532 y 537 d.C., fue durante casi 1.000 años la iglesia más grande del mundo. Su cúpula de 31 metros de diámetro pareció a los contemporáneos "suspendida del cielo por una cadena de oro". Fue catedral cristiana, luego mezquita otomana (1453–1935), luego museo (hasta 2020) y desde 2020 es de nuevo mezquita activa. Los mosaicos bizantinos de los emperadores y la Virgen coexisten hoy con el mihrab islámico —la tensión de siglos visible en una sola sala.</div>
+        </div>
+        <div class="place-item must">
+          <div class="place-name">Mezquita Azul (Sultanahmet Camii)</div>
+          <div class="place-desc">Construida entre 1609 y 1616 por el sultán Ahmed I, es la única mezquita del mundo con seis minaretes. Su interior está cubierto por más de 20.000 azulejos İznik azules y blancos, y 260 ventanas. Es una de las arquitecturas islámicas más perfectas del planeta. Actualmente en restauración parcial, pero visitable.</div>
+        </div>
+        <div class="place-item must">
+          <div class="place-name">Cisterna Basílica (Yerebatan Sarnıcı)</div>
+          <div class="place-desc">Una de las más grandes de las 36 cisternas subterráneas construidas por el Imperio Bizantino bajo Justiniano I. Almacenaba agua para palacio y ciudad. 336 columnas, muchas reutilizadas de templos paganos, incluyendo dos bases con cabezas de Medusa en posición invertida —una curiosidad arqueológica que genera mucho debate. Atmosférica, fresca (10°C) y perfecta para el calor de junio.</div>
+        </div>
+        <div class="place-item must">
+          <div class="place-name">El Bósforo</div>
+          <div class="place-desc">El estrecho que divide Europa y Asia. Un crucero corto por el Bósforo (hay ferrys regulares desde Eminönü) es la forma más impresionante de ver Estambul: los palacios otomanos sobre el agua, la fortaleza de Rumeli Hisarı, los puentes colgantes... El Bósforo es la columna vertebral histórica y geopolítica de la ciudad.</div>
+        </div>
+      </div>
+
+      <div class="priority-group">
+        <div class="priority-badge badge-rec">👍 Muy recomendables</div>
+        <div class="place-item rec">
+          <div class="place-name">Palacio de Topkapi</div>
+          <div class="place-desc">Centro del Imperio Otomano durante 400 años (1465–1856). Alberga la espada de Mahoma, el manto del Profeta, la Cuchilla de David y el bastón de Moisés —las reliquias más sagradas del Islam. El Harem y los tesoros son extraordinarios. Con tiempo limitado, priorizar el patio del Harem y las salas del Tesoro Imperial.</div>
+        </div>
+        <div class="place-item rec">
+          <div class="place-name">Gran Bazar (Kapalıçarşı)</div>
+          <div class="place-desc">El mayor mercado cubierto del mundo: 60 calles, 4.000 tiendas, construido en 1461 sobre el ágora bizantino. Una experiencia sensorial absoluta aunque sepas que no vas a comprar nada. Las alfombras, las especias, las lámparas de mosaico y el ambiente son únicos.</div>
+        </div>
+        <div class="place-item rec">
+          <div class="place-name">Plaza Sultanahmet e Hipódromo</div>
+          <div class="place-desc">El espacio donde convergieron tres civilizaciones: el obelisco de Tutmosis III (1400 a.C., traído desde Egipto por Teodosio en 390 d.C.), la columna de serpientes de Delfos (479 a.C.) y la columna de Constantino. Todo en el mismo espacio de 200 metros.</div>
+        </div>
+      </div>
+
+      <div class="priority-group">
+        <div class="priority-badge badge-opt">✦ Opcionales</div>
+        <div class="place-item opt">
+          <div class="place-name">Barrio de Balat y Fener</div>
+          <div class="place-desc">Los antiguos barrios judío y griego de Estambul, con casas de colores, escaleras empinadas y una autenticidad que Sultanahmet ha perdido.</div>
+        </div>
+        <div class="place-item opt">
+          <div class="place-name">Museo de Arte Islámico</div>
+          <div class="place-desc">Colección extraordinaria de alfombras, manuscritos coránicos y arte islámico que abarca 13 siglos. El más importante de su tipo fuera de El Cairo.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section-block">
+      <div class="section-label"><div class="section-icon">🗺</div><h3>Ruta optimizada para la escala</h3></div>
+      <div class="highlight-box">
+        <strong>Ventaja enorme:</strong> El crucero atraca en Karaköy, a 10 minutos a pie de Sultanahmet. Todo el núcleo histórico es caminable. Es el destino más aprovechable del itinerario para una escala de un día.
+      </div>
+      <table class="route-table">
+        <tr><th>Hora</th><th>Lugar</th><th>Duración</th><th>Nota</th></tr>
+        <tr><td class="time">07:30</td><td>Cisterna Basílica</td><td class="dur">45 min</td><td>Abre a las 9h, pero ir temprano evita colas. Fresco y espectacular.</td></tr>
+        <tr><td class="time">08:15</td><td>Santa Sofía</td><td class="dur">1h</td><td>Abre a las 9h. En activo como mezquita: cubrir hombros y cabeza.</td></tr>
+        <tr><td class="time">09:15</td><td>Mezquita Azul (exterior y si abre, interior)</td><td class="dur">30 min</td><td>Cerrada a turistas en horas de rezo</td></tr>
+        <tr><td class="time">09:45</td><td>Plaza Sultanahmet / Hipódromo</td><td class="dur">30 min</td><td>Los tres obeliscos: 2.500 años de historia en 200 metros</td></tr>
+        <tr><td class="time">10:15</td><td>Palacio de Topkapi</td><td class="dur">1h 30min</td><td>Ir directo al Harem y al Tesoro Imperial. Comprar ticket online.</td></tr>
+        <tr><td class="time">11:45</td><td>Bazar de las Especias (Mısır Çarşısı)</td><td class="dur">30 min</td><td>Más manejable y auténtico que el Gran Bazar. Turcos locales también compran aquí.</td></tr>
+        <tr><td class="time">12:15</td><td>Almuerzo en Eminönü</td><td class="dur">45 min</td><td>Los balık ekmek (bocadillo de caballa asada) del Puente de Gálata son legendarios.</td></tr>
+        <tr><td class="time">13:00</td><td>Gran Bazar (paseo rápido)</td><td class="dur">45 min</td><td>No perderse en él, es un laberinto. Entrar, disfrutar, salir.</td></tr>
+        <tr><td class="time">13:45</td><td>Torre de Gálata o Puente de Gálata</td><td class="dur">30 min</td><td>La torre es ascendible para vistas panorámicas</td></tr>
+        <tr><td class="time">14:15</td><td>Regreso al barco a pie</td><td class="dur">15 min</td><td>Karaköy está junto al puerto</td></tr>
+      </table>
+    </div>
+
+    <div class="section-block">
+      <div class="section-label"><div class="section-icon">🍽</div><h3>Gastronomía</h3></div>
+      <div class="food-grid">
+        <div class="food-item"><div class="food-type">Icónico</div><div class="food-name">Balık Ekmek</div><div class="food-desc">Bocadillo de caballa asada con cebolla y perejil, vendido en barcos en el Puente de Gálata. El sabor más auténtico de Estambul.</div></div>
+        <div class="food-item"><div class="food-type">Plato</div><div class="food-name">Döner / Lahmacun</div><div class="food-desc">Lahmacun: pizza fina turca con carne picada especiada. Diferente y deliciosa. Evitar los döner de apariencia turística.</div></div>
+        <div class="food-item"><div class="food-type">Desayuno</div><div class="food-name">Kahvaltı</div><div class="food-desc">El desayuno turco: 20+ platos pequeños (queso, aceitunas, miel, huevos, simit...). Una experiencia cultural en sí mismo.</div></div>
+        <div class="food-item"><div class="food-type">Dulce</div><div class="food-name">Baklava de Karaköy Güllüoğlu</div><div class="food-desc">La mejor baklava de Estambul, considerada por muchos la mejor del mundo. A 200m del puerto. Obligatoria.</div></div>
+        <div class="food-item"><div class="food-type">Bebida</div><div class="food-name">Çay (té turco)</div><div class="food-desc">El té negro en vasito de tulipán, servido en todas partes. Ritual social cotidiano. Los turcos beben una media de 10 vasos al día.</div></div>
+        <div class="food-item"><div class="food-type">Bebida</div><div class="food-name">Türk Kahvesi</div><div class="food-desc">El café turco: sin filtro, intenso, con poso. La leyenda dice que el primer café del mundo se abrió en Estambul en 1554.</div></div>
+      </div>
+    </div>
+
+    <div class="section-block">
+      <div class="section-label"><div class="section-icon">📷</div><h3>Miradores y fotografía</h3></div>
+      <div class="photo-item"><div class="photo-name">Torre de Gálata (panorámica 360°)</div><div class="photo-tip">Vista completa de Estambul: cuerno de oro, Bósforo, cúpulas de Santa Sofía y Sultanahmet. Mejor al atardecer si el barco zarpa de noche.</div></div>
+      <div class="photo-item"><div class="photo-name">Interior de Santa Sofía</div><div class="photo-tip">La luz entra por las ventanas de la base de la cúpula creando haces dorados. Entre las 9 y las 11h la luz es espectacular.</div></div>
+      <div class="photo-item"><div class="photo-name">Puente de Gálata al amanecer</div><div class="photo-tip">Pescadores en el puente con las cúpulas de Sultanahmet al fondo y el cuerno de oro reflejando la luz. Una de las imágenes más icónicas de Turquía.</div></div>
+      <div class="photo-item"><div class="photo-name">Cisterna Basílica</div><div class="photo-tip">Larga exposición necesaria. Llevar trípode pequeño si es posible. La iluminación artificial crea atmósferas oníricas.</div></div>
+    </div>
+
+    <div class="section-block">
+      <div class="section-label"><div class="section-icon">💡</div><h3>Consejos prácticos</h3></div>
+      <div class="tip-item"><span class="tip-icon">🕌</span><span><strong>Mezquitas:</strong> Visita solo fuera de las horas de oración (especialmente la del viernes al mediodía). Llevar calcetines limpios, cubrir hombros y cabeza. El acceso es gratuito pero solo en horas no-rezos.</span></div>
+      <div class="tip-item"><span class="tip-icon">💱</span><span><strong>Moneda:</strong> Lira turca (TRY). Los cambios de moneda en zonas turísticas tienen comisiones altas; buscar un banco o cajero. La inflación turca puede hacer que los precios varíen mucho.</span></div>
+      <div class="tip-item"><span class="tip-icon">⚠️</span><span><strong>Estafas clásicas:</strong> Hombre amigable que "quiere practicar español/inglés" y te lleva a un bar donde la cuenta es desorbitada. Limpiabotas que "se les cae" el cepillo para pedirte que lo recojas y luego insistir en limpiar tus zapatos. Ser amable pero firme.</span></div>
+      <div class="tip-item"><span class="tip-icon">🌡</span><span><strong>Temperatura:</strong> 28–33°C. El interior de la Cisterna es un refugio de 10°C muy agradecido.</span></div>
+      <div class="tip-item"><span class="tip-icon">👗</span><span><strong>Ropa:</strong> Pantalón largo o falda midi para hombres y mujeres en las mezquitas. Un pañuelo fino es imprescindible.</span></div>
+    </div>
+
+    <div class="section-block">
+      <div class="section-label"><div class="section-icon">⭐</div><h3>Valoración</h3></div>
+      <div class="scores-grid">
+        <div class="score-card"><div class="score-label">Historia</div><div class="score-val">10<span>/10</span></div><div class="score-stars">★★★★★</div></div>
+        <div class="score-card"><div class="score-label">Cultura</div><div class="score-val">10<span>/10</span></div><div class="score-stars">★★★★★</div></div>
+        <div class="score-card"><div class="score-label">Paisaje</div><div class="score-val">9<span>/10</span></div><div class="score-stars">★★★★★</div></div>
+        <div class="score-card"><div class="score-label">Gastronomía</div><div class="score-val">10<span>/10</span></div><div class="score-stars">★★★★★</div></div>
+        <div class="score-card"><div class="score-label">Experiencia</div><div class="score-val">10<span>/10</span></div><div class="score-stars">★★★★★</div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ================================ -->
+<!-- MYKONOS -->
+<!-- ================================ -->
+<div class="destination" id="mykonos">
+  <div class="dest-header" style="background: linear-gradient(135deg, #1a3a5c, #2d5986);">
+    <div class="dest-number">Escala 03 · 22 de junio</div>
+    <h2>Mykonos <em>— Cícladas, Grecia</em></h2>
+    <div class="dest-tagline">"La isla más glamurosa del Egeo, con el secreto arqueológico mejor guardado: Delos"</div>
+  </div>
+  <div class="dest-body">
+    <div class="section-block">
+      <div class="section-label"><div class="section-icon">🏛</div><h3>Contexto histórico y cultural</h3></div>
+      <p>Mykonos es famosa hoy como destino de lujo y fiesta, pero su verdadera relevancia histórica radica en su proximidad a Delos —la isla vecina, a solo 20 minutos en barco, que fue uno de los santuarios más sagrados y puertos comerciales más importantes del mundo antiguo.</p>
+      <p>Delos fue, según la mitología griega, el lugar de nacimiento de Apolo y Ártemis. Era una isla tan sagrada que estaba prohibido nacer o morir en ella: los enfermos terminales y las mujeres embarazadas debían ser trasladados a Mykonos. Hoy Delos es un yacimiento arqueológico deshabitado, uno de los más importantes del Mediterráneo, bajo protección de la UNESCO.</p>
+      <p>La propia Mykonos, con sus calles laberínticas de cal blanca, fue diseñada deliberadamente para confundir a los piratas —el trazado urbano orgánico del barrio de Chora, con calles que se cruzan en ángulos imposibles, era una defensa táctica. Los molinos de viento del promontorio Kato Myli (siglo XVI) fueron construidos por los venecianos para moler el trigo que transportaban los barcos que cruzaban el Egeo.</p>
+      <div class="curiosity">
+        En el siglo II a.C., Delos era el mayor mercado de esclavos del mundo mediterráneo: se vendían hasta 10.000 personas al día. El crecimiento de la piratería y el ataque de Mitrídates VI en el 88 a.C. —que masacró a 20.000 itálicos en un solo día— acabó con su prosperidad para siempre.
+      </div>
+    </div>
+
+    <div class="section-block">
+      <div class="section-label"><div class="section-icon">📍</div><h3>Qué ver prioritariamente</h3></div>
+      <div class="priority-group">
+        <div class="priority-badge badge-must">⭐ Imprescindibles</div>
+        <div class="place-item must">
+          <div class="place-name">Excursión arqueológica a Delos</div>
+          <div class="place-desc">La gran joya oculta de este viaje. Delos es un yacimiento arqueológico completamente deshabitado con templos de Apolo, el Barrio del Teatro, la famosa Terraza de los Leones (leones arcaicos de mármol del siglo VII a.C.) y vistas panorámicas desde el Monte Cinto (112 m). El barco hacia Delos sale desde el puerto de Mykonos varias veces al día (30 min). Es EL gran secreto histórico de esta escala.</div>
+        </div>
+        <div class="place-item must">
+          <div class="place-name">Chora (casco histórico de Mykonos)</div>
+          <div class="place-desc">El laberinto de cal blanca más fotogénico del Egeo. La Little Venice, con las casas de los capitanes directamente sobre el mar, los molinos de viento y la iglesia de Paraportiani (una agregación de cinco capillas blancas que se han fusionado en un solo bloque icónico) son imprescindibles.</div>
+        </div>
+      </div>
+
+      <div class="priority-group">
+        <div class="priority-badge badge-rec">👍 Muy recomendables</div>
+        <div class="place-item rec">
+          <div class="place-name">Iglesia de Paraportiani</div>
+          <div class="place-desc">Una de las iglesias más fotografiadas del mundo, aunque rara vez se menciona que no es una sola iglesia sino cinco capillas del siglo XV fusionadas en un único volumen escultórico de cal blanca. La forma más pura de la arquitectura de las Cícladas.</div>
+        </div>
+        <div class="place-item rec">
+          <div class="place-name">Museo Arqueológico de Mykonos</div>
+          <div class="place-desc">Alberga hallazgos de Delos y de la necrópolis de Renia. Destaca un famoso pithos (urna funeraria) con relieves que narran la caída de Troya.</div>
+        </div>
+      </div>
+
+      <div class="priority-group">
+        <div class="priority-badge badge-opt">✦ Opcionales</div>
+        <div class="place-item opt">
+          <div class="place-name">Playas (Agios Stefanos, Ornos)</div>
+          <div class="place-desc">Si el crucero permite tiempo de playa, Mykonos tiene algunas de las mejores del Egeo —aguas cristalinas y arena dorada. Pero para historia, Delos es infinitamente más valioso.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section-block">
+      <div class="section-label"><div class="section-icon">🗺</div><h3>Ruta optimizada</h3></div>
+      <div class="highlight-box">
+        <strong>Decisión clave:</strong> Si el horario lo permite, dedica la mañana a Delos y la tarde a Mykonos Chora. Si el barco zarpa temprano, elige Delos sin dudarlo —es única e irreemplazable. Mykonos Chora es más "repetible".
+      </div>
+      <table class="route-table">
+        <tr><th>Hora</th><th>Lugar</th><th>Duración</th><th>Nota</th></tr>
+        <tr><td class="time">08:00</td><td>Ferry a Delos</td><td class="dur">30 min</td><td>Sale desde el Old Port de Mykonos. Comprar ticket previo.</td></tr>
+        <tr><td class="time">08:30</td><td>Yacimiento arqueológico de Delos</td><td class="dur">2h 30min</td><td>Terraza de Leones, Santuario de Apolo, Barrio del Teatro</td></tr>
+        <tr><td class="time">11:00</td><td>Ferry de regreso a Mykonos</td><td class="dur">30 min</td><td></td></tr>
+        <tr><td class="time">11:30</td><td>Chora de Mykonos</td><td class="dur">1h</td><td>Iglesia de Paraportiani, molinos, Little Venice</td></tr>
+        <tr><td class="time">12:30</td><td>Almuerzo en Chora</td><td class="dur">1h</td><td>Buscar tabernas alejadas 2 calles del puerto</td></tr>
+        <tr><td class="time">13:30</td><td>Paseo libre / compras / playa</td><td class="dur">variable</td><td>Según hora de zarpe</td></tr>
+      </table>
+    </div>
+
+    <div class="section-block">
+      <div class="section-label"><div class="section-icon">🍽</div><h3>Gastronomía</h3></div>
+      <div class="food-grid">
+        <div class="food-item"><div class="food-type">Especialidad local</div><div class="food-name">Louza</div><div class="food-desc">Embutido de cerdo curado con especias, típico de Mykonos. Se toma como meze con ouzo.</div></div>
+        <div class="food-item"><div class="food-type">Queso</div><div class="food-name">Kopanisti</div><div class="food-desc">Queso fermentado picante, denominación de origen de Mykonos. Único en Grecia.</div></div>
+        <div class="food-item"><div class="food-type">Postre</div><div class="food-name">Amygdalota</div><div class="food-desc">Pastelitos de almendra, flor de naranjo y agua de rosas. La repostería tradicional de las Cícladas.</div></div>
+        <div class="food-item"><div class="food-type">Bebida</div><div class="food-name">Vino de las Cícladas</div><div class="food-desc">Vinos locales de uva assyrtiko: secos, minerales, con acidez elegante. Los del Egeo son los mejores blancos de Grecia.</div></div>
+      </div>
+      <p style="margin-top:1rem;font-size:13px;color:var(--mist);">⚠️ Mykonos es la isla más cara de Grecia. Evitar los restaurantes del puerto —los precios son de hotel de lujo. Internarse 3–4 calles hacia el interior de Chora reduce el precio a la mitad.</p>
+    </div>
+
+    <div class="section-block">
+      <div class="section-label"><div class="section-icon">📷</div><h3>Miradores y fotografía</h3></div>
+      <div class="photo-item"><div class="photo-name">Kato Myli (molinos de viento)</div><div class="photo-tip">Mejor con la luz del atardecer, con el mar azul de fondo. Llegar al menos 1h antes del ocaso para conseguir la posición.</div></div>
+      <div class="photo-item"><div class="photo-name">Little Venice</div><div class="photo-tip">Casas de colores directamente sobre el mar. La luz de tarde es perfecta. Cuidado con la gente saturando el encuadre en temporada alta.</div></div>
+      <div class="photo-item"><div class="photo-name">Terraza de los Leones en Delos</div><div class="photo-tip">Los leones arcaicos de mármol del siglo VII a.C. con vistas al Egeo y las islas. Una de las fotografías más poderosas del viaje.</div></div>
+    </div>
+
+    <div class="section-block">
+      <div class="section-label"><div class="section-icon">💡</div><h3>Consejos prácticos</h3></div>
+      <div class="tip-item"><span class="tip-icon">🌡</span><span><strong>Temperatura:</strong> 28–32°C con viento del norte (meltemi) que refresca. El viento puede ser fuerte en cubierta.</span></div>
+      <div class="tip-item"><span class="tip-icon">🏛</span><span><strong>Delos:</strong> No hay sombra en el yacimiento. Llevar sombrero, agua y protector solar. La isla está deshabitada y los servicios son mínimos.</span></div>
+      <div class="tip-item"><span class="tip-icon">🗺</span><span><strong>Orientarse en Chora:</strong> El laberinto de calles es deliberado —no te preocupes por perderte, es parte de la experiencia. Siempre se llega al mar.</span></div>
+    </div>
+
+    <div class="section-block">
+      <div class="section-label"><div class="section-icon">⭐</div><h3>Valoración</h3></div>
+      <div class="scores-grid">
+        <div class="score-card"><div class="score-label">Historia</div><div class="score-val">9<span>/10</span></div><div class="score-stars">★★★★★</div></div>
+        <div class="score-card"><div class="score-label">Cultura</div><div class="score-val">7<span>/10</span></div><div class="score-stars">★★★★☆</div></div>
+        <div class="score-card"><div class="score-label">Paisaje</div><div class="score-val">9<span>/10</span></div><div class="score-stars">★★★★★</div></div>
+        <div class="score-card"><div class="score-label">Gastronomía</div><div class="score-val">7<span>/10</span></div><div class="score-stars">★★★★☆</div></div>
+        <div class="score-card"><div class="score-label">Experiencia</div><div class="score-val">8<span>/10</span></div><div class="score-stars">★★★★☆</div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ================================ -->
+<!-- CRETA -->
+<!-- ================================ -->
+<div class="destination" id="creta">
+  <div class="dest-header" style="background: linear-gradient(135deg, #2d1a0e, #7a3520);">
+    <div class="dest-number">Escala 04 · 23 de junio</div>
+    <h2>Heraklion — <em>Creta, Grecia</em></h2>
+    <div class="dest-tagline">"El origen de Europa: la civilización minoica y el laberinto del Minotauro"</div>
+  </div>
+  <div class="dest-body">
+
+    <div class="section-block">
+      <div class="section-label"><div class="section-icon">🏛</div><h3>Contexto histórico y cultural</h3></div>
+      <p>Creta alberga la civilización más antigua de Europa: la Minoica (3000–1100 a.C.). Los minoicos crearon el primer sistema de escritura europeo (Lineal A, aún sin descifrar), los primeros frescos figurativos del continente, palacios con fontanería y sistemas de alcantarillado, y una cultura marítima que dominó el Mediterráneo Oriental durante mil años, siglos antes de que los griegos clásicos existieran.</p>
+      <p>El Palacio de Knossos (cerca de Heraklion) fue la sede del rey Minos, el gobernante semi-legendario que da nombre a la civilización. Es el complejo palacial más grande del Egeo (22.000 m²), con hasta cinco plantas, 1.300 habitaciones, frescos polícromos, sistemas hidráulicos avanzados y una distribución laberíntica que inspiró el mito del Minotauro. Fue excavado y "restaurado" (polémicamente) por Arthur Evans a principios del siglo XX.</p>
+      <div class="anecdote">
+        El mito del Minotauro dice que el rey Minos encargó a Dédalo construir un laberinto para encerrar al monstruo —mitad hombre, mitad toro— hijo de su esposa Pasífae y un toro blanco divino. Teseo, con la ayuda del hilo de Ariadna, entró, mató al Minotauro y escapó. La arqueología sugiere que el toro era sagrado para los minoicos —los frescos del "salto del toro" son uno de los temas recurrentes de su arte— y que Knossos era efectivamente tan laberíntico que el mito pudo nacer del edificio real.
+      </div>
+      <p>Tras el colapso minoico (probablemente por la erupción del volcán de Tera/Santorini hacia el 1600 a.C. más invasiones micénicas), Creta pasó sucesivamente por griegos, romanos, bizantinos, árabes (870 años de emirato árabe que los convirtió en piratas del Mediterráneo), luego los venecianos (1204–1669) que dejaron la hermosa arquitectura defensiva de Heraklion, y finalmente los otomanos hasta la unificación con Grecia en 1913.</p>
+      <div class="curiosity">
+        La civilización minoica es técnicamente pre-griega: hablaban una lengua diferente (Lineal A, no descifrada), tenían dioses propios (predominantemente femeninos), y no existían cuando los dioses olímpicos tomaron forma. El mito griego del laberinto fue, literalmente, construido sobre los cimientos de una cultura anterior cuya lengua y religión aún desconocemos.
+      </div>
+    </div>
+
+    <div class="section-block">
+      <div class="section-label"><div class="section-icon">📍</div><h3>Qué ver prioritariamente</h3></div>
+      <div class="priority-group">
+        <div class="priority-badge badge-must">⭐ Imprescindibles</div>
+        <div class="place-item must">
+          <div class="place-name">Palacio de Knossos</div>
+          <div class="place-desc">A 5 km de Heraklion, es la razón principal para visitar Creta. El mayor yacimiento minoico del mundo. Aunque la "restauración" de Arthur Evans en hormigón armado (1900–1931) es polémica arqueológicamente, permite visualizar la escala y complejidad del palacio con sus frescos in situ. Esencial para comprender los 1.500 años de historia pre-griega de Europa.</div>
+        </div>
+        <div class="place-item must">
+          <div class="place-name">Museo Arqueológico de Heraklion</div>
+          <div class="place-desc">El mejor museo de arte minoico del mundo. Alberga el Disco de Festo (inscripción espiral en arcilla, aún sin descifrar, considerado el primer "documento impreso" de la historia), el fresco del Salto del Toro, la diosa de las serpientes y el sarcófago de Hagia Triada. Visitar ANTES que Knossos para contextualizar.</div>
+        </div>
+      </div>
+
+      <div class="priority-group">
+        <div class="priority-badge badge-rec">👍 Muy recomendables</div>
+        <div class="place-item rec">
+          <div class="place-name">Fortaleza veneciana de Koules (Rocca al Mare)</div>
+          <div class="place-desc">El castillo veneciano del puerto de Heraklion, construido en el siglo XVI. Custodió la ciudad durante 21 años de asedio otomano (1648–1669). Desde aquí se ve la ciudad, el puerto y el mar. El interior muestra la maestría defensiva veneciana.</div>
+        </div>
+        <div class="place-item rec">
+          <div class="place-name">Casco histórico veneciano</div>
+          <div class="place-desc">La ciudad vieja dentro de las murallas venecianas: la Loggia, la Fuente Morosini (con sus leones de mármol), la catedral de San Tito. Un fragmento de la República de Venecia trasplantado al Mediterráneo oriental.</div>
+        </div>
+      </div>
+
+      <div class="priority-group">
+        <div class="priority-badge badge-opt">✦ Opcionales</div>
+        <div class="place-item opt">
+          <div class="place-name">Museo de Arte Contemporáneo de Creta</div>
+          <div class="place-desc">Para quien no quiera solo antigüedad. El arte cretense moderno es rico y singular.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section-block">
+      <div class="section-label"><div class="section-icon">🗺</div><h3>Ruta optimizada</h3></div>
+      <div class="highlight-box">
+        <strong>Transporte:</strong> El puerto de Heraklion está a 10 minutos a pie del centro histórico y a 5 km de Knossos. Taxis al yacimiento: ~15 minutos. También hay autobús público directo desde la estación junto al puerto (muy económico).
+      </div>
+      <table class="route-table">
+        <tr><th>Hora</th><th>Lugar</th><th>Duración</th><th>Nota</th></tr>
+        <tr><td class="time">08:00</td><td>Museo Arqueológico de Heraklion</td><td class="dur">1h 15min</td><td>Abre a las 8h. Ver el Disco de Festo y los frescos antes de Knossos.</td></tr>
+        <tr><td class="time">09:15</td><td>Taxi a Knossos</td><td class="dur">15 min</td><td>~10€ el trayecto</td></tr>
+        <tr><td class="time">09:30</td><td>Palacio de Knossos</td><td class="dur">1h 30min</td><td>Llegar antes del calor del mediodía. Contratar audio-guía.</td></tr>
+        <tr><td class="time">11:00</td><td>Regreso a Heraklion</td><td class="dur">15 min</td><td></td></tr>
+        <tr><td class="time">11:15</td><td>Fuente Morosini y casco veneciano</td><td class="dur">45 min</td><td>Paseo a pie por la ciudad histórica</td></tr>
+        <tr><td class="time">12:00</td><td>Fortaleza de Koules</td><td class="dur">30 min</td><td>Visitar el castillo veneciano del puerto</td></tr>
+        <tr><td class="time">12:30</td><td>Almuerzo en el mercado central</td><td class="dur">45 min</td><td>La Agora de Heraklion: meze cretense y productos locales</td></tr>
+        <tr><td class="time">13:15</td><td>Regreso al puerto</td><td class="dur">10 min</td><td>A pie</td></tr>
+      </table>
+    </div>
+
+    <div class="section-block">
+      <div class="section-label"><div class="section-icon">🍽</div><h3>Gastronomía</h3></div>
+      <div class="food-grid">
+        <div class="food-item"><div class="food-type">Plato</div><div class="food-name">Dakos</div><div class="food-desc">Pan de cebada seco con tomate triturado, aceitunas, queso mizithra y aceite de oliva. El desayuno más antiguo de Europa, posiblemente.</div></div>
+        <div class="food-item"><div class="food-type">Plato</div><div class="food-name">Gamopilafo</div><div class="food-desc">"Arroz de boda": arroz cocido en caldo de cabra o cordero, con mantequilla y limón. El plato festivo cretense por excelencia.</div></div>
+        <div class="food-item"><div class="food-type">Queso</div><div class="food-name">Graviera de Creta</div><div class="food-desc">El queso más premiado de Grecia. Curado, con sabor a hierba mediterránea. D.O.P.</div></div>
+        <div class="food-item"><div class="food-type">Aceite</div><div class="food-name">Aceite de oliva cretense</div><div class="food-desc">Creta produce el mejor aceite de oliva de Europa (y posiblemente del mundo). El aceite virgen extra de Ierapetra o Sitia es extraordinario.</div></div>
+        <div class="food-item"><div class="food-type">Dulce</div><div class="food-name">Kalitsounia</div><div class="food-desc">Pastelitos de masa fina rellenos de queso mizithra y miel. Tradicionales de Semana Santa pero disponibles todo el año.</div></div>
+        <div class="food-item"><div class="food-type">Licor</div><div class="food-name">Tsikoudia (Raki cretense)</div><div class="food-desc">El aguardiente de orujo cretense, más suave que el ouzo. Se sirve gratis en muchos restaurantes con el postre —es la hospitalidad cretense.</div></div>
+      </div>
+    </div>
+
+    <div class="section-block">
+      <div class="section-label"><div class="section-icon">📷</div><h3>Miradores y fotografía</h3></div>
+      <div class="photo-item"><div class="photo-name">Trono de Minos en Knossos</div><div class="photo-tip">La sala del trono con el fresco de los grifos es el espacio más antiguo de Europa con función de gobierno identificable. La imagen más icónica del yacimiento.</div></div>
+      <div class="photo-item"><div class="photo-name">Fortaleza de Koules al amanecer</div><div class="photo-tip">El castillo veneciano reflejado en el agua del puerto con la ciudad al fondo. Mejor con luz de madrugada, pero la mañana temprana también es hermosa.</div></div>
+      <div class="photo-item"><div class="photo-name">Fresco del Salto del Toro (Museo Arqueológico)</div><div class="photo-tip">El fresco más famoso del mundo minoico: tres acróbatas saltando sobre un toro. Fotografiar sin flash para apreciar los colores originales.</div></div>
+    </div>
+
+    <div class="section-block">
+      <div class="section-label"><div class="section-icon">💡</div><h3>Consejos prácticos</h3></div>
+      <div class="tip-item"><span class="tip-icon">🌡</span><span><strong>Temperatura:</strong> 30–35°C. Knossos es un yacimiento abierto —el calor a mediodía es agobiante. Ir a primera hora.</span></div>
+      <div class="tip-item"><span class="tip-icon">🏛</span><span><strong>Knossos:</strong> La polémica restauración de Evans (con hormigón y colores vivos) incomoda a algunos arqueólogos, pero facilita la comprensión del espacio. Si prefieres un yacimiento "puro", visitar Festo (a 60 km, no factible en una escala) es la alternativa.</span></div>
+      <div class="tip-item"><span class="tip-icon">🎒</span><span><strong>Guía:</strong> En Knossos, una guía local o audio-guía de calidad marca la diferencia entre ver ruinas y entender una civilización.</span></div>
+    </div>
+
+    <div class="section-block">
+      <div class="section-label"><div class="section-icon">⭐</div><h3>Valoración</h3></div>
+      <div class="scores-grid">
+        <div class="score-card"><div class="score-label">Historia</div><div class="score-val">10<span>/10</span></div><div class="score-stars">★★★★★</div></div>
+        <div class="score-card"><div class="score-label">Cultura</div><div class="score-val">9<span>/10</span></div><div class="score-stars">★★★★★</div></div>
+        <div class="score-card"><div class="score-label">Paisaje</div><div class="score-val">7<span>/10</span></div><div class="score-stars">★★★★☆</div></div>
+        <div class="score-card"><div class="score-label">Gastronomía</div><div class="score-val">10<span>/10</span></div><div class="score-stars">★★★★★</div></div>
+        <div class="score-card"><div class="score-label">Experiencia</div><div class="score-val">9<span>/10</span></div><div class="score-stars">★★★★★</div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ================================ -->
+<!-- RODAS -->
+<!-- ================================ -->
+<div class="destination" id="rodas">
+  <div class="dest-header" style="background: linear-gradient(135deg, #1a3a1a, #2d6a3a);">
+    <div class="dest-number">Escala 05 · 24 de junio</div>
+    <h2>Rodas <em>— Dodecaneso, Grecia</em></h2>
+    <div class="dest-tagline">"Una de las ciudades medievales mejor conservadas del mundo: cruzados, caballeros y el sol de Helios"</div>
+  </div>
+  <div class="dest-body">
+
+    <div class="section-block">
+      <div class="section-label"><div class="section-icon">🏛</div><h3>Contexto histórico y cultural</h3></div>
+      <p>Rodas es una de las islas históricamente más ricas del Mediterráneo. Fundada en 408 a.C. mediante la sinecismo (fusión) de tres ciudades-estado antiguas, se convirtió en una de las repúblicas comerciales más prósperas del mundo helenístico. Fue aliada de Roma, sede de una famosa escuela de retórica donde estudió Julio César, y hogar del Coloso —una estatua de Helios (el dios sol) de entre 33 y 70 metros, considerada una de las Siete Maravillas del Mundo Antiguo, destruida por un terremoto en 226 a.C., apenas 54 años después de su construcción.</p>
+      <p>En el siglo XIV, la Orden de los Caballeros Hospitalarios (Orden de San Juan) tomó la isla y la convirtió en su fortaleza principal durante más de dos siglos (1309–1522). La ciudad medieval amurallada que construyeron es considerada el ejemplo mejor conservado de arquitectura militar medieval tardía del mundo, declarada Patrimonio de la Humanidad por la UNESCO. El Gran Maestre de la Orden tenía un poder equivalente al de un rey europeo.</p>
+      <div class="anecdote">
+        En 1522, el sultán Suleimán el Magnífico sitió Rodas con 200.000 soldados y 400 barcos durante 6 meses. Los Caballeros, que no llegaban a 7.000 (incluyendo civiles), resistieron heroicamente. Al rendirse, Suleimán quedó tan impresionado por el valor de los defensores que les permitió marcharse con honores militares, banderas desplegadas y sus armas. Fue uno de los actos de caballerosidad más notables de las Guerras Otomanas.
+      </div>
+      <p>Rodas también fue colonia italiana (1912–1943), período en que el régimen fascista construyó edificios de estilo Art Déco y neobizantino en el puerto que conviven hoy con la ciudad medieval. Tras la Segunda Guerra Mundial fue cedida a Grecia en 1947.</p>
+    </div>
+
+    <div class="section-block">
+      <div class="section-label"><div class="section-icon">📍</div><h3>Qué ver prioritariamente</h3></div>
+      <div class="priority-group">
+        <div class="priority-badge badge-must">⭐ Imprescindibles</div>
+        <div class="place-item must">
+          <div class="place-name">Ciudad Medieval amurallada (casco histórico UNESCO)</div>
+          <div class="place-desc">Las murallas medievales de 4 km de longitud, los fosos, las torres y las puertas son el corazón de la visita. La Calle de los Caballeros (Ippoton) es la calle medieval mejor conservada de Europa: bordeada por los distintos "hostales" (posadas) de las diferentes lenguas de la Orden, construidos entre los siglos XIV y XVI. Una caminata por ella es como retroceder 600 años.</div>
+        </div>
+        <div class="place-item must">
+          <div class="place-name">Palacio del Gran Maestre</div>
+          <div class="place-desc">La fortaleza-residencia del Gran Maestre de los Caballeros. Construido sobre una acrópolis helenística, fue destruido en una explosión de polvorín en 1856 y reconstruido por los italianos en 1937 como residencia de verano de Mussolini y el rey Víctor Manuel III (aunque nunca lo usaron). El interior alberga mosaicos romanos traídos de Cos y una colección de arte medieval. Imponente architectura militar.</div>
+        </div>
+        <div class="place-item must">
+          <div class="place-name">Bazar turco y Mezquita de Suleimán</div>
+          <div class="place-desc">El barrio turco dentro de la ciudad medieval —un laberinto de callecitas con bazares, mezquitas y fuentes otomanas— es uno de los contrastes históricos más fascinantes del Mediterráneo: arquitectura de cruzados medievales con superposición otomana. La Mezquita de Suleimán (siglo XVI) domina el horizonte de la ciudad medieval.</div>
+        </div>
+      </div>
+
+      <div class="priority-group">
+        <div class="priority-badge badge-rec">👍 Muy recomendables</div>
+        <div class="place-item rec">
+          <div class="place-name">Museo Arqueológico de Rodas (Hospital Medieval)</div>
+          <div class="place-desc">Instalado en el antiguo hospital medieval de los Caballeros (siglo XV), alberga la famosa Afrodita de Rodas (escultura helenística del siglo I a.C.) y una rica colección de arte antiguo. El edificio en sí —con sus arcos góticos y patios— es una obra maestra de la arquitectura hospitalaria medieval.</div>
+        </div>
+        <div class="place-item rec">
+          <div class="place-name">Puerto de Mandráki y las columnas del Coloso</div>
+          <div class="place-desc">Los dos ciervos de bronce que flanquean la entrada del puerto marcan (según la tradición) el lugar donde se alzaba el Coloso. El puerto veneciano, con sus tres molinos medievales y el Castillo de Naillac, es muy fotogénico.</div>
+        </div>
+      </div>
+
+      <div class="priority-group">
+        <div class="priority-badge badge-opt">✦ Opcionales</div>
+        <div class="place-item opt">
+          <div class="place-name">Acrópolis de Rodas (Colina Monte Smith)</div>
+          <div class="place-desc">Restos del templo de Apolo y el estadio helenístico. A 20 minutos a pie del centro. Impresionantes vistas pero menos impactante que el interior medieval.</div>
+        </div>
+        <div class="place-item opt">
+          <div class="place-name">Lindos (a 50 km)</div>
+          <div class="place-desc">Un pueblo blanco deslumbrante con acrópolis griega sobre acantilados. No es factible en una escala de un día, pero es el punto más hermoso de la isla.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section-block">
+      <div class="section-label"><div class="section-icon">🗺</div><h3>Ruta optimizada</h3></div>
+      <div class="highlight-box">
+        <strong>Ventaja:</strong> El crucero atraca en el Puerto de Mandráki, a 5 minutos a pie de la entrada a la ciudad medieval. Una de las mejores posiciones de todas las escalas.
+      </div>
+      <table class="route-table">
+        <tr><th>Hora</th><th>Lugar</th><th>Duración</th><th>Nota</th></tr>
+        <tr><td class="time">08:00</td><td>Puerto de Mandráki (columnas del Coloso)</td><td class="dur">20 min</td><td>Foto de los ciervos de bronce y molinos medievales</td></tr>
+        <tr><td class="time">08:20</td><td>Palacio del Gran Maestre</td><td class="dur">1h</td><td>Abre a las 8h. Ir primero para evitar grupos.</td></tr>
+        <tr><td class="time">09:20</td><td>Calle de los Caballeros (Ippoton)</td><td class="dur">30 min</td><td>La calle medieval más perfecta de Europa. Paseo lento y fotográfico.</td></tr>
+        <tr><td class="time">09:50</td><td>Museo Arqueológico (Hospital Medieval)</td><td class="dur">45 min</td><td>Ver la Afrodita de Rodas y el edificio en sí</td></tr>
+        <tr><td class="time">10:35</td><td>Barrio turco y Mezquita de Suleimán</td><td class="dur">45 min</td><td>Explorar las callejuelas del mercado y las fuentes otomanas</td></tr>
+        <tr><td class="time">11:20</td><td>Murallas medievales (paseo exterior)</td><td class="dur">30 min</td><td>El foso seco y las torres son impresionantes desde fuera</td></tr>
+        <tr><td class="time">11:50</td><td>Almuerzo en la ciudad medieval</td><td class="dur">1h</td><td>Buscar tabernas en las calles interiores, alejadas del puerto</td></tr>
+        <tr><td class="time">12:50</td><td>Paseo libre / compras de artesanía</td><td class="dur">variable</td><td>Cerámica rodia y productos locales</td></tr>
+      </table>
+    </div>
+
+    <div class="section-block">
+      <div class="section-label"><div class="section-icon">🍽</div><h3>Gastronomía</h3></div>
+      <div class="food-grid">
+        <div class="food-item"><div class="food-type">Especialidad</div><div class="food-name">Pitaroudia</div><div class="food-desc">Buñuelos de garbanzos con tomate y hierbas. Aperitivo local que no existe igual en el resto de Grecia.</div></div>
+        <div class="food-item"><div class="food-type">Queso</div><div class="food-name">Myzithra rodia</div><div class="food-desc">Queso fresco de oveja, más cremoso que el continental. Se toma con miel local de tomillo.</div></div>
+        <div class="food-item"><div class="food-type">Dulce</div><div class="food-name">Melekoúni</div><div class="food-desc">Barrita de sésamo con miel y flores de naranja. Originaria de la antigüedad griega, se ofrecía en bodas.</div></div>
+        <div class="food-item"><div class="food-type">Vino</div><div class="food-name">Vino de Rodas (CAIR)</div><div class="food-desc">La bodega cooperativa de la isla produce blancos de uva Athiri de gran calidad y el famoso vino espumoso Cava CAIR.</div></div>
+      </div>
+    </div>
+
+    <div class="section-block">
+      <div class="section-label"><div class="section-icon">📷</div><h3>Miradores y fotografía</h3></div>
+      <div class="photo-item"><div class="photo-name">Calle de los Caballeros (Ippoton) al amanecer</div><div class="photo-tip">La luz dorada de la mañana sobre los adoquines medievales, con los escudos de armas en las fachadas, es una de las imágenes más poderosas del viaje. Antes de las 9h no hay nadie.</div></div>
+      <div class="photo-item"><div class="photo-name">Puerto de Mandráki con molinos medievales</div><div class="photo-tip">Los tres molinos en el rompeolas, con el mar turquesa de fondo. Temprano o al atardecer.</div></div>
+      <div class="photo-item"><div class="photo-name">Patios del Palacio del Gran Maestre</div><div class="photo-tip">Los arcos y columnas góticas con mosaicos romanos en el suelo. Fotografía arquitectónica magnífica.</div></div>
+    </div>
+
+    <div class="section-block">
+      <div class="section-label"><div class="section-icon">💡</div><h3>Consejos prácticos</h3></div>
+      <div class="tip-item"><span class="tip-icon">🌡</span><span><strong>Temperatura:</strong> 30–34°C. La ciudad medieval tiene calles sombreadas y estrechas —más fresca que otras escalas al aire libre.</span></div>
+      <div class="tip-item"><span class="tip-icon">👟</span><span><strong>Calzado:</strong> Los adoquines medievales son irregulares. Zapatillas cómodas obligatorias.</span></div>
+      <div class="tip-item"><span class="tip-icon">🗺</span><span><strong>Perderse:</strong> La ciudad medieval tiene 200+ callejuelas. No te preocupes: es pequeña y siempre llegarás a la muralla. El laberinto es parte de la experiencia.</span></div>
+      <div class="tip-item"><span class="tip-icon">⚠️</span><span><strong>Lindos:</strong> Si el barco zarpa tarde (20h o después), considera contratar un taxi (70–80€ ida y vuelta) para ver Lindos —merece la pena enormemente. Pero no en verano con calor sin agua suficiente.</span></div>
+    </div>
+
+    <div class="section-block">
+      <div class="section-label"><div class="section-icon">⭐</div><h3>Valoración</h3></div>
+      <div class="scores-grid">
+        <div class="score-card"><div class="score-label">Historia</div><div class="score-val">9<span>/10</span></div><div class="score-stars">★★★★★</div></div>
+        <div class="score-card"><div class="score-label">Cultura</div><div class="score-val">9<span>/10</span></div><div class="score-stars">★★★★★</div></div>
+        <div class="score-card"><div class="score-label">Paisaje</div><div class="score-val">8<span>/10</span></div><div class="score-stars">★★★★☆</div></div>
+        <div class="score-card"><div class="score-label">Gastronomía</div><div class="score-val">8<span>/10</span></div><div class="score-stars">★★★★☆</div></div>
+        <div class="score-card"><div class="score-label">Experiencia</div><div class="score-val">9<span>/10</span></div><div class="score-stars">★★★★★</div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ================================ -->
+<!-- SANTORINI -->
+<!-- ================================ -->
+<div class="destination" id="santorini">
+  <div class="dest-header" style="background: linear-gradient(135deg, #1a0a2e, #4a1a6a);">
+    <div class="dest-number">Escala 06 · 25 de junio</div>
+    <h2>Santorini <em>— Cícladas, Grecia</em></h2>
+    <div class="dest-tagline">"La caldera de un volcán que hundió una civilización y quizás inspiró el mito de la Atlántida"</div>
+  </div>
+  <div class="dest-body">
+
+    <div class="section-block">
+      <div class="section-label"><div class="section-icon">🏛</div><h3>Contexto histórico y cultural</h3></div>
+      <p>Santorini es el fragmento de lo que fue una isla circular llamada Tera. En torno al 1600 a.C. (la datación exacta sigue en debate: algunos dicen 1628, otros 1520), el volcán que ocupaba el centro de la isla sufrió una de las erupciones más colosales de la historia humana registrada: cuatro veces más potente que el Krakatoa de 1883. La explosión hundió el centro de la isla, creando la caldera actual (un lago de agua de mar de 12 km de diámetro), generó tsunamis que devastaron las costas del Mediterráneo Oriental, y muy probablemente aceleró el colapso de la civilización minoica en Creta, apenas 100 km al sur.</p>
+      <p>En el yacimiento de Akrotiri (al sur de la isla) se conserva una ciudad minoica perfectamente preservada bajo la ceniza volcánica —el "Pompeya del Egeo". Sus habitantes evacuaron antes de la erupción (no se han encontrado cadáveres) llevándose los objetos de valor, pero dejando intactos frescos extraordinarios, muebles, vasijas y una organización urbana sofisticadísima con agua corriente y calefacción por suelo radiante. Es uno de los yacimientos arqueológicos más impresionantes del mundo.</p>
+      <div class="anecdote">
+        Platón describió en sus diálogos Timeo y Critias (360 a.C.) una isla civilización avanzada llamada Atlántida, destruida en un cataclismo y hundida bajo el mar. Muchos historiadores y arqueólogos han especulado que Platón pudo haberse basado en la memoria colectiva de la erupción de Tera y la desaparición de la civilización minoica. Aunque la hipótesis es controvertida, la coincidencia de una civilización insular avanzada destruida por una catástrofe geológica es llamativa.
+      </div>
+      <p>La Santorini moderna fue colonizada por dorios, luego por romanos, luego por venecianos (que la llamaron Santorini, de Santa Irene), y finalmente por los otomanos. Los asentamientos en el borde de la caldera —Fira, Oia, Imerovigli— son relativamente modernos, reconstruidos tras el terremoto devastador de 1956.</p>
+      <div class="curiosity">
+        El suelo de Santorini es pura piedra volcánica (pómez). El vino assyrtiko de Santorini se produce con viñas trenzadas en forma de canasta (kouloura) que protegen la uva del viento meltemi. Son viñas muy antiguas, algunas con más de 200 años, que sobrevivieron a la filoxera del siglo XIX porque el suelo volcánico y la aridez impiden que el parásito sobreviva.
+      </div>
+    </div>
+
+    <div class="section-block">
+      <div class="section-label"><div class="section-icon">📍</div><h3>Qué ver prioritariamente</h3></div>
+      <div class="priority-group">
+        <div class="priority-badge badge-must">⭐ Imprescindibles</div>
+        <div class="place-item must">
+          <div class="place-name">Akrotiri — el "Pompeya minoico"</div>
+          <div class="place-desc">El yacimiento arqueológico más importante de la isla. Una ciudad de 3.600 años perfectamente conservada bajo la ceniza volcánica: calles de dos pisos, frescos in situ, vasijas, muebles. La cubierta moderna protege el yacimiento del sol. El fresco del "Flotilla" (barcos en procesión) y el "Pescador" son piezas maestras del arte prehelénico. Este lugar, junto con el Disco de Festo, es uno de los grandes misterios arqueológicos de Europa.</div>
+        </div>
+        <div class="place-item must">
+          <div class="place-name">La Caldera desde Fira o Oia</div>
+          <div class="place-desc">La vista de la caldera volcánica desde el borde del acantilado es una de las experiencias visuales más poderosas del Mediterráneo: casas blancas y cúpulas azules sobre acantilados de 300 metros que caen verticalmente al mar, con la pequeña isla volcánica de Nea Kameni humeando en el centro. Es el paisaje más reconocible de Grecia.</div>
+        </div>
+        <div class="place-item must">
+          <div class="place-name">Oia (atardecer)</div>
+          <div class="place-desc">El pueblo de Oia, en el extremo norte de la isla, tiene el atardecer más fotografiado del mundo. Miles de personas se congregan cada tarde para verlo. Si el barco zarpa al atardecer, este es el espectáculo que no debe perderse. Llegar con 1h de antelación para conseguir posición.</div>
+        </div>
+      </div>
+
+      <div class="priority-group">
+        <div class="priority-badge badge-rec">👍 Muy recomendables</div>
+        <div class="place-item rec">
+          <div class="place-name">Museo Prehistórico de Fira</div>
+          <div class="place-desc">Alberga los frescos originales de Akrotiri. Los frescos del "Flotilla", el "Joven Pescador" y los "Antílopes" son piezas únicas en la historia del arte prehelénico. Visitar antes de ir a Akrotiri para ver los originales.</div>
+        </div>
+        <div class="place-item rec">
+          <div class="place-name">Nea Kameni (volcán activo en la caldera)</div>
+          <div class="place-desc">Un barco corto desde el puerto de Fira lleva a la pequeña isla volcánica donde se puede ver y oler azufre activo. Una experiencia geológica única. Las aguas termales adyacentes son naranjas por el mineral.</div>
+        </div>
+      </div>
+
+      <div class="priority-group">
+        <div class="priority-badge badge-opt">✦ Opcionales</div>
+        <div class="place-item opt">
+          <div class="place-name">Pirgos (pueblo medieval)</div>
+          <div class="place-desc">El pueblo más alto de la isla con restos de castillo veneciano y tabernas auténticas lejos del turismo masivo.</div>
+        </div>
+        <div class="place-item opt">
+          <div class="place-name">Playa Roja (Kokkini Paralia)</div>
+          <div class="place-desc">Playa de arena roja volcánica y acantilados de lava —un paisaje lunar único. A 500m de Akrotiri.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section-block">
+      <div class="section-label"><div class="section-icon">🗺</div><h3>Ruta optimizada</h3></div>
+      <div class="highlight-box">
+        <strong>Logística importante:</strong> El crucero atraca en la caldera (anclaje, no muelle) y el trayecto en lancha hasta el puerto de Fira tarda 20 minutos. Desde Fira, el teleférico o las mulas suben al pueblo (5 min / 10 min). Los teleféricos tienen colas enormes en verano —valorar subir a pie (587 escalones). Un ATV (quod) de alquiler permite moverse libremente por la isla.
+      </div>
+      <table class="route-table">
+        <tr><th>Hora</th><th>Lugar</th><th>Duración</th><th>Nota</th></tr>
+        <tr><td class="time">08:00</td><td>Lancha → Fira → Teleférico / escaleras</td><td class="dur">35 min</td><td>Ir temprano evita las colas del teleférico</td></tr>
+        <tr><td class="time">08:35</td><td>Museo Prehistórico de Fira</td><td class="dur">45 min</td><td>Ver los frescos originales de Akrotiri</td></tr>
+        <tr><td class="time">09:20</td><td>ATV/taxi a Akrotiri</td><td class="dur">20 min</td><td>~15 km al sur por carretera costera</td></tr>
+        <tr><td class="time">09:40</td><td>Yacimiento de Akrotiri</td><td class="dur">1h 30min</td><td>El Pompeya minoico. Con audio-guía o guía local.</td></tr>
+        <tr><td class="time">11:10</td><td>Playa Roja (breve parada)</td><td class="dur">20 min</td><td>500m de Akrotiri, paisaje lunar</td></tr>
+        <tr><td class="time">11:30</td><td>Fira (pueblo principal, almuerzo)</td><td class="dur">1h 15min</td><td>Buscar restaurantes en las callejuelas traseras, no en la caldera</td></tr>
+        <tr><td class="time">12:45</td><td>Camino de Fira a Oia (a pie o ATV)</td><td class="dur">45 min</td><td>El sendero caldera de 10 km es legendario si hay energía</td></tr>
+        <tr><td class="time">13:30</td><td>Oia</td><td class="dur">1h</td><td>Paseo, fotografía de cúpulas azules y caldera</td></tr>
+        <tr><td class="time">14:30</td><td>Regreso a Fira y lancha</td><td class="dur">45 min</td><td>Calcular holgura —las colas del teleférico son largas</td></tr>
+      </table>
+    </div>
+
+    <div class="section-block">
+      <div class="section-label"><div class="section-icon">🍽</div><h3>Gastronomía</h3></div>
+      <div class="food-grid">
+        <div class="food-item"><div class="food-type">Especialidad</div><div class="food-name">Fava de Santorini</div><div class="food-desc">Puré de alubias amarillas (D.O.P. de Santorini), cocidas en el suelo volcánico que les da un sabor único. Con aceite de oliva, cebolla y alcaparras. Un plato que tiene 3.500 años de historia.</div></div>
+        <div class="food-item"><div class="food-type">Tomate</div><div class="food-name">Tomatokeftedes</div><div class="food-desc">Albóndigas de tomate cherry de Santorini —pequeños, dulcísimos, cultivados en suelo volcánico sin irrigación. Son diferentes a cualquier tomate del mundo.</div></div>
+        <div class="food-item"><div class="food-type">Vino</div><div class="food-name">Assyrtiko de Santorini</div><div class="food-desc">El mejor vino blanco del Egeo: seco, mineral, cítrico, con acidez viva. Las viñas de más de 200 años, en suelo volcánico sin agua, producen uvas concentradas. Buscar bodegas Hatzidakis, Santo o Domaine Sigalas.</div></div>
+        <div class="food-item"><div class="food-type">Licor</div><div class="food-name">Vinsanto</div><div class="food-desc">Vino dulce de uvas pasificadas al sol, crianza mínima de dos años en barrica. El tesoro líquido de Santorini. Un pequeño vaso es una experiencia sensorial completa.</div></div>
+      </div>
+    </div>
+
+    <div class="section-block">
+      <div class="section-label"><div class="section-icon">📷</div><h3>Miradores y fotografía</h3></div>
+      <div class="photo-item"><div class="photo-name">Oia al atardecer</div><div class="photo-tip">Llegar al punto del castillo veneciano (Kastro) con 1h de antelación. La luz dorada convierte las cúpulas azules en oro. La imagen más replicada de Grecia —y con razón.</div></div>
+      <div class="photo-item"><div class="photo-name">Imerovigli ("el balcón de Santorini")</div><div class="photo-tip">Entre Fira y Oia, Imerovigli tiene las mejores vistas de la caldera y de la roca Skaros. Menos turistas que Oia. Amanecer espectacular.</div></div>
+      <div class="photo-item"><div class="photo-name">Vista de la caldera desde el barco (llegada)</div><div class="photo-tip">La llegada a la caldera de Santorini al amanecer, con los acantilados iluminando y los pueblos blancos recortados, es una de las imágenes más impactantes del viaje. Subir a cubierta.</div></div>
+      <div class="photo-item"><div class="photo-name">Akrotiri desde dentro</div><div class="photo-tip">Las calles de 3.600 años con las paredes de dos pisos perfectamente conservadas. Fotografía de arquitectura prehistórica única en Europa.</div></div>
+    </div>
+
+    <div class="section-block">
+      <div class="section-label"><div class="section-icon">💡</div><h3>Consejos prácticos</h3></div>
+      <div class="tip-item"><span class="tip-icon">⚠️</span><span><strong>El teleférico:</strong> Las colas en verano pueden ser de 45 minutos a 1 hora. Alternativa: bajar a pie (587 escalones, 20 min, agradable por la mañana), subir en teleférico o mulas si no queda energía.</span></div>
+      <div class="tip-item"><span class="tip-icon">🛵</span><span><strong>ATV/Quad:</strong> Son la mejor forma de moverse. Se alquilan en Fira desde ~30€/día. Libertad total para explorar la isla a tu ritmo. Conducir con precaución en las carreteras estrechas.</span></div>
+      <div class="tip-item"><span class="tip-icon">💰</span><span><strong>Precios:</strong> Santorini es muy cara, especialmente en Oia. Un café puede costar 8€. Los restaurantes con vista a la caldera cobran el triple por la misma comida.</span></div>
+      <div class="tip-item"><span class="tip-icon">🌡</span><span><strong>Temperatura:</strong> 28–33°C. La piedra volcánica acumula calor y lo irradia al caminar. Hidratación constante.</span></div>
+      <div class="tip-item"><span class="tip-icon">🚢</span><span><strong>Regreso al barco:</strong> Las colas para la lancha de regreso pueden ser largas. Calcular 45–60 minutos de margen extra antes de la hora de zarpe.</span></div>
+    </div>
+
+    <div class="section-block">
+      <div class="section-label"><div class="section-icon">⭐</div><h3>Valoración</h3></div>
+      <div class="scores-grid">
+        <div class="score-card"><div class="score-label">Historia</div><div class="score-val">9<span>/10</span></div><div class="score-stars">★★★★★</div></div>
+        <div class="score-card"><div class="score-label">Cultura</div><div class="score-val">8<span>/10</span></div><div class="score-stars">★★★★☆</div></div>
+        <div class="score-card"><div class="score-label">Paisaje</div><div class="score-val">10<span>/10</span></div><div class="score-stars">★★★★★</div></div>
+        <div class="score-card"><div class="score-label">Gastronomía</div><div class="score-val">8<span>/10</span></div><div class="score-stars">★★★★☆</div></div>
+        <div class="score-card"><div class="score-label">Experiencia</div><div class="score-val">10<span>/10</span></div><div class="score-stars">★★★★★</div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+</div><!-- /container -->
+
+<!-- ================================ -->
+<!-- SECCIONES FINALES -->
+<!-- ================================ -->
+
+<div class="final-section" id="ranking">
+  <div class="container">
+    <h2>Ranking de escalas</h2>
+    <p style="margin-bottom:1.5rem;color:rgba(255,255,255,0.55);font-size:13px;">Para el viajero apasionado por la historia, la arqueología, la cultura y la fotografía</p>
+
+    <div class="ranking-item">
+      <div class="rank-num">1</div>
+      <div class="rank-body">
+        <h4>Estambul</h4>
+        <p>La ciudad más históricamente densa del planeta. Tres imperios, 1.600 años de capitalidad, y la superposición visible de civilizaciones. Santa Sofía sola justifica el viaje entero. Con la ventaja logística de atracar a 10 minutos a pie de todo, es el destino de mayor retorno histórico-cultural del crucero.</p>
+      </div>
+    </div>
+    <div class="ranking-item">
+      <div class="rank-num">2</div>
+      <div class="rank-body">
+        <h4>Atenas (El Pireo)</h4>
+        <p>La Acrópolis y el Partenón son el fundamento visual de la civilización occidental. Ninguna fotografía, ningún libro, prepara para la experiencia real de estar frente al mármol pentélico del siglo V a.C. El Nuevo Museo es uno de los mejores del mundo.</p>
+      </div>
+    </div>
+    <div class="ranking-item">
+      <div class="rank-num">3</div>
+      <div class="rank-body">
+        <h4>Heraklion — Creta</h4>
+        <p>La puerta de entrada a la civilización más antigua de Europa. Knossos y el Museo Arqueológico revelan 1.500 años de historia pre-griega que la mayoría de viajeros desconoce por completo. El Disco de Festo es el objeto más misterioso de la arqueología mediterránea.</p>
+      </div>
+    </div>
+    <div class="ranking-item">
+      <div class="rank-num">4</div>
+      <div class="rank-body">
+        <h4>Santorini</h4>
+        <p>La combinación de Akrotiri (el Pompeya minoico), la geología volcánica extrema y el paisaje más fotogénico del Mediterráneo la convierten en una experiencia total. El atardecer de Oia y la llegada a la caldera son memorias permanentes.</p>
+      </div>
+    </div>
+    <div class="ranking-item">
+      <div class="rank-num">5</div>
+      <div class="rank-body">
+        <h4>Rodas</h4>
+        <p>La ciudad medieval mejor conservada del Mediterráneo es una joya subestimada. La Calle de los Caballeros, el Palacio del Gran Maestre y el Bazar Turco ofrecen tres civilizaciones superpuestas en el espacio de unas pocas manzanas.</p>
+      </div>
+    </div>
+    <div class="ranking-item">
+      <div class="rank-num">6</div>
+      <div class="rank-body">
+        <h4>Mykonos (+ Delos)</h4>
+        <p>Mykonos sola sería la última del ranking. Pero la excursión a Delos la catapulta al top 3 arqueológico: el yacimiento deshabitado de uno de los santuarios más sagrados del mundo antiguo, con la Terraza de los Leones y las ruinas de los templos de Apolo, es extraordinario.</p>
+      </div>
+    </div>
+    <div class="ranking-item">
+      <div class="rank-num">7</div>
+      <div class="rank-body">
+        <h4>Paso por los Dardanelos</h4>
+        <p>No es una escala, pero navegarlos conscientemente —con Troya a 30 km, las playas de Gallípoli visibles, los castillos de Mehmed II a ambos lados— es una experiencia histórica que pocos viajeros saben apreciar. Quien lleva el libro de Homero o Tucídides en ese momento vivirá algo único.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="final-section" id="imprescindibles" style="background:#0d1a2a;">
+  <div class="container">
+    <h2>Los 25 lugares imprescindibles del crucero</h2>
+    <p style="margin-bottom:1.5rem;color:rgba(255,255,255,0.5);font-size:13px;">Una selección curada para el viajero exigente con la historia y el arte</p>
+
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:0 2rem;">
+      <div>
+        <div class="must-item"><span class="must-num">01</span>La Acrópolis de Atenas — el edificio más influyente jamás construido</div>
+        <div class="must-item"><span class="must-num">02</span>Nuevo Museo de la Acrópolis — las cariátides originales y el friso del Partenón</div>
+        <div class="must-item"><span class="must-num">03</span>Ágora Antigua de Atenas — donde Sócrates discutía con los ciudadanos</div>
+        <div class="must-item"><span class="must-num">04</span>Templo de Hefesto — el templo dórico mejor conservado del mundo</div>
+        <div class="must-item"><span class="must-num">05</span>Santa Sofía (Hagia Sophia) — 1.500 años de historia cristiana e islámica</div>
+        <div class="must-item"><span class="must-num">06</span>Cisterna Basílica — el mundo subterráneo de Justiniano</div>
+        <div class="must-item"><span class="must-num">07</span>Palacio de Topkapi — el corazón del Imperio Otomano</div>
+        <div class="must-item"><span class="must-num">08</span>Mezquita Azul — perfección de la arquitectura islámica</div>
+        <div class="must-item"><span class="must-num">09</span>Plaza Sultanahmet (Hipódromo) — 2.500 años en 200 metros</div>
+        <div class="must-item"><span class="must-num">10</span>Bazar de las Especias de Estambul — los aromas del comercio otomano</div>
+        <div class="must-item"><span class="must-num">11</span>El Bósforo — el estrecho que divide dos continentes</div>
+        <div class="must-item"><span class="must-num">12</span>Delos — el santuario más sagrado del mundo antiguo</div>
+        <div class="must-item"><span class="must-num">13</span>Terraza de los Leones de Delos (siglo VII a.C.)</div>
+      </div>
+      <div>
+        <div class="must-item"><span class="must-num">14</span>Iglesia de Paraportiani, Mykonos — la arquitectura cicládica en estado puro</div>
+        <div class="must-item"><span class="must-num">15</span>Museo Arqueológico de Heraklion — el Disco de Festo y los frescos minoicos</div>
+        <div class="must-item"><span class="must-num">16</span>Palacio de Knossos — el laberinto del Minotauro, la cuna de Europa</div>
+        <div class="must-item"><span class="must-num">17</span>Fortaleza veneciana de Koules, Heraklion</div>
+        <div class="must-item"><span class="must-num">18</span>Calle de los Caballeros (Ippoton), Rodas — el callejero medieval perfecto</div>
+        <div class="must-item"><span class="must-num">19</span>Palacio del Gran Maestre, Rodas</div>
+        <div class="must-item"><span class="must-num">20</span>Ciudad medieval amurallada de Rodas (UNESCO)</div>
+        <div class="must-item"><span class="must-num">21</span>Akrotiri — el Pompeya minoico bajo la ceniza volcánica</div>
+        <div class="must-item"><span class="must-num">22</span>Museo Prehistórico de Fira — los frescos de la ciudad perdida de Tera</div>
+        <div class="must-item"><span class="must-num">23</span>La caldera de Santorini desde el borde (Fira o Imerovigli)</div>
+        <div class="must-item"><span class="must-num">24</span>Atardecer de Oia — el más famoso del Mediterráneo</div>
+        <div class="must-item"><span class="must-num">25</span>Paso por los Dardanelos — desde cubierta, con Homero en mente</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="final-section" style="background: linear-gradient(135deg, #0d1a2a, #1a0d2a);">
+  <div class="container">
+    <h2>Lo que no debo perderme bajo ningún concepto</h2>
+    <p style="margin-bottom:1.5rem;color:rgba(255,255,255,0.5);font-size:13px;">Las experiencias más memorables e irrepetibles del viaje</p>
+
+    <div class="unmissable-item">
+      <h4>🌅 Subir a la Acrópolis al amanecer</h4>
+      <p>Llegar a las 8h, cuando abre, antes de que lleguen los grupos organizados. El Partenón bañado en luz dorada del este, con el Egeo brillando a lo lejos y la ciudad de Atenas desplegándose en silencio, es una experiencia que no tiene equivalente. En ese momento entiendes por qué la civilización occidental lleva 2.500 años mirando hacia esta colina.</p>
+    </div>
+
+    <div class="unmissable-item">
+      <h4>🕌 Entrar en Santa Sofía a primera hora de la mañana</h4>
+      <p>Antes de las 9h30, con la luz de la mañana penetrando por las 40 ventanas de la base de la cúpula, el interior de Santa Sofía produce algo cercano al asombro religioso —independientemente de las creencias de cada uno. Estar en el centro de la nave y mirar hacia arriba, donde los mosaicos de Cristo coexisten con las caligrafías de Alá, es estar dentro de la Historia con mayúscula.</p>
+    </div>
+
+    <div class="unmissable-item">
+      <h4>🏛 Caminar por la Calle de los Caballeros de Rodas al amanecer</h4>
+      <p>A las 8h de la mañana, antes de que lleguen los cruceristas, la Calle de los Caballeros está completamente vacía. Los adoquines del siglo XV, los escudos de armas en las fachadas góticas, el silencio absoluto. Es el viaje en el tiempo más convincente de todo el crucero.</p>
+    </div>
+
+    <div class="unmissable-item">
+      <h4>🌋 La llegada a la caldera de Santorini al amanecer</h4>
+      <p>Subir a cubierta cuando el barco entra en la caldera al amanecer. Los acantilados de 300 metros de altura, negros en la base y blancos en la cima, los pueblos iluminados de color naranja, el agua casi inmóvil dentro del cráter volcánico. Es el mejor argumento visual para entender por qué existe el mito de la Atlántida.</p>
+    </div>
+
+    <div class="unmissable-item">
+      <h4>🏺 El fresco del Salto del Toro en el Museo de Heraklion</h4>
+      <p>Estar frente al fresco del Salto del Toro —tres acróbatas, uno saltando sobre un toro en movimiento, con una fluidez y una vida que ningún artista europeo volvería a alcanzar hasta el Renacimiento— y entender que fue pintado hace 3.600 años por alguien cuya lengua no podemos leer. Uno de los momentos más perturbadores y hermosos del viaje.</p>
+    </div>
+
+    <div class="unmissable-item">
+      <h4>🚢 Navegar los Dardanelos con Homero en la mano</h4>
+      <p>Leer el canto II de la Ilíada, o simplemente saber que Aquiles, Odiseo, Agamenón y Alejandro cruzaron este mismo estrecho, mientras las costas europeas y asiáticas pasan a poco más de un kilómetro. La historia no está en los museos —a veces está en el agua que te rodea.</p>
+    </div>
+
+    <div class="unmissable-item">
+      <h4>🌇 El atardecer de Oia</h4>
+      <p>Miles de personas desde todo el mundo se reúnen en el mismo punto cada tarde para ver el sol caer sobre el mar Egeo desde los acantilados de Oia. Es un fenómeno social tan extraño como hermoso. La luz anaranjada convierte las cúpulas azules en oro, el mar se vuelve de plata y por unos minutos todas las diferencias entre los espectadores desaparecen. Una de las pocas experiencias colectivas de belleza que ofrece el turismo masivo.</p>
+    </div>
+
+    <div class="unmissable-item">
+      <h4>☕ Un café turco en Estambul, mirando el Bósforo</h4>
+      <p>Sentarse en una terraza con vista al Bósforo, con un café turco sin filtro y un vaso de agua, y contemplar los buques de carga que van de Europa a Asia y viceversa, los minaretes en el horizonte y los gatos de Estambul caminando entre las sillas. Es el momento de calma perfecta en medio de una ciudad de 15 millones de personas y 2.500 años de historia.</p>
+    </div>
+
+  </div>
+</div>
+
+<footer>
+  <p>Guía cultural profunda · Crucero <span>Mare Nostrum</span> · Junio 2025</p>
+  <p style="margin-top:0.4rem;font-size:11px;opacity:0.6;">Del Pireo a Santorini · Historia, arqueología y cultura mediterránea</p>
+</footer>
+
+<script>
+  // Active nav link on scroll
+  const sections = document.querySelectorAll('[id]');
+  const navLinks = document.querySelectorAll('nav a');
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        navLinks.forEach(link => {
+          link.classList.remove('active');
+          if (link.getAttribute('href') === '#' + entry.target.id) {
+            link.classList.add('active');
+          }
+        });
+      }
+    });
+  }, { threshold: 0.3, rootMargin: '-60px 0px 0px 0px' });
+
+  sections.forEach(s => observer.observe(s));
+</script>
+</body>
+</html>
