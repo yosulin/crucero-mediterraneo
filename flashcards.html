@@ -208,6 +208,55 @@
     opacity: 0.7;
   }
 
+  /* ── AUDIO BUTTON ── */
+  .audio-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    margin: 8px auto 2px;
+    background: var(--blue);
+    color: white;
+    border: none;
+    border-radius: 30px;
+    padding: 7px 18px;
+    font-family: 'Nunito', sans-serif;
+    font-size: 13px;
+    font-weight: 800;
+    cursor: pointer;
+    transition: background 0.15s, transform 0.12s;
+    -webkit-tap-highlight-color: transparent;
+    box-shadow: 0 3px 10px rgba(47,127,212,0.3);
+  }
+  .audio-btn:hover { background: #1a6ab8; }
+  .audio-btn:active { transform: scale(0.93); }
+  .audio-btn.speaking {
+    background: var(--green);
+    box-shadow: 0 3px 10px rgba(45,184,124,0.4);
+    animation: pulse-btn 0.6s ease-in-out infinite alternate;
+  }
+  @keyframes pulse-btn {
+    from { transform: scale(1); }
+    to   { transform: scale(1.06); }
+  }
+  .audio-btn svg {
+    width: 15px; height: 15px;
+    fill: white;
+    flex-shrink: 0;
+  }
+  .no-speech-warning {
+    background: #fff3cd;
+    border: 1px solid #f5b800;
+    border-radius: 10px;
+    padding: 8px 14px;
+    font-size: 12px;
+    color: #7a5800;
+    text-align: center;
+    margin: 0 auto 1rem;
+    max-width: 500px;
+    display: none;
+  }
+
   /* ── GRAMMAR SECTION ── */
   .grammar-intro {
     background: white;
@@ -369,6 +418,7 @@
 </head>
 <body>
 
+<div class="no-speech-warning" id="no-speech-warn">⚠️ Tu navegador no tiene soporte de audio. Prueba con Chrome o Safari.</div>
 <header>
   <div class="logo-area">
     <h1>Kids <span>Can!</span> 3</h1>
@@ -399,6 +449,10 @@
       <div class="card-body">
         <div class="word-en">play baseball</div>
         <div class="word-phonetic">/pleɪ ˈbeɪs.bɔːl/</div>
+        <button class="audio-btn" onclick="speakWord('play baseball')" aria-label="Escuchar play baseball">
+          <svg viewBox="0 0 24 24"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/></svg>
+          Escuchar
+        </button>
         <div class="translations">
           <span class="trans-pill trans-eu"><span class="trans-label">EU</span>beisbola jo</span>
           <span class="trans-pill trans-es"><span class="trans-label">ES</span>jugar al béisbol</span>
@@ -415,6 +469,10 @@
       <div class="card-body">
         <div class="word-en">play badminton</div>
         <div class="word-phonetic">/pleɪ ˈbæd.mɪn.tən/</div>
+        <button class="audio-btn" onclick="speakWord('play badminton')" aria-label="Escuchar play badminton">
+          <svg viewBox="0 0 24 24"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/></svg>
+          Escuchar
+        </button>
         <div class="translations">
           <span class="trans-pill trans-eu"><span class="trans-label">EU</span>badminton jokatu</span>
           <span class="trans-pill trans-es"><span class="trans-label">ES</span>jugar al bádminton</span>
@@ -431,6 +489,10 @@
       <div class="card-body">
         <div class="word-en">play hockey</div>
         <div class="word-phonetic">/pleɪ ˈhɒk.i/</div>
+        <button class="audio-btn" onclick="speakWord('play hockey')" aria-label="Escuchar play hockey">
+          <svg viewBox="0 0 24 24"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/></svg>
+          Escuchar
+        </button>
         <div class="translations">
           <span class="trans-pill trans-eu"><span class="trans-label">EU</span>hockeya jo</span>
           <span class="trans-pill trans-es"><span class="trans-label">ES</span>jugar al hockey</span>
@@ -447,6 +509,10 @@
       <div class="card-body">
         <div class="word-en">do gymnastics</div>
         <div class="word-phonetic">/duː dʒɪmˈnæs.tɪks/</div>
+        <button class="audio-btn" onclick="speakWord('do gymnastics')" aria-label="Escuchar do gymnastics">
+          <svg viewBox="0 0 24 24"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/></svg>
+          Escuchar
+        </button>
         <div class="translations">
           <span class="trans-pill trans-eu"><span class="trans-label">EU</span>gimnasia egin</span>
           <span class="trans-pill trans-es"><span class="trans-label">ES</span>hacer gimnasia</span>
@@ -463,6 +529,10 @@
       <div class="card-body">
         <div class="word-en">do judo</div>
         <div class="word-phonetic">/duː ˈdʒuː.dəʊ/</div>
+        <button class="audio-btn" onclick="speakWord('do judo')" aria-label="Escuchar do judo">
+          <svg viewBox="0 0 24 24"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/></svg>
+          Escuchar
+        </button>
         <div class="translations">
           <span class="trans-pill trans-eu"><span class="trans-label">EU</span>judoa egin</span>
           <span class="trans-pill trans-es"><span class="trans-label">ES</span>hacer judo</span>
@@ -479,6 +549,10 @@
       <div class="card-body">
         <div class="word-en">sports centre</div>
         <div class="word-phonetic">/spɔːts ˈsen.tər/</div>
+        <button class="audio-btn" onclick="speakWord('sports centre')" aria-label="Escuchar sports centre">
+          <svg viewBox="0 0 24 24"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/></svg>
+          Escuchar
+        </button>
         <div class="translations">
           <span class="trans-pill trans-eu"><span class="trans-label">EU</span>kirol zentroa</span>
           <span class="trans-pill trans-es"><span class="trans-label">ES</span>centro deportivo</span>
@@ -495,6 +569,10 @@
       <div class="card-body">
         <div class="word-en">swimming pool</div>
         <div class="word-phonetic">/ˈswɪm.ɪŋ puːl/</div>
+        <button class="audio-btn" onclick="speakWord('swimming pool')" aria-label="Escuchar swimming pool">
+          <svg viewBox="0 0 24 24"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/></svg>
+          Escuchar
+        </button>
         <div class="translations">
           <span class="trans-pill trans-eu"><span class="trans-label">EU</span>igerilekua</span>
           <span class="trans-pill trans-es"><span class="trans-label">ES</span>piscina</span>
@@ -511,6 +589,10 @@
       <div class="card-body">
         <div class="word-en">basketball court</div>
         <div class="word-phonetic">/ˈbɑːs.kɪt.bɔːl kɔːt/</div>
+        <button class="audio-btn" onclick="speakWord('basketball court')" aria-label="Escuchar basketball court">
+          <svg viewBox="0 0 24 24"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/></svg>
+          Escuchar
+        </button>
         <div class="translations">
           <span class="trans-pill trans-eu"><span class="trans-label">EU</span>saskibaloi pista</span>
           <span class="trans-pill trans-es"><span class="trans-label">ES</span>cancha de baloncesto</span>
@@ -527,6 +609,10 @@
       <div class="card-body">
         <div class="word-en">running track</div>
         <div class="word-phonetic">/ˈrʌn.ɪŋ træk/</div>
+        <button class="audio-btn" onclick="speakWord('running track')" aria-label="Escuchar running track">
+          <svg viewBox="0 0 24 24"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/></svg>
+          Escuchar
+        </button>
         <div class="translations">
           <span class="trans-pill trans-eu"><span class="trans-label">EU</span>atletismo pista</span>
           <span class="trans-pill trans-es"><span class="trans-label">ES</span>pista de atletismo</span>
@@ -543,6 +629,10 @@
       <div class="card-body">
         <div class="word-en">football pitch</div>
         <div class="word-phonetic">/ˈfʊt.bɔːl pɪtʃ/</div>
+        <button class="audio-btn" onclick="speakWord('football pitch')" aria-label="Escuchar football pitch">
+          <svg viewBox="0 0 24 24"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/></svg>
+          Escuchar
+        </button>
         <div class="translations">
           <span class="trans-pill trans-eu"><span class="trans-label">EU</span>futbol zelaia</span>
           <span class="trans-pill trans-es"><span class="trans-label">ES</span>campo de fútbol</span>
@@ -565,6 +655,10 @@
       <div class="card-body">
         <div class="word-en">fox</div>
         <div class="word-phonetic">/fɒks/</div>
+        <button class="audio-btn" onclick="speakWord('fox')" aria-label="Escuchar fox">
+          <svg viewBox="0 0 24 24"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/></svg>
+          Escuchar
+        </button>
         <div class="translations">
           <span class="trans-pill trans-eu"><span class="trans-label">EU</span>azeria</span>
           <span class="trans-pill trans-es"><span class="trans-label">ES</span>zorro</span>
@@ -578,6 +672,10 @@
       <div class="card-body">
         <div class="word-en">turtle</div>
         <div class="word-phonetic">/ˈtɜː.tl̩/</div>
+        <button class="audio-btn" onclick="speakWord('turtle')" aria-label="Escuchar turtle">
+          <svg viewBox="0 0 24 24"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/></svg>
+          Escuchar
+        </button>
         <div class="translations">
           <span class="trans-pill trans-eu"><span class="trans-label">EU</span>dortoka</span>
           <span class="trans-pill trans-es"><span class="trans-label">ES</span>tortuga</span>
@@ -591,6 +689,10 @@
       <div class="card-body">
         <div class="word-en">mouse</div>
         <div class="word-phonetic">/maʊs/</div>
+        <button class="audio-btn" onclick="speakWord('mouse')" aria-label="Escuchar mouse">
+          <svg viewBox="0 0 24 24"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/></svg>
+          Escuchar
+        </button>
         <div class="translations">
           <span class="trans-pill trans-eu"><span class="trans-label">EU</span>sagua</span>
           <span class="trans-pill trans-es"><span class="trans-label">ES</span>ratón</span>
@@ -604,6 +706,10 @@
       <div class="card-body">
         <div class="word-en">reptile</div>
         <div class="word-phonetic">/ˈrep.taɪl/</div>
+        <button class="audio-btn" onclick="speakWord('reptile')" aria-label="Escuchar reptile">
+          <svg viewBox="0 0 24 24"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/></svg>
+          Escuchar
+        </button>
         <div class="translations">
           <span class="trans-pill trans-eu"><span class="trans-label">EU</span>narrastia</span>
           <span class="trans-pill trans-es"><span class="trans-label">ES</span>reptil</span>
@@ -617,6 +723,10 @@
       <div class="card-body">
         <div class="word-en">shell</div>
         <div class="word-phonetic">/ʃel/</div>
+        <button class="audio-btn" onclick="speakWord('shell')" aria-label="Escuchar shell">
+          <svg viewBox="0 0 24 24"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/></svg>
+          Escuchar
+        </button>
         <div class="translations">
           <span class="trans-pill trans-eu"><span class="trans-label">EU</span>oskola</span>
           <span class="trans-pill trans-es"><span class="trans-label">ES</span>concha / caparazón</span>
@@ -630,6 +740,10 @@
       <div class="card-body">
         <div class="word-en">mammal</div>
         <div class="word-phonetic">/ˈmæm.əl/</div>
+        <button class="audio-btn" onclick="speakWord('mammal')" aria-label="Escuchar mammal">
+          <svg viewBox="0 0 24 24"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/></svg>
+          Escuchar
+        </button>
         <div class="translations">
           <span class="trans-pill trans-eu"><span class="trans-label">EU</span>ugaztuna</span>
           <span class="trans-pill trans-es"><span class="trans-label">ES</span>mamífero</span>
@@ -749,11 +863,80 @@
 </div><!-- /grammar1 -->
 
 <script>
+// ── TAB NAVIGATION ──
 function showTab(id) {
   document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
   document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
   document.getElementById(id).classList.add('active');
   event.target.classList.add('active');
+}
+
+// ── SPEECH SYNTHESIS ──
+const synth = window.speechSynthesis;
+let currentBtn = null;
+
+// Check browser support
+if (!synth) {
+  document.getElementById('no-speech-warn').style.display = 'block';
+}
+
+function getEnglishVoice() {
+  const voices = synth.getVoices();
+  // Prefer en-GB or en-US voices
+  return (
+    voices.find(v => v.lang === 'en-GB') ||
+    voices.find(v => v.lang === 'en-US') ||
+    voices.find(v => v.lang.startsWith('en')) ||
+    null
+  );
+}
+
+function speakWord(word) {
+  if (!synth) return;
+
+  // Cancel any ongoing speech
+  synth.cancel();
+
+  // Reset previous button
+  if (currentBtn) {
+    currentBtn.classList.remove('speaking');
+    currentBtn = null;
+  }
+
+  const btn = event.currentTarget;
+
+  const utter = new SpeechSynthesisUtterance(word);
+  utter.lang = 'en-GB';
+  utter.rate = 0.85;   // slightly slower — better for kids learning
+  utter.pitch = 1.05;
+
+  // Try to set a nice English voice
+  // Voices may not be loaded yet on first call
+  const setVoiceAndSpeak = () => {
+    const voice = getEnglishVoice();
+    if (voice) utter.voice = voice;
+
+    btn.classList.add('speaking');
+    currentBtn = btn;
+
+    utter.onend = () => {
+      btn.classList.remove('speaking');
+      currentBtn = null;
+    };
+    utter.onerror = () => {
+      btn.classList.remove('speaking');
+      currentBtn = null;
+    };
+
+    synth.speak(utter);
+  };
+
+  // Voices might not be loaded on first interaction (especially iOS)
+  if (synth.getVoices().length === 0) {
+    synth.addEventListener('voiceschanged', setVoiceAndSpeak, { once: true });
+  } else {
+    setVoiceAndSpeak();
+  }
 }
 </script>
 </body>
