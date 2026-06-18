@@ -1,0 +1,760 @@
+<!DOCTYPE html>
+<html lang="eu">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kids Can! 3 — Flashcards</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Nunito+Sans:wght@400;600&display=swap');
+
+  :root {
+    --red:    #e8344a;
+    --green:  #2db87c;
+    --blue:   #2f7fd4;
+    --yellow: #f5b800;
+    --purple: #8a44c8;
+    --orange: #f07030;
+    --bg:     #f0f7ff;
+    --white:  #ffffff;
+    --ink:    #1a1a2e;
+    --muted:  #6b7a99;
+    --card-r: 20px;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Nunito', sans-serif;
+    background: var(--bg);
+    min-height: 100vh;
+    padding: 1.5rem 1rem 3rem;
+  }
+
+  /* ── HEADER ── */
+  header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    max-width: 1100px;
+    margin: 0 auto 2rem;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+  .logo-area h1 {
+    font-size: 1.8rem;
+    font-weight: 900;
+    color: var(--ink);
+    line-height: 1;
+  }
+  .logo-area h1 span { color: var(--red); }
+  .logo-area p {
+    font-size: 12px;
+    color: var(--muted);
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-top: 2px;
+  }
+  .unit-badge {
+    background: var(--red);
+    color: white;
+    font-size: 13px;
+    font-weight: 800;
+    padding: 6px 18px;
+    border-radius: 30px;
+    letter-spacing: 0.05em;
+  }
+
+  /* ── TAB BAR ── */
+  .tabs {
+    display: flex;
+    gap: 8px;
+    max-width: 1100px;
+    margin: 0 auto 2rem;
+    overflow-x: auto;
+    scrollbar-width: none;
+    padding-bottom: 2px;
+  }
+  .tabs::-webkit-scrollbar { display: none; }
+  .tab {
+    background: white;
+    border: 2px solid #dde6f5;
+    color: var(--muted);
+    font-family: 'Nunito', sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    padding: 8px 20px;
+    border-radius: 30px;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: all 0.18s;
+  }
+  .tab:hover { border-color: var(--blue); color: var(--blue); }
+  .tab.active {
+    background: var(--blue);
+    border-color: var(--blue);
+    color: white;
+    box-shadow: 0 4px 12px rgba(47,127,212,0.3);
+  }
+  .tab.grammar-tab.active {
+    background: var(--purple);
+    border-color: var(--purple);
+    box-shadow: 0 4px 12px rgba(138,68,200,0.3);
+  }
+
+  /* ── SECTIONS ── */
+  .section { display: none; max-width: 1100px; margin: 0 auto; }
+  .section.active { display: block; }
+
+  /* ── VOCAB GRID ── */
+  .vocab-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 1.2rem;
+  }
+
+  /* ── FLASHCARD ── */
+  .card {
+    background: white;
+    border-radius: var(--card-r);
+    overflow: hidden;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.07);
+    transition: transform 0.2s, box-shadow 0.2s;
+    cursor: pointer;
+    position: relative;
+  }
+  .card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 10px 28px rgba(0,0,0,0.12);
+  }
+  .card-accent {
+    height: 6px;
+    border-radius: 0;
+  }
+  .card-img {
+    width: 100%;
+    aspect-ratio: 4/3;
+    background: #f0f5ff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 4rem;
+    position: relative;
+    overflow: hidden;
+  }
+  .card-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+  }
+  .card-img .emoji-fallback {
+    font-size: 4.5rem;
+    line-height: 1;
+  }
+
+  .card-body {
+    padding: 1rem 1rem 1.1rem;
+    text-align: center;
+  }
+  .word-en {
+    font-size: 1.25rem;
+    font-weight: 900;
+    color: var(--ink);
+    line-height: 1.2;
+    margin-bottom: 4px;
+  }
+  .word-phonetic {
+    font-size: 0.82rem;
+    color: var(--muted);
+    font-family: 'Nunito Sans', sans-serif;
+    font-weight: 600;
+    letter-spacing: 0.03em;
+    margin-bottom: 8px;
+    background: #f3f6fc;
+    display: inline-block;
+    padding: 2px 10px;
+    border-radius: 20px;
+  }
+  .translations {
+    display: flex;
+    gap: 6px;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-top: 6px;
+  }
+  .trans-pill {
+    font-size: 12px;
+    font-weight: 700;
+    padding: 4px 12px;
+    border-radius: 20px;
+    line-height: 1.3;
+  }
+  .trans-eu {
+    background: #e8f5ee;
+    color: #1a6640;
+  }
+  .trans-es {
+    background: #fff0e0;
+    color: #7a3800;
+  }
+  .trans-label {
+    font-size: 9px;
+    font-weight: 800;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    display: block;
+    margin-bottom: 1px;
+    opacity: 0.7;
+  }
+
+  /* ── GRAMMAR SECTION ── */
+  .grammar-intro {
+    background: white;
+    border-radius: var(--card-r);
+    padding: 1.5rem 2rem;
+    margin-bottom: 1.5rem;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.06);
+    border-left: 5px solid var(--purple);
+  }
+  .grammar-intro h2 {
+    font-size: 1.4rem;
+    font-weight: 900;
+    color: var(--purple);
+    margin-bottom: 0.4rem;
+  }
+  .grammar-intro p {
+    font-size: 14px;
+    color: #445;
+    line-height: 1.7;
+  }
+
+  .grammar-card {
+    background: white;
+    border-radius: var(--card-r);
+    overflow: hidden;
+    margin-bottom: 1.2rem;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.06);
+  }
+  .grammar-card-header {
+    padding: 1rem 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+  }
+  .grammar-icon {
+    font-size: 1.6rem;
+    flex-shrink: 0;
+  }
+  .grammar-title {
+    font-size: 1.1rem;
+    font-weight: 900;
+    color: white;
+  }
+  .grammar-subtitle {
+    font-size: 11px;
+    color: rgba(255,255,255,0.75);
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+  .grammar-body {
+    padding: 1.2rem 1.5rem 1.5rem;
+  }
+
+  .explain-box {
+    background: #f8f0ff;
+    border: 2px solid #e0c8ff;
+    border-radius: 14px;
+    padding: 1rem 1.2rem;
+    margin-bottom: 1rem;
+    font-size: 14px;
+    color: #332;
+    line-height: 1.7;
+  }
+  .explain-box strong { color: var(--purple); }
+
+  .example-list { list-style: none; display: flex; flex-direction: column; gap: 8px; }
+  .example-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.7rem;
+    background: #f5f8ff;
+    border-radius: 12px;
+    padding: 0.8rem 1rem;
+    border-left: 4px solid transparent;
+  }
+  .example-item.pos { border-left-color: var(--green); }
+  .example-item.neg { border-left-color: var(--red); }
+  .example-item.q   { border-left-color: var(--yellow); background: #fffbf0; }
+  .example-emoji { font-size: 1.2rem; flex-shrink: 0; margin-top: 1px; }
+  .example-en {
+    font-size: 15px;
+    font-weight: 800;
+    color: var(--ink);
+    display: block;
+    margin-bottom: 2px;
+  }
+  .example-es {
+    font-size: 12px;
+    color: var(--muted);
+    font-weight: 600;
+  }
+  .example-highlight {
+    background: #ffe0e6;
+    color: var(--red);
+    padding: 1px 5px;
+    border-radius: 5px;
+    font-weight: 900;
+  }
+  .example-highlight.green {
+    background: #d4f5e5;
+    color: #1a7a50;
+  }
+
+  .pattern-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 0.8rem;
+    font-size: 13.5px;
+    border-radius: 12px;
+    overflow: hidden;
+  }
+  .pattern-table th {
+    background: var(--purple);
+    color: white;
+    padding: 8px 14px;
+    text-align: left;
+    font-weight: 700;
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+  .pattern-table td {
+    padding: 9px 14px;
+    border-bottom: 1px solid #eee;
+    font-weight: 600;
+  }
+  .pattern-table tr:nth-child(even) td { background: #f8f0ff; }
+  .pattern-table .cell-en { color: var(--ink); font-weight: 800; }
+  .pattern-table .cell-eu { color: #1a6640; }
+  .pattern-table .cell-es { color: #7a3800; }
+
+  .tip-box {
+    background: #fff8e0;
+    border: 2px solid var(--yellow);
+    border-radius: 14px;
+    padding: 0.9rem 1.2rem;
+    margin-top: 1rem;
+    display: flex;
+    gap: 0.7rem;
+    font-size: 13.5px;
+    color: #443300;
+    line-height: 1.6;
+  }
+  .tip-box .tip-icon { font-size: 1.3rem; flex-shrink: 0; }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 600px) {
+    .vocab-grid { grid-template-columns: repeat(2, 1fr); gap: 0.8rem; }
+    .word-en { font-size: 1.05rem; }
+    .grammar-body { padding: 1rem; }
+  }
+  @media print {
+    nav, .tabs { display: none; }
+    .section { display: block !important; }
+    .card { break-inside: avoid; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo-area">
+    <h1>Kids <span>Can!</span> 3</h1>
+    <p>Macmillan Education · 4º Primaria</p>
+  </div>
+  <div class="unit-badge">📌 PLANTILLA DE MUESTRA</div>
+</header>
+
+<!-- TABS -->
+<div class="tabs">
+  <button class="tab active" onclick="showTab('unit1')">⚽ Unit 1 · Deportes</button>
+  <button class="tab" onclick="showTab('unit1b')">🦊 Unit 2 · Animales</button>
+  <button class="tab grammar-tab" onclick="showTab('grammar1')">📖 Gramática · Unit 1</button>
+</div>
+
+<!-- ══════════════════════════════════ -->
+<!-- UNIT 1 VOCAB: SPORTS              -->
+<!-- ══════════════════════════════════ -->
+<div class="section active" id="unit1">
+  <div class="vocab-grid">
+
+    <!-- play baseball -->
+    <div class="card">
+      <div class="card-accent" style="background:var(--red)"></div>
+      <div class="card-img">
+        <span class="emoji-fallback">⚾</span>
+      </div>
+      <div class="card-body">
+        <div class="word-en">play baseball</div>
+        <div class="word-phonetic">/pleɪ ˈbeɪs.bɔːl/</div>
+        <div class="translations">
+          <span class="trans-pill trans-eu"><span class="trans-label">EU</span>beisbola jo</span>
+          <span class="trans-pill trans-es"><span class="trans-label">ES</span>jugar al béisbol</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- play badminton -->
+    <div class="card">
+      <div class="card-accent" style="background:var(--blue)"></div>
+      <div class="card-img">
+        <span class="emoji-fallback">🏸</span>
+      </div>
+      <div class="card-body">
+        <div class="word-en">play badminton</div>
+        <div class="word-phonetic">/pleɪ ˈbæd.mɪn.tən/</div>
+        <div class="translations">
+          <span class="trans-pill trans-eu"><span class="trans-label">EU</span>badminton jokatu</span>
+          <span class="trans-pill trans-es"><span class="trans-label">ES</span>jugar al bádminton</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- play hockey -->
+    <div class="card">
+      <div class="card-accent" style="background:var(--green)"></div>
+      <div class="card-img">
+        <span class="emoji-fallback">🏒</span>
+      </div>
+      <div class="card-body">
+        <div class="word-en">play hockey</div>
+        <div class="word-phonetic">/pleɪ ˈhɒk.i/</div>
+        <div class="translations">
+          <span class="trans-pill trans-eu"><span class="trans-label">EU</span>hockeya jo</span>
+          <span class="trans-pill trans-es"><span class="trans-label">ES</span>jugar al hockey</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- do gymnastics -->
+    <div class="card">
+      <div class="card-accent" style="background:var(--purple)"></div>
+      <div class="card-img">
+        <span class="emoji-fallback">🤸</span>
+      </div>
+      <div class="card-body">
+        <div class="word-en">do gymnastics</div>
+        <div class="word-phonetic">/duː dʒɪmˈnæs.tɪks/</div>
+        <div class="translations">
+          <span class="trans-pill trans-eu"><span class="trans-label">EU</span>gimnasia egin</span>
+          <span class="trans-pill trans-es"><span class="trans-label">ES</span>hacer gimnasia</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- do judo -->
+    <div class="card">
+      <div class="card-accent" style="background:var(--orange)"></div>
+      <div class="card-img">
+        <span class="emoji-fallback">🥋</span>
+      </div>
+      <div class="card-body">
+        <div class="word-en">do judo</div>
+        <div class="word-phonetic">/duː ˈdʒuː.dəʊ/</div>
+        <div class="translations">
+          <span class="trans-pill trans-eu"><span class="trans-label">EU</span>judoa egin</span>
+          <span class="trans-pill trans-es"><span class="trans-label">ES</span>hacer judo</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- sports centre -->
+    <div class="card">
+      <div class="card-accent" style="background:var(--yellow)"></div>
+      <div class="card-img">
+        <span class="emoji-fallback">🏟️</span>
+      </div>
+      <div class="card-body">
+        <div class="word-en">sports centre</div>
+        <div class="word-phonetic">/spɔːts ˈsen.tər/</div>
+        <div class="translations">
+          <span class="trans-pill trans-eu"><span class="trans-label">EU</span>kirol zentroa</span>
+          <span class="trans-pill trans-es"><span class="trans-label">ES</span>centro deportivo</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- swimming pool -->
+    <div class="card">
+      <div class="card-accent" style="background:var(--blue)"></div>
+      <div class="card-img">
+        <span class="emoji-fallback">🏊</span>
+      </div>
+      <div class="card-body">
+        <div class="word-en">swimming pool</div>
+        <div class="word-phonetic">/ˈswɪm.ɪŋ puːl/</div>
+        <div class="translations">
+          <span class="trans-pill trans-eu"><span class="trans-label">EU</span>igerilekua</span>
+          <span class="trans-pill trans-es"><span class="trans-label">ES</span>piscina</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- basketball court -->
+    <div class="card">
+      <div class="card-accent" style="background:var(--orange)"></div>
+      <div class="card-img">
+        <span class="emoji-fallback">🏀</span>
+      </div>
+      <div class="card-body">
+        <div class="word-en">basketball court</div>
+        <div class="word-phonetic">/ˈbɑːs.kɪt.bɔːl kɔːt/</div>
+        <div class="translations">
+          <span class="trans-pill trans-eu"><span class="trans-label">EU</span>saskibaloi pista</span>
+          <span class="trans-pill trans-es"><span class="trans-label">ES</span>cancha de baloncesto</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- running track -->
+    <div class="card">
+      <div class="card-accent" style="background:var(--green)"></div>
+      <div class="card-img">
+        <span class="emoji-fallback">🏃</span>
+      </div>
+      <div class="card-body">
+        <div class="word-en">running track</div>
+        <div class="word-phonetic">/ˈrʌn.ɪŋ træk/</div>
+        <div class="translations">
+          <span class="trans-pill trans-eu"><span class="trans-label">EU</span>atletismo pista</span>
+          <span class="trans-pill trans-es"><span class="trans-label">ES</span>pista de atletismo</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- football pitch -->
+    <div class="card">
+      <div class="card-accent" style="background:var(--red)"></div>
+      <div class="card-img">
+        <span class="emoji-fallback">⚽</span>
+      </div>
+      <div class="card-body">
+        <div class="word-en">football pitch</div>
+        <div class="word-phonetic">/ˈfʊt.bɔːl pɪtʃ/</div>
+        <div class="translations">
+          <span class="trans-pill trans-eu"><span class="trans-label">EU</span>futbol zelaia</span>
+          <span class="trans-pill trans-es"><span class="trans-label">ES</span>campo de fútbol</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ══════════════════════════════════ -->
+<!-- UNIT 2 VOCAB: ANIMALS (muestra)   -->
+<!-- ══════════════════════════════════ -->
+<div class="section" id="unit1b">
+  <div class="vocab-grid">
+
+    <div class="card">
+      <div class="card-accent" style="background:var(--orange)"></div>
+      <div class="card-img"><span class="emoji-fallback">🦊</span></div>
+      <div class="card-body">
+        <div class="word-en">fox</div>
+        <div class="word-phonetic">/fɒks/</div>
+        <div class="translations">
+          <span class="trans-pill trans-eu"><span class="trans-label">EU</span>azeria</span>
+          <span class="trans-pill trans-es"><span class="trans-label">ES</span>zorro</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-accent" style="background:var(--green)"></div>
+      <div class="card-img"><span class="emoji-fallback">🐢</span></div>
+      <div class="card-body">
+        <div class="word-en">turtle</div>
+        <div class="word-phonetic">/ˈtɜː.tl̩/</div>
+        <div class="translations">
+          <span class="trans-pill trans-eu"><span class="trans-label">EU</span>dortoka</span>
+          <span class="trans-pill trans-es"><span class="trans-label">ES</span>tortuga</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-accent" style="background:var(--blue)"></div>
+      <div class="card-img"><span class="emoji-fallback">🐭</span></div>
+      <div class="card-body">
+        <div class="word-en">mouse</div>
+        <div class="word-phonetic">/maʊs/</div>
+        <div class="translations">
+          <span class="trans-pill trans-eu"><span class="trans-label">EU</span>sagua</span>
+          <span class="trans-pill trans-es"><span class="trans-label">ES</span>ratón</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-accent" style="background:var(--purple)"></div>
+      <div class="card-img"><span class="emoji-fallback">🦎</span></div>
+      <div class="card-body">
+        <div class="word-en">reptile</div>
+        <div class="word-phonetic">/ˈrep.taɪl/</div>
+        <div class="translations">
+          <span class="trans-pill trans-eu"><span class="trans-label">EU</span>narrastia</span>
+          <span class="trans-pill trans-es"><span class="trans-label">ES</span>reptil</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-accent" style="background:var(--red)"></div>
+      <div class="card-img"><span class="emoji-fallback">🐚</span></div>
+      <div class="card-body">
+        <div class="word-en">shell</div>
+        <div class="word-phonetic">/ʃel/</div>
+        <div class="translations">
+          <span class="trans-pill trans-eu"><span class="trans-label">EU</span>oskola</span>
+          <span class="trans-pill trans-es"><span class="trans-label">ES</span>concha / caparazón</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-accent" style="background:var(--yellow)"></div>
+      <div class="card-img"><span class="emoji-fallback">🐾</span></div>
+      <div class="card-body">
+        <div class="word-en">mammal</div>
+        <div class="word-phonetic">/ˈmæm.əl/</div>
+        <div class="translations">
+          <span class="trans-pill trans-eu"><span class="trans-label">EU</span>ugaztuna</span>
+          <span class="trans-pill trans-es"><span class="trans-label">ES</span>mamífero</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ══════════════════════════════════ -->
+<!-- GRAMMAR UNIT 1                    -->
+<!-- ══════════════════════════════════ -->
+<div class="section" id="grammar1">
+
+  <div class="grammar-intro">
+    <h2>📖 Gramática · Unit 1</h2>
+    <p>En esta unidad aprendemos a decir qué deportes hacemos y cuáles no hacemos. En inglés usamos dos palabras especiales: <strong>play</strong> (para deportes con pelota o raqueta) y <strong>do</strong> (para artes marciales y gimnasia). ¡Es fácil!</p>
+  </div>
+
+  <!-- GRAMMAR CARD 1: play / do -->
+  <div class="grammar-card">
+    <div class="grammar-card-header" style="background:var(--blue)">
+      <div class="grammar-icon">⚽</div>
+      <div>
+        <div class="grammar-title">Play vs. Do</div>
+        <div class="grammar-subtitle">¿Cuándo uso cada una?</div>
+      </div>
+    </div>
+    <div class="grammar-body">
+      <div class="explain-box">
+        Usamos <strong>play</strong> con deportes que tienen pelota, raqueta o se juegan en equipo:<br>
+        play football, play basketball, play badminton…<br><br>
+        Usamos <strong>do</strong> con artes marciales y actividades individuales:<br>
+        do judo, do gymnastics, do swimming…
+      </div>
+      <table class="pattern-table">
+        <tr><th>Inglés</th><th>Euskera</th><th>Castellano</th></tr>
+        <tr>
+          <td class="cell-en">I <span style="color:var(--blue);font-weight:900">play</span> football</td>
+          <td class="cell-eu">Futbola jokatzen dut</td>
+          <td class="cell-es">Juego al fútbol</td>
+        </tr>
+        <tr>
+          <td class="cell-en">She <span style="color:var(--blue);font-weight:900">plays</span> basketball</td>
+          <td class="cell-eu">Saskibaloia jokatzen du</td>
+          <td class="cell-es">Ella juega al baloncesto</td>
+        </tr>
+        <tr>
+          <td class="cell-en">I <span style="color:var(--purple);font-weight:900">do</span> judo</td>
+          <td class="cell-eu">Judoa egiten dut</td>
+          <td class="cell-es">Hago judo</td>
+        </tr>
+        <tr>
+          <td class="cell-en">He <span style="color:var(--purple);font-weight:900">does</span> gymnastics</td>
+          <td class="cell-eu">Gimnasia egiten du</td>
+          <td class="cell-es">Él hace gimnasia</td>
+        </tr>
+      </table>
+      <div class="tip-box">
+        <span class="tip-icon">💡</span>
+        <span>Cuando hablamos de <strong>él, ella o eso</strong> (he, she, it), añadimos una <strong>–s</strong> al verbo: play → play<strong>s</strong>, do → do<strong>es</strong>. ¡Es como si el verbo saludara a la persona!</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- GRAMMAR CARD 2: affirmative / negative -->
+  <div class="grammar-card">
+    <div class="grammar-card-header" style="background:var(--green)">
+      <div class="grammar-icon">✅</div>
+      <div>
+        <div class="grammar-title">Afirmativo y negativo</div>
+        <div class="grammar-subtitle">Decir lo que hago y lo que NO hago</div>
+      </div>
+    </div>
+    <div class="grammar-body">
+      <div class="explain-box">
+        Para decir que <strong>no</strong> hacemos algo, añadimos <strong>don't</strong> (I, you, we, they) o <strong>doesn't</strong> (he, she, it) antes del verbo. El verbo vuelve a su forma normal, sin –s.
+      </div>
+      <ul class="example-list">
+        <li class="example-item pos">
+          <span class="example-emoji">⚽</span>
+          <div>
+            <span class="example-en">I <span class="example-highlight green">play</span> football.</span>
+            <span class="example-es">Juego al fútbol. · Futbola jokatzen dut.</span>
+          </div>
+        </li>
+        <li class="example-item neg">
+          <span class="example-emoji">🏒</span>
+          <div>
+            <span class="example-en">I <span class="example-highlight">don't play</span> hockey.</span>
+            <span class="example-es">No juego al hockey. · Hockeya ez dut jokatzen.</span>
+          </div>
+        </li>
+        <li class="example-item pos">
+          <span class="example-emoji">🤸</span>
+          <div>
+            <span class="example-en">We <span class="example-highlight green">do</span> gymnastics.</span>
+            <span class="example-es">Hacemos gimnasia. · Gimnasia egiten dugu.</span>
+          </div>
+        </li>
+        <li class="example-item neg">
+          <span class="example-emoji">🥋</span>
+          <div>
+            <span class="example-en">We <span class="example-highlight">don't do</span> judo.</span>
+            <span class="example-es">No hacemos judo. · Judoa ez dugu egiten.</span>
+          </div>
+        </li>
+      </ul>
+      <div class="tip-box">
+        <span class="tip-icon">🎯</span>
+        <span><strong>Truco:</strong> Don't = do + not juntados con un apóstrofo. Es como "no hago". ¡Cuando lo ves, significa que algo NO pasa!</span>
+      </div>
+    </div>
+  </div>
+
+</div><!-- /grammar1 -->
+
+<script>
+function showTab(id) {
+  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  event.target.classList.add('active');
+}
+</script>
+</body>
+</html>
