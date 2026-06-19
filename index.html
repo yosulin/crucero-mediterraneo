@@ -2017,10 +2017,28 @@ async function fetchWeather(widgetEl) {
   const lon  = widgetEl.dataset.lon;
   const date = widgetEl.dataset.date;
 
-  const url = `https://api.open-meteo.com/v1/forecast?`
-    + `latitude=${lat}&longitude=${lon}`
-    + `&daily=temperature_2m_max,temperature_2m_min,weathercode,precipitation_probability_max,windspeed_10m_max`
-    + `&timezone=auto&start_date=${date}&end_date=${date}`;
+  // Decide endpoint: archive for past dates, forecast for future
+  const today = new Date();
+  today.setHours(0,0,0,0);
+  const targetDate = new Date(date + 'T00:00:00');
+  const isPast = targetDate < today;
+
+  let url, rainKey;
+  if (isPast) {
+    // Archive API — has actual recorded data, no rain probability
+    url = `https://archive-api.open-meteo.com/v1/archive?`
+      + `latitude=${lat}&longitude=${lon}`
+      + `&daily=temperature_2m_max,temperature_2m_min,weathercode,precipitation_sum,windspeed_10m_max`
+      + `&timezone=auto&start_date=${date}&end_date=${date}`;
+    rainKey = 'precipitation_sum';
+  } else {
+    // Forecast API — future dates
+    url = `https://api.open-meteo.com/v1/forecast?`
+      + `latitude=${lat}&longitude=${lon}`
+      + `&daily=temperature_2m_max,temperature_2m_min,weathercode,precipitation_probability_max,windspeed_10m_max`
+      + `&timezone=auto&start_date=${date}&end_date=${date}`;
+    rainKey = 'precipitation_probability_max';
+  }
 
   try {
     const res  = await fetch(url);
@@ -2031,12 +2049,16 @@ async function fetchWeather(widgetEl) {
       throw new Error('No data');
     }
 
-    const tmax  = Math.round(d.temperature_2m_max[0]);
-    const tmin  = Math.round(d.temperature_2m_min[0]);
-    const wmo   = d.weathercode[0];
-    const rain  = d.precipitation_probability_max[0];
-    const wind  = Math.round(d.windspeed_10m_max[0]);
-    const wInfo = getWmo(wmo);
+    const tmax   = Math.round(d.temperature_2m_max[0]);
+    const tmin   = Math.round(d.temperature_2m_min[0]);
+    const wmo    = d.weathercode[0];
+    const wind   = Math.round(d.windspeed_10m_max[0]);
+    const wInfo  = getWmo(wmo);
+    const rainVal = d[rainKey] ? d[rainKey][0] : null;
+    const rainLabel = isPast
+      ? (rainVal !== null ? `${rainVal.toFixed(1)} mm` : '—')
+      : (rainVal !== null ? `${rainVal}% lluvia` : '—');
+    const dataLabel = isPast ? 'Datos reales registrados' : 'Previsión meteorológica';
 
     widgetEl.classList.remove('loading');
     widgetEl.innerHTML = `
@@ -2046,10 +2068,10 @@ async function fetchWeather(widgetEl) {
         <span class="weather-min">${tmin}°C mín</span>
       </div>
       <div class="weather-desc">
-        <span class="weather-label">Meteorología · Tiempo previsto</span>
+        <span class="weather-label">${dataLabel}</span>
         ${wInfo.desc}
         <div class="weather-extras">
-          <span class="weather-extra">💧 ${rain}% lluvia</span>
+          <span class="weather-extra">💧 ${rainLabel}</span>
           <span class="weather-extra">💨 ${wind} km/h</span>
         </div>
       </div>
@@ -2058,7 +2080,7 @@ async function fetchWeather(widgetEl) {
     widgetEl.classList.remove('loading');
     widgetEl.innerHTML = `
       <span class="weather-icon">🌡️</span>
-      <span class="weather-error">Previsión no disponible para esta fecha</span>
+      <span class="weather-error">No se pudo cargar el tiempo</span>
     `;
   }
 }
