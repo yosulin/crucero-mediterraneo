@@ -2016,6 +2016,15 @@ nav a.active {
 
   let currentDest = null;
 
+
+  // Scroll with offset to compensate fixed nav bar (52px) + breathing room
+  function scrollToEl(el) {
+    const NAV_HEIGHT = 52;
+    const PADDING    = 16;
+    const top = el.getBoundingClientRect().top + window.scrollY - NAV_HEIGHT - PADDING;
+    window.scrollTo({ top, behavior: 'smooth' });
+  }
+
   // Build dock for a destination — called once per dest change
   function buildDock(destId) {
     const config = destinations[destId];
@@ -2038,7 +2047,7 @@ nav a.active {
       btn.innerHTML = `<span class="dock-icon">${meta.icon}</span><span class="dock-txt">${meta.label}</span>`;
       btn.addEventListener('click', (e) => {
         e.preventDefault();
-        el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        scrollToEl(el);
       });
       dockButtons.appendChild(btn);
     });
@@ -2117,7 +2126,7 @@ nav a.active {
           btn.innerHTML = `<span class="dock-icon">${icon}</span><span class="dock-txt">${label}</span>`;
           btn.addEventListener('click', e => {
             e.preventDefault();
-            el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            scrollToEl(el);
           });
           dockButtons.appendChild(btn);
         });
