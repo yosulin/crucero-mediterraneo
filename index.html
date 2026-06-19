@@ -1729,11 +1729,6 @@ nav a.active {
   flex-direction: column;
   align-items: center;
   gap: 8px;
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity 0.3s ease;
-}
-#dest-dock.visible {
   opacity: 1;
   pointer-events: all;
 }
@@ -1932,18 +1927,13 @@ nav a.active {
 
   let currentDest = null;
 
-  // Build dock for a destination
+  // Build dock for a destination — called once per dest change
   function buildDock(destId) {
     const config = destinations[destId];
-    if (!config) return;
+    if (!config || !config.sections.length) return;
 
     dockLabel.textContent = config.label;
     dockButtons.innerHTML = '';
-
-    if (config.sections.length === 0) {
-      dock.classList.remove('visible');
-      return;
-    }
 
     config.sections.forEach(sec => {
       const meta = sectionMeta[sec];
@@ -1963,15 +1953,9 @@ nav a.active {
       });
       dockButtons.appendChild(btn);
     });
-
-    dock.classList.add('visible');
   }
 
-  // Track which destination is in view
-  const destIds = Object.keys(destinations);
-  const destElements = destIds.map(id => document.getElementById(id)).filter(Boolean);
-  
-  // Also track section blocks for dock active state
+  // Track section active state within current dest
   function updateActiveDockBtn() {
     if (!currentDest) return;
     const config = destinations[currentDest];
@@ -1982,9 +1966,7 @@ nav a.active {
 
     config.sections.forEach(sec => {
       const el = document.getElementById(`${currentDest}-${sec}`);
-      if (el && el.offsetTop <= scrollY) {
-        activeSec = `${currentDest}-${sec}`;
-      }
+      if (el && el.offsetTop <= scrollY) activeSec = `${currentDest}-${sec}`;
     });
 
     dockButtons.querySelectorAll('.dock-btn').forEach(btn => {
@@ -1992,39 +1974,17 @@ nav a.active {
     });
   }
 
-  // Nav active + dock visibility on scroll
+  // Nav highlight + dock label update on scroll — dock always visible
+  const destIds = Object.keys(destinations);
+  const destElements = destIds.map(id => document.getElementById(id)).filter(Boolean);
+
   function onScroll() {
     const scrollY = window.scrollY + 80;
     let newDest = null;
 
-    // Find current destination
     destElements.forEach(el => {
-      if (el && el.offsetTop <= scrollY) {
-        newDest = el.id;
-      }
+      if (el && el.offsetTop <= scrollY) newDest = el.id;
     });
-
-    // Check if we're past all destinations (in final sections)
-    const finalSections = document.querySelectorAll('.final-section');
-    let inFinal = false;
-    finalSections.forEach(el => {
-      if (el.offsetTop <= scrollY) inFinal = true;
-    });
-
-    // Hide dock in hero or final sections without sections
-    const inHero = scrollY < (destElements[0]?.offsetTop || 999);
-    
-    if (inHero) {
-      dock.classList.remove('visible');
-      newDest = null;
-    } else if (newDest && destinations[newDest] && destinations[newDest].sections.length > 0) {
-      if (newDest !== currentDest) {
-        currentDest = newDest;
-        buildDock(newDest);
-      }
-    } else if (inFinal) {
-      dock.classList.remove('visible');
-    }
 
     // Update nav active link
     navLinks.forEach(link => {
@@ -2032,11 +1992,21 @@ nav a.active {
       link.classList.toggle('active', href === newDest);
     });
 
+    // Rebuild dock buttons when destination changes
+    if (newDest && newDest !== currentDest && destinations[newDest]?.sections?.length) {
+      currentDest = newDest;
+      buildDock(newDest);
+    }
+
     updateActiveDockBtn();
   }
 
+  // Build initial dock with first destination
+  buildDock('atenas');
+  currentDest = 'atenas';
+
   window.addEventListener('scroll', onScroll, { passive: true });
-  onScroll(); // run once on load
+  onScroll();
 })();
 </script>
 
