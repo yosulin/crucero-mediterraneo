@@ -518,6 +518,98 @@
     margin-top: 3rem;
   }
   footer span { color: var(--gold); }
+
+  /* ── WEATHER WIDGET ── */
+  .weather-widget {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-top: 1.1rem;
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.15);
+    border-radius: 14px;
+    padding: 0.75rem 1.1rem;
+    min-height: 56px;
+    flex-wrap: wrap;
+  }
+  .weather-widget.loading {
+    opacity: 0.6;
+  }
+  .weather-icon {
+    font-size: 2rem;
+    line-height: 1;
+    flex-shrink: 0;
+  }
+  .weather-temps {
+    display: flex;
+    flex-direction: column;
+    gap: 1px;
+    flex-shrink: 0;
+  }
+  .weather-max {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: #ffd080;
+    line-height: 1;
+  }
+  .weather-min {
+    font-size: 0.9rem;
+    color: rgba(255,255,255,0.55);
+    font-weight: 500;
+  }
+  .weather-desc {
+    font-size: 13px;
+    color: rgba(255,255,255,0.75);
+    font-weight: 500;
+    line-height: 1.4;
+    flex: 1;
+  }
+  .weather-desc .weather-label {
+    font-size: 9px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.4);
+    display: block;
+    margin-bottom: 2px;
+  }
+  .weather-extras {
+    display: flex;
+    gap: 10px;
+    margin-top: 4px;
+    flex-wrap: wrap;
+  }
+  .weather-extra {
+    font-size: 11px;
+    color: rgba(255,255,255,0.55);
+    display: flex;
+    align-items: center;
+    gap: 3px;
+  }
+  .weather-error {
+    font-size: 12px;
+    color: rgba(255,255,255,0.4);
+    font-style: italic;
+  }
+  /* Dardanelos nav section weather */
+  .nav-weather {
+    margin-top: 1.5rem;
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.12);
+    border-radius: 14px;
+    padding: 1rem 1.2rem;
+  }
+  .nav-weather h4 {
+    color: var(--gold);
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1rem;
+    margin-bottom: 0.8rem;
+  }
+  .nav-weather-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.6rem;
+  }
+
 </style>
 </head>
 <body>
@@ -571,6 +663,11 @@
     <h2>El Pireo — <em>Atenas</em></h2>
     <div class="dest-tagline">"La cuna de la democracia, la filosofía y la razón occidental"</div>
     <div class="dest-date" style="margin-top:0.8rem">Puerto de entrada · ~25 km del centro de Atenas</div>
+  
+    <div class="weather-widget loading" id="wx-atenas" data-lat="37.9838" data-lon="23.7275" data-date="2025-06-19">
+      <span class="weather-icon">⏳</span>
+      <span class="weather-desc"><span class="weather-label">Meteorología · Tiempo previsto</span>Cargando previsión...</span>
+    </div>
   </div>
   <div class="dest-body">
 
@@ -754,6 +851,11 @@
     <h2>Estambul <em>— Turquía</em></h2>
     <div class="dest-tagline">"La ciudad que fue tres imperios: Roma, Bizancio y el Islam"</div>
     <div class="dest-date" style="margin-top:0.8rem">Puerto de Karaköy / Galata · Corazón histórico a pie</div>
+  
+    <div class="weather-widget loading" id="wx-estambul" data-lat="41.0082" data-lon="28.9784" data-date="2025-06-21">
+      <span class="weather-icon">⏳</span>
+      <span class="weather-desc"><span class="weather-label">Meteorología · Tiempo previsto</span>Cargando previsión...</span>
+    </div>
   </div>
   <div class="dest-body">
 
@@ -891,6 +993,11 @@
     <div class="dest-number">Escala 03 · 22 de junio</div>
     <h2>Mykonos <em>— Cícladas, Grecia</em></h2>
     <div class="dest-tagline">"La isla más glamurosa del Egeo, con el secreto arqueológico mejor guardado: Delos"</div>
+  
+    <div class="weather-widget loading" id="wx-mykonos" data-lat="37.4415" data-lon="25.3267" data-date="2025-06-22">
+      <span class="weather-icon">⏳</span>
+      <span class="weather-desc"><span class="weather-label">Meteorología · Tiempo previsto</span>Cargando previsión...</span>
+    </div>
   </div>
   <div class="dest-body">
     <div class="section-block" id="estambul-valoracion">
@@ -1000,6 +1107,11 @@
     <div class="dest-number">Escala 04 · 23 de junio</div>
     <h2>Heraklion — <em>Creta, Grecia</em></h2>
     <div class="dest-tagline">"El origen de Europa: la civilización minoica y el laberinto del Minotauro"</div>
+  
+    <div class="weather-widget loading" id="wx-creta" data-lat="35.3387" data-lon="25.1442" data-date="2025-06-23">
+      <span class="weather-icon">⏳</span>
+      <span class="weather-desc"><span class="weather-label">Meteorología · Tiempo previsto</span>Cargando previsión...</span>
+    </div>
   </div>
   <div class="dest-body">
 
@@ -1116,6 +1228,11 @@
     <div class="dest-number">Escala 05 · 24 de junio</div>
     <h2>Rodas <em>— Dodecaneso, Grecia</em></h2>
     <div class="dest-tagline">"Una de las ciudades medievales mejor conservadas del mundo: cruzados, caballeros y el sol de Helios"</div>
+  
+    <div class="weather-widget loading" id="wx-rodas" data-lat="36.4341" data-lon="28.2176" data-date="2025-06-24">
+      <span class="weather-icon">⏳</span>
+      <span class="weather-desc"><span class="weather-label">Meteorología · Tiempo previsto</span>Cargando previsión...</span>
+    </div>
   </div>
   <div class="dest-body">
 
@@ -1236,6 +1353,11 @@
     <div class="dest-number">Escala 06 · 25 de junio</div>
     <h2>Santorini <em>— Cícladas, Grecia</em></h2>
     <div class="dest-tagline">"La caldera de un volcán que hundió una civilización y quizás inspiró el mito de la Atlántida"</div>
+  
+    <div class="weather-widget loading" id="wx-santorini" data-lat="36.3932" data-lon="25.4615" data-date="2025-06-25">
+      <span class="weather-icon">⏳</span>
+      <span class="weather-desc"><span class="weather-label">Meteorología · Tiempo previsto</span>Cargando previsión...</span>
+    </div>
   </div>
   <div class="dest-body">
 
@@ -1619,6 +1741,98 @@ nav a.active {
 .dock-btn.active-section .dock-txt {
   color: #c9a84c;
 }
+
+  /* ── WEATHER WIDGET ── */
+  .weather-widget {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-top: 1.1rem;
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.15);
+    border-radius: 14px;
+    padding: 0.75rem 1.1rem;
+    min-height: 56px;
+    flex-wrap: wrap;
+  }
+  .weather-widget.loading {
+    opacity: 0.6;
+  }
+  .weather-icon {
+    font-size: 2rem;
+    line-height: 1;
+    flex-shrink: 0;
+  }
+  .weather-temps {
+    display: flex;
+    flex-direction: column;
+    gap: 1px;
+    flex-shrink: 0;
+  }
+  .weather-max {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: #ffd080;
+    line-height: 1;
+  }
+  .weather-min {
+    font-size: 0.9rem;
+    color: rgba(255,255,255,0.55);
+    font-weight: 500;
+  }
+  .weather-desc {
+    font-size: 13px;
+    color: rgba(255,255,255,0.75);
+    font-weight: 500;
+    line-height: 1.4;
+    flex: 1;
+  }
+  .weather-desc .weather-label {
+    font-size: 9px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.4);
+    display: block;
+    margin-bottom: 2px;
+  }
+  .weather-extras {
+    display: flex;
+    gap: 10px;
+    margin-top: 4px;
+    flex-wrap: wrap;
+  }
+  .weather-extra {
+    font-size: 11px;
+    color: rgba(255,255,255,0.55);
+    display: flex;
+    align-items: center;
+    gap: 3px;
+  }
+  .weather-error {
+    font-size: 12px;
+    color: rgba(255,255,255,0.4);
+    font-style: italic;
+  }
+  /* Dardanelos nav section weather */
+  .nav-weather {
+    margin-top: 1.5rem;
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.12);
+    border-radius: 14px;
+    padding: 1rem 1.2rem;
+  }
+  .nav-weather h4 {
+    color: var(--gold);
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1rem;
+    margin-bottom: 0.8rem;
+  }
+  .nav-weather-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.6rem;
+  }
+
 </style>
 
 <!-- MINI DOCK -->
@@ -1766,6 +1980,95 @@ nav a.active {
   window.addEventListener('scroll', onScroll, { passive: true });
   onScroll(); // run once on load
 })();
+</script>
+
+
+<script>
+// ════════════════════════════════
+// WEATHER — Open-Meteo API (free, no key required)
+// ════════════════════════════════
+const WMO_CODES = {
+  0:  { icon:'☀️',  desc:'Despejado' },
+  1:  { icon:'🌤️', desc:'Mayormente despejado' },
+  2:  { icon:'⛅',  desc:'Parcialmente nublado' },
+  3:  { icon:'☁️',  desc:'Nublado' },
+  45: { icon:'🌫️', desc:'Niebla' },
+  48: { icon:'🌫️', desc:'Niebla con escarcha' },
+  51: { icon:'🌦️', desc:'Llovizna ligera' },
+  53: { icon:'🌦️', desc:'Llovizna moderada' },
+  55: { icon:'🌧️', desc:'Llovizna intensa' },
+  61: { icon:'🌧️', desc:'Lluvia ligera' },
+  63: { icon:'🌧️', desc:'Lluvia moderada' },
+  65: { icon:'🌧️', desc:'Lluvia intensa' },
+  71: { icon:'🌨️', desc:'Nevada ligera' },
+  80: { icon:'🌦️', desc:'Chubascos ligeros' },
+  81: { icon:'🌧️', desc:'Chubascos moderados' },
+  82: { icon:'⛈️',  desc:'Chubascos intensos' },
+  95: { icon:'⛈️',  desc:'Tormenta eléctrica' },
+  99: { icon:'⛈️',  desc:'Tormenta con granizo' },
+};
+
+function getWmo(code) {
+  return WMO_CODES[code] || { icon:'🌡️', desc:'Variable' };
+}
+
+async function fetchWeather(widgetEl) {
+  const lat  = widgetEl.dataset.lat;
+  const lon  = widgetEl.dataset.lon;
+  const date = widgetEl.dataset.date;
+
+  const url = `https://api.open-meteo.com/v1/forecast?`
+    + `latitude=${lat}&longitude=${lon}`
+    + `&daily=temperature_2m_max,temperature_2m_min,weathercode,precipitation_probability_max,windspeed_10m_max`
+    + `&timezone=auto&start_date=${date}&end_date=${date}`;
+
+  try {
+    const res  = await fetch(url);
+    const data = await res.json();
+    const d    = data.daily;
+
+    if (!d || !d.temperature_2m_max || d.temperature_2m_max.length === 0) {
+      throw new Error('No data');
+    }
+
+    const tmax  = Math.round(d.temperature_2m_max[0]);
+    const tmin  = Math.round(d.temperature_2m_min[0]);
+    const wmo   = d.weathercode[0];
+    const rain  = d.precipitation_probability_max[0];
+    const wind  = Math.round(d.windspeed_10m_max[0]);
+    const wInfo = getWmo(wmo);
+
+    widgetEl.classList.remove('loading');
+    widgetEl.innerHTML = `
+      <span class="weather-icon">${wInfo.icon}</span>
+      <div class="weather-temps">
+        <span class="weather-max">${tmax}°C</span>
+        <span class="weather-min">${tmin}°C mín</span>
+      </div>
+      <div class="weather-desc">
+        <span class="weather-label">Meteorología · Tiempo previsto</span>
+        ${wInfo.desc}
+        <div class="weather-extras">
+          <span class="weather-extra">💧 ${rain}% lluvia</span>
+          <span class="weather-extra">💨 ${wind} km/h</span>
+        </div>
+      </div>
+    `;
+  } catch(e) {
+    widgetEl.classList.remove('loading');
+    widgetEl.innerHTML = `
+      <span class="weather-icon">🌡️</span>
+      <span class="weather-error">Previsión no disponible para esta fecha</span>
+    `;
+  }
+}
+
+// Load all weather widgets on page load
+document.addEventListener('DOMContentLoaded', () => {
+  const widgets = document.querySelectorAll('.weather-widget[data-lat]');
+  // Stagger requests slightly to avoid rate limiting
+  widgets.forEach((w, i) => setTimeout(() => fetchWeather(w), i * 300));
+});
 </script>
 
 </body>
