@@ -727,6 +727,125 @@
   }
   #pwa-dismiss-btn:hover { color: rgba(255,255,255,0.6); }
 
+
+  /* ── RESUMEN EJECUTIVO ── */
+  .briefing {
+    background: var(--aegean);
+    color: white;
+    padding: 2.5rem 0;
+    margin-bottom: 0;
+  }
+  .briefing-inner { max-width: 860px; margin: 0 auto; padding: 0 1.5rem; }
+  .briefing h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.6rem; font-weight: 300;
+    color: var(--gold); margin-bottom: 0.3rem;
+  }
+  .briefing-sub { font-size: 12px; color: rgba(255,255,255,0.4); letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 1.5rem; }
+  .briefing-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 0.8rem;
+  }
+  .briefing-card {
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 14px;
+    padding: 1rem 1.1rem;
+    cursor: pointer;
+    transition: background 0.15s;
+    text-decoration: none;
+    display: block;
+  }
+  .briefing-card:hover { background: rgba(255,255,255,0.1); }
+  .briefing-card-top {
+    display: flex; align-items: center; gap: 0.6rem; margin-bottom: 0.5rem;
+  }
+  .briefing-card-num {
+    font-size: 9px; letter-spacing: 0.15em; text-transform: uppercase;
+    color: var(--gold); font-weight: 600;
+  }
+  .briefing-card-date { font-size: 10px; color: rgba(255,255,255,0.35); margin-left: auto; }
+  .briefing-card-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.15rem; font-weight: 600; color: white; margin-bottom: 0.35rem;
+    line-height: 1.2;
+  }
+  .briefing-card-fact { font-size: 11.5px; color: rgba(255,255,255,0.55); line-height: 1.5; }
+  .briefing-scores {
+    display: flex; gap: 4px; margin-top: 0.5rem; flex-wrap: wrap;
+  }
+  .b-score {
+    font-size: 10px; font-weight: 700;
+    background: rgba(201,168,76,0.15);
+    color: var(--gold);
+    padding: 2px 7px; border-radius: 10px;
+  }
+
+  /* ── MAPA ── */
+  .map-section {
+    background: #0d1a2a;
+    padding: 2rem 0;
+  }
+  .map-inner { max-width: 860px; margin: 0 auto; padding: 0 1.5rem; }
+  .map-inner h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.4rem; font-weight: 300; color: var(--gold);
+    margin-bottom: 0.3rem;
+  }
+  .map-inner p { font-size: 12px; color: rgba(255,255,255,0.4); margin-bottom: 1rem; }
+  #cruise-map {
+    height: 380px; border-radius: 16px;
+    overflow: hidden;
+    border: 1px solid rgba(255,255,255,0.1);
+  }
+  @media (max-width: 600px) { #cruise-map { height: 280px; } }
+
+  /* ── SVG ILUSTRACIÓN ── */
+  .dest-illustration {
+    width: 100%; max-height: 180px;
+    overflow: hidden;
+    display: flex; align-items: center; justify-content: center;
+    background: linear-gradient(180deg, rgba(26,58,92,0.3) 0%, transparent 100%);
+  }
+  .dest-illustration svg { width: 100%; max-height: 180px; }
+
+  /* ── ACORDEÓN ── */
+  .accordion-trigger {
+    width: 100%;
+    background: none; border: none;
+    display: flex; align-items: center; justify-content: space-between;
+    cursor: pointer;
+    padding: 0;
+    font-family: inherit;
+    text-align: left;
+  }
+  .accordion-trigger .acc-arrow {
+    font-size: 12px;
+    color: var(--mist);
+    transition: transform 0.25s;
+    flex-shrink: 0;
+    margin-left: 0.5rem;
+  }
+  .accordion-trigger[aria-expanded="true"] .acc-arrow {
+    transform: rotate(180deg);
+  }
+  .accordion-body {
+    overflow: hidden;
+    transition: max-height 0.35s ease, opacity 0.25s ease;
+    max-height: 0;
+    opacity: 0;
+  }
+  .accordion-body.open {
+    max-height: 4000px;
+    opacity: 1;
+  }
+  /* On desktop always show */
+  @media (min-width: 700px) {
+    .accordion-body { max-height: none !important; opacity: 1 !important; }
+    .accordion-trigger .acc-arrow { display: none; }
+  }
+
 </style>
   <link rel="manifest" href="manifest.json">
   <link rel="apple-touch-icon" href="apple-touch-icon.png">
@@ -734,6 +853,7 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="apple-mobile-web-app-title" content="Mare Nostrum">
   <meta name="theme-color" content="#1a3a5c">
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
 </head>
 <body>
 
@@ -753,7 +873,7 @@
 
 <!-- HERO -->
 <div class="hero">
-  <div class="hero-sub">Guía cultural profunda · Junio 2025</div>
+  <div class="hero-sub">Guía cultural profunda · Junio 2026</div>
   <h1>Crucero por el <em>Mare Nostrum</em><br>Grecia · Turquía · El Egeo</h1>
   <p style="color:rgba(255,255,255,0.5);font-size:13px;margin:1rem 0 2.5rem;font-style:italic;">Del Pireo a Santorini · 8 jornadas · Historia, arqueología y cultura mediterránea</p>
   <div class="route-line">
@@ -775,6 +895,124 @@
   </div>
 </div>
 
+
+<!-- RESUMEN EJECUTIVO -->
+<div class="briefing">
+  <div class="briefing-inner">
+    <h2>Resumen del itinerario</h2>
+    <p class="briefing-sub">8 jornadas · 7 destinos · Del Egeo al Bósforo</p>
+    <div class="briefing-grid">
+
+      <a class="briefing-card" href="#atenas" onclick="event.preventDefault();scrollToSection('atenas')">
+        <div class="briefing-card-top">
+          <span class="briefing-card-num">Escala 01</span>
+          <span class="briefing-card-date">19 jun</span>
+        </div>
+        <div class="briefing-card-name">⚓ El Pireo · Atenas</div>
+        <div class="briefing-card-fact">La Acrópolis, el Partenón y el origen de la democracia occidental. El destino más histórico del viaje.</div>
+        <div class="briefing-scores">
+          <span class="b-score">Historia 10</span>
+          <span class="b-score">Cultura 10</span>
+          <span class="b-score">Global 10</span>
+        </div>
+      </a>
+
+      <a class="briefing-card" href="#dardanelos" onclick="event.preventDefault();scrollToSection('dardanelos')">
+        <div class="briefing-card-top">
+          <span class="briefing-card-num">Navegación</span>
+          <span class="briefing-card-date">20 jun</span>
+        </div>
+        <div class="briefing-card-name">🌊 Dardanelos</div>
+        <div class="briefing-card-fact">El estrecho donde cruzó Jerjes, Alejandro y donde se libró Gallípoli. Troya a 30 km. Subir a cubierta de madrugada.</div>
+        <div class="briefing-scores">
+          <span class="b-score">Historia 10</span>
+          <span class="b-score">Estrellas ⭐</span>
+        </div>
+      </a>
+
+      <a class="briefing-card" href="#estambul" onclick="event.preventDefault();scrollToSection('estambul')">
+        <div class="briefing-card-top">
+          <span class="briefing-card-num">Escala 02</span>
+          <span class="briefing-card-date">21 jun</span>
+        </div>
+        <div class="briefing-card-name">🕌 Estambul</div>
+        <div class="briefing-card-fact">Tres imperios en una ciudad. Santa Sofía, la Cisterna Basílica y el Gran Bazar. El destino más denso del crucero.</div>
+        <div class="briefing-scores">
+          <span class="b-score">Historia 10</span>
+          <span class="b-score">Gastro 10</span>
+          <span class="b-score">Global 10</span>
+        </div>
+      </a>
+
+      <a class="briefing-card" href="#mykonos" onclick="event.preventDefault();scrollToSection('mykonos')">
+        <div class="briefing-card-top">
+          <span class="briefing-card-num">Escala 03</span>
+          <span class="briefing-card-date">22 jun</span>
+        </div>
+        <div class="briefing-card-name">🏛 Mykonos · Delos</div>
+        <div class="briefing-card-fact">No te quedes en Mykonos — la joya es Delos, el santuario más sagrado del mundo antiguo. Terraza de los Leones.</div>
+        <div class="briefing-scores">
+          <span class="b-score">Historia 9</span>
+          <span class="b-score">Paisaje 9</span>
+          <span class="b-score">Global 8</span>
+        </div>
+      </a>
+
+      <a class="briefing-card" href="#creta" onclick="event.preventDefault();scrollToSection('creta')">
+        <div class="briefing-card-top">
+          <span class="briefing-card-num">Escala 04</span>
+          <span class="briefing-card-date">23 jun</span>
+        </div>
+        <div class="briefing-card-name">🏺 Heraklion · Creta</div>
+        <div class="briefing-card-fact">Knossos y el Palacio del Minotauro. La civilización minoica, la más antigua de Europa. El Disco de Festo sin descifrar.</div>
+        <div class="briefing-scores">
+          <span class="b-score">Historia 10</span>
+          <span class="b-score">Gastro 10</span>
+          <span class="b-score">Global 9</span>
+        </div>
+      </a>
+
+      <a class="briefing-card" href="#rodas" onclick="event.preventDefault();scrollToSection('rodas')">
+        <div class="briefing-card-top">
+          <span class="briefing-card-num">Escala 05</span>
+          <span class="briefing-card-date">24 jun</span>
+        </div>
+        <div class="briefing-card-name">⚔️ Rodas</div>
+        <div class="briefing-card-fact">La ciudad medieval mejor conservada del Mediterráneo. Caballeros Hospitalarios, otomanos y el fantasma del Coloso.</div>
+        <div class="briefing-scores">
+          <span class="b-score">Historia 9</span>
+          <span class="b-score">Cultura 9</span>
+          <span class="b-score">Global 9</span>
+        </div>
+      </a>
+
+      <a class="briefing-card" href="#santorini" onclick="event.preventDefault();scrollToSection('santorini')">
+        <div class="briefing-card-top">
+          <span class="briefing-card-num">Escala 06</span>
+          <span class="briefing-card-date">25 jun</span>
+        </div>
+        <div class="briefing-card-name">🌋 Santorini</div>
+        <div class="briefing-card-fact">La caldera del volcán que hundió una civilización. Akrotiri — el Pompeya minoico. Atardecer de Oia. La Atlántida.</div>
+        <div class="briefing-scores">
+          <span class="b-score">Paisaje 10</span>
+          <span class="b-score">Historia 9</span>
+          <span class="b-score">Global 10</span>
+        </div>
+      </a>
+
+    </div>
+  </div>
+</div>
+
+<!-- MAPA INTERACTIVO -->
+<div class="map-section">
+  <div class="map-inner">
+    <h2>🗺 Itinerario en el mapa</h2>
+    <p>Pulsa cada marcador para saltar a esa sección</p>
+    <div id="cruise-map"></div>
+  </div>
+</div>
+
 <div class="container">
 
 <!-- ================================ -->
@@ -793,6 +1031,48 @@
     </div>
     <div id="local-time-atenas" style="font-size:11px;color:rgba(255,255,255,0.5);margin-top:6px;font-family:'Inter',sans-serif;letter-spacing:0.08em;">🕐 — hora local</div>
   </div>
+<div class="dest-illustration">
+<svg viewBox="0 0 800 180" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="sky-a" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#1a3a5c" stop-opacity="0.9"/><stop offset="100%" stop-color="#c9a84c" stop-opacity="0.3"/></linearGradient>
+    <filter id="blur-a"><feGaussianBlur stdDeviation="1.5"/></filter>
+  </defs>
+  <rect width="800" height="180" fill="url(#sky-a)"/>
+  <!-- Hills -->
+  <ellipse cx="400" cy="220" rx="320" ry="90" fill="#1a2a1a" opacity="0.6"/>
+  <ellipse cx="150" cy="200" rx="180" ry="70" fill="#1a2a1a" opacity="0.4"/>
+  <!-- Acropolis rock -->
+  <polygon points="250,130 550,130 530,95 270,95" fill="#3a2a18" opacity="0.9"/>
+  <!-- Parthenon columns -->
+  <rect x="285" y="58" width="230" height="8" rx="2" fill="#f5ead5" opacity="0.9"/>
+  <rect x="280" y="93" width="240" height="6" rx="2" fill="#f0e0c0" opacity="0.85"/>
+  <!-- Pediment -->
+  <polygon points="400,32 280,58 520,58" fill="#f0e0c0" opacity="0.85"/>
+  <!-- Columns -->
+  <rect x="293" y="66" width="11" height="27" fill="#f5ead5" opacity="0.85"/>
+  <rect x="316" y="66" width="11" height="27" fill="#f5ead5" opacity="0.85"/>
+  <rect x="339" y="66" width="11" height="27" fill="#f5ead5" opacity="0.85"/>
+  <rect x="362" y="66" width="11" height="27" fill="#f5ead5" opacity="0.85"/>
+  <rect x="385" y="66" width="11" height="27" fill="#f5ead5" opacity="0.85"/>
+  <rect x="408" y="66" width="11" height="27" fill="#f5ead5" opacity="0.85"/>
+  <rect x="431" y="66" width="11" height="27" fill="#f5ead5" opacity="0.85"/>
+  <rect x="454" y="66" width="11" height="27" fill="#f5ead5" opacity="0.85"/>
+  <rect x="477" y="66" width="11" height="27" fill="#f5ead5" opacity="0.85"/>
+  <rect x="496" y="66" width="11" height="27" fill="#f5ead5" opacity="0.85"/>
+  <!-- Stars -->
+  <circle cx="100" cy="30" r="1.5" fill="white" opacity="0.6"/>
+  <circle cx="200" cy="15" r="1" fill="white" opacity="0.5"/>
+  <circle cx="650" cy="25" r="1.5" fill="white" opacity="0.6"/>
+  <circle cx="720" cy="40" r="1" fill="white" opacity="0.4"/>
+  <circle cx="580" cy="12" r="2" fill="white" opacity="0.5"/>
+  <!-- Moon -->
+  <circle cx="680" cy="28" r="12" fill="#f5e8c0" opacity="0.7"/>
+  <circle cx="686" cy="24" r="10" fill="#1a3a5c" opacity="0.8"/>
+  <!-- Watercolor wash overlay -->
+  <rect width="800" height="180" fill="#c9a84c" opacity="0.04"/>
+</svg>
+</div>
+
   <div class="dest-body">
 
     <!-- HISTORIA -->
@@ -880,19 +1160,27 @@
 
     <!-- PATRIMONIO -->
     <div class="section-block" id="atenas-patrimonio">
-      <div class="section-label"><div class="section-icon">🏺</div><h3>Patrimonio, arqueología y arte</h3></div>
-      <p>El Partenón fue diseñado para crear una ilusión óptica de perfección: sus columnas son ligeramente curvas, el suelo es cóncavo y las columnas de las esquinas son algo más gruesas —todo calculado para que el ojo humano lo perciba como absolutamente recto. Es matemáticamente el edificio más sofisticado jamás construido en piedra.</p>
-      <p>Las cariátides del Erecteion son seis figuras femeninas que actúan como columnas. Cinco originales están en el Nuevo Museo de la Acrópolis; la sexta se la llevó Lord Elgin a Londres (hoy en el Museo Británico). Grecia lleva décadas reclamando su devolución.</p>
-      <div class="curiosity">
-        Los mármoles del Partenón en el Museo Británico —conocidos como "Mármoles de Elgin"— representan el 40% del friso original. Elgin los desmontó entre 1801 y 1812. El debate sobre su restitución es uno de los más importantes en la diplomacia cultural del siglo XXI.
+      <button class="accordion-trigger" aria-expanded="false" onclick="toggleAcc(this)">
+      <div class="section-label" style="margin-bottom:0;flex:1;">
+        <div class="section-icon">🏺</div>
+        <h3>Patrimonio, arqueología y arte</h3>
       </div>
-    </div>
+      <span class="acc-arrow">▼</span>
+    </button>
+    <div class="accordion-body">
+    
+    </div></div>
 
     <!-- GASTRONOMÍA -->
     <div class="section-block" id="atenas-gastro">
-      <div class="section-label"><div class="section-icon">🍽</div><h3>Gastronomía</h3></div>
-      <div class="food-grid">
-        <div class="food-item"><div class="food-type">Plato</div><div class="food-name">Souvlaki</div><div class="food-desc">Brocheta de cerdo o pollo con pita, tomate y tzatziki. El fast food griego por excelencia, delicioso y barato en Monastiráki.</div></div>
+      <button class="accordion-trigger" aria-expanded="false" onclick="toggleAcc(this)">
+      <div class="section-label" style="margin-bottom:0;flex:1;">
+        <div class="section-icon">🍽</div>
+        <h3>Gastronomía</h3>
+      </div>
+      <span class="acc-arrow">▼</span>
+    </button>
+    <div class="accordion-body"><div class="food-name">Souvlaki</div><div class="food-desc">Brocheta de cerdo o pollo con pita, tomate y tzatziki. El fast food griego por excelencia, delicioso y barato en Monastiráki.</div></div>
         <div class="food-item"><div class="food-type">Plato</div><div class="food-name">Moussaka</div><div class="food-desc">Capas de berenjena, carne picada y bechamel. El plato más representativo de la cocina casera ateniense.</div></div>
         <div class="food-item"><div class="food-type">Aperitivo</div><div class="food-name">Taramosalata</div><div class="food-desc">Crema de huevas de pescado con aceite de oliva y limón. Imprescindible como meze.</div></div>
         <div class="food-item"><div class="food-type">Dulce</div><div class="food-name">Loukoumades</div><div class="food-desc">Buñuelos fritos con miel y canela. La receta más antigua del mundo: se servían a los vencedores olímpicos en la Antigua Grecia.</div></div>
@@ -900,33 +1188,53 @@
         <div class="food-item"><div class="food-type">Bebida</div><div class="food-name">Ouzo / Retsina</div><div class="food-desc">Ouzo: anisado tradicional. Retsina: vino con resina de pino, sabor único e histórico. Mejor con meze.</div></div>
       </div>
       <p style="margin-top:1rem;font-size:13px;color:var(--mist);">📍 Zona recomendada: Mercado de Monastiráki y las calles de Psyrri tienen las tabernas más auténticas y asequibles. Evitar los restaurantes con manteles turísticos en Plaka —son caros y mediocres.</p>
-    </div>
+    
+    </div></div>
 
     <!-- FOTOGRAFÍA -->
     <div class="section-block" id="atenas-fotos">
-      <div class="section-label"><div class="section-icon">📷</div><h3>Miradores y fotografía</h3></div>
-      <div class="photo-item"><div class="photo-name">Colina de Filopapou (frente a la Acrópolis)</div><div class="photo-tip">La mejor vista frontal del Partenón. Ideal entre las 8 y las 10h con luz dorada del este iluminando el mármol.</div></div>
+      <button class="accordion-trigger" aria-expanded="false" onclick="toggleAcc(this)">
+      <div class="section-label" style="margin-bottom:0;flex:1;">
+        <div class="section-icon">📷</div>
+        <h3>Miradores y fotografía</h3>
+      </div>
+      <span class="acc-arrow">▼</span>
+    </button>
+    <div class="accordion-body"><div class="photo-tip">La mejor vista frontal del Partenón. Ideal entre las 8 y las 10h con luz dorada del este iluminando el mármol.</div></div>
       <div class="photo-item"><div class="photo-name">Terraza del Nuevo Museo de la Acrópolis</div><div class="photo-tip">Vista única con la Acrópolis como fondo. Muy limpia y sin masas de turistas en el encuadre.</div></div>
       <div class="photo-item"><div class="photo-name">Calles de Anafiotika (barrio dentro de Plaka)</div><div class="photo-tip">Casitas blancas y ciclamores rosas al pie de la Acrópolis. Las calles más fotogénicas de Atenas. Antes de las 9h está vacío.</div></div>
       <div class="photo-item"><div class="photo-name">Colina del Areópago</div><div class="photo-tip">Roca histórica donde el Apóstol Pablo predicó en Atenas. Vistas perfectas de la Acrópolis y la ciudad. Atardecer espectacular.</div></div>
-    </div>
+    
+    </div></div>
 
     <!-- CONSEJOS -->
     <div class="section-block" id="atenas-consejos">
-      <div class="section-label"><div class="section-icon">💡</div><h3>Consejos prácticos</h3></div>
-      <div class="tip-item"><span class="tip-icon">🌡</span><span><strong>Temperatura en junio:</strong> 28–35°C, sol intenso. Imprescindible sombrero, protección solar y agua abundante. La Acrópolis es completamente descubierta.</span></div>
+      <button class="accordion-trigger" aria-expanded="false" onclick="toggleAcc(this)">
+      <div class="section-label" style="margin-bottom:0;flex:1;">
+        <div class="section-icon">💡</div>
+        <h3>Consejos prácticos</h3>
+      </div>
+      <span class="acc-arrow">▼</span>
+    </button>
+    <div class="accordion-body">
       <div class="tip-item"><span class="tip-icon">👟</span><span><strong>Calzado:</strong> La Acrópolis tiene escalones y piedras pulidas por millones de pies —son resbaladizas. Zapatillas cómodas con suela de goma, nunca chanclas.</span></div>
       <div class="tip-item"><span class="tip-icon">⏰</span><span><strong>Horarios:</strong> La Acrópolis abre a las 8h. Compra las entradas online con antelación para evitar filas larguísimas en verano.</span></div>
       <div class="tip-item"><span class="tip-icon">⚠️</span><span><strong>Estafas:</strong> En Monastiráki, cuidado con el juego de las tres cartas y con los hombres que ofrecen "flores gratis" y luego exigen pago. Los taxistas sin taxímetro son otra trampa; el metro es la alternativa perfecta.</span></div>
       <div class="tip-item"><span class="tip-icon">🎟</span><span><strong>Entrada combinada:</strong> El ticket combinado de la Acrópolis incluye el Ágora, el Teatro de Dioniso, la Biblioteca de Adriano y otros sitios. Vale la pena si visitas varios.</span></div>
       <div class="tip-item"><span class="tip-icon">🚢</span><span><strong>Gestión del tiempo:</strong> Calcular siempre 30 minutos extra de margen para el regreso al barco. El metro es puntual pero puede haber espera.</span></div>
-    </div>
+    
+    </div></div>
 
     <!-- VALORACIÓN -->
     <div class="section-block" id="atenas-valoracion">
-      <div class="section-label"><div class="section-icon">⭐</div><h3>Valoración</h3></div>
-      <div class="scores-grid">
-        <div class="score-card"><div class="score-label">Historia</div><div class="score-val">10<span>/10</span></div><div class="score-stars">★★★★★</div></div>
+      <button class="accordion-trigger" aria-expanded="false" onclick="toggleAcc(this)">
+      <div class="section-label" style="margin-bottom:0;flex:1;">
+        <div class="section-icon">💡</div>
+        <h3>Consejos prácticos</h3>
+      </div>
+      <span class="acc-arrow">▼</span>
+    </button>
+    <div class="accordion-body"><div class="score-val">10<span>/10</span></div><div class="score-stars">★★★★★</div></div>
         <div class="score-card"><div class="score-label">Cultura</div><div class="score-val">10<span>/10</span></div><div class="score-stars">★★★★★</div></div>
         <div class="score-card"><div class="score-label">Paisaje</div><div class="score-val">8<span>/10</span></div><div class="score-stars">★★★★☆</div></div>
         <div class="score-card"><div class="score-label">Gastronomía</div><div class="score-val">9<span>/10</span></div><div class="score-stars">★★★★★</div></div>
@@ -1000,6 +1308,49 @@
     </div>
     <div id="local-time-estambul" style="font-size:11px;color:rgba(255,255,255,0.5);margin-top:6px;font-family:'Inter',sans-serif;letter-spacing:0.08em;">🕐 — hora local</div>
   </div>
+<div class="dest-illustration">
+<svg viewBox="0 0 800 180" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="sky-e" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#0d1a2e" stop-opacity="1"/><stop offset="100%" stop-color="#8b3a1a" stop-opacity="0.5"/></linearGradient>
+  </defs>
+  <rect width="800" height="180" fill="url(#sky-e)"/>
+  <!-- Bosphorus water -->
+  <rect x="0" y="140" width="800" height="40" fill="#1a3a5c" opacity="0.8"/>
+  <path d="M0 145 Q200 138 400 145 Q600 152 800 145 L800 180 L0 180Z" fill="#0d2240" opacity="0.9"/>
+  <!-- Hagia Sophia -->
+  <ellipse cx="300" cy="90" rx="55" ry="45" fill="#c8b89a" opacity="0.85"/>
+  <ellipse cx="300" cy="85" rx="48" ry="40" fill="#d5c4a5" opacity="0.9"/>
+  <rect x="245" y="90" width="110" height="50" fill="#c8b89a" opacity="0.85"/>
+  <!-- Minarets Hagia Sophia -->
+  <rect x="248" y="45" width="7" height="55" fill="#b8a888" opacity="0.9"/>
+  <polygon points="251.5,40 248,48 255,48" fill="#b8a888" opacity="0.9"/>
+  <rect x="349" y="45" width="7" height="55" fill="#b8a888" opacity="0.9"/>
+  <polygon points="352.5,40 349,48 356,48" fill="#b8a888" opacity="0.9"/>
+  <!-- Blue Mosque -->
+  <ellipse cx="490" cy="95" rx="45" ry="35" fill="#9ab0c8" opacity="0.8"/>
+  <rect x="448" y="95" width="84" height="45" fill="#9ab0c8" opacity="0.8"/>
+  <!-- Blue Mosque minarets (6) -->
+  <rect x="450" y="55" width="6" height="48" fill="#8aa0b8" opacity="0.85"/>
+  <polygon points="453,50 450,57 456,57" fill="#8aa0b8"/>
+  <rect x="462" y="62" width="5" height="40" fill="#8aa0b8" opacity="0.85"/>
+  <polygon points="464.5,57 462,63 467,63" fill="#8aa0b8"/>
+  <rect x="526" y="55" width="6" height="48" fill="#8aa0b8" opacity="0.85"/>
+  <polygon points="529,50 526,57 532,57" fill="#8aa0b8"/>
+  <rect x="514" y="62" width="5" height="40" fill="#8aa0b8" opacity="0.85"/>
+  <polygon points="516.5,57 514,63 519,63" fill="#8aa0b8"/>
+  <!-- Galata Tower -->
+  <rect x="610" y="75" width="22" height="65" fill="#a09080" opacity="0.85"/>
+  <ellipse cx="621" cy="75" rx="14" ry="10" fill="#907060" opacity="0.9"/>
+  <polygon points="621,58 608,75 634,75" fill="#907060" opacity="0.9"/>
+  <!-- Sun setting -->
+  <circle cx="160" cy="115" r="35" fill="#f5a030" opacity="0.5"/>
+  <circle cx="160" cy="115" r="25" fill="#f5c060" opacity="0.4"/>
+  <!-- Water reflections -->
+  <path d="M230 148 Q260 143 290 148" stroke="#f5a030" stroke-width="1.5" fill="none" opacity="0.3"/>
+  <path d="M440 152 Q480 147 520 152" stroke="#c9a84c" stroke-width="1" fill="none" opacity="0.25"/>
+</svg>
+</div>
+
   <div class="dest-body">
 
     <div class="section-block" id="estambul-historia">
@@ -1016,9 +1367,14 @@
     </div>
 
     <div class="section-block" id="estambul-queVer">
-      <div class="section-label"><div class="section-icon">📍</div><h3>Qué ver prioritariamente</h3></div>
-      <div class="priority-group">
-        <div class="priority-badge badge-must">⭐ Imprescindibles</div>
+      <button class="accordion-trigger" aria-expanded="false" onclick="toggleAcc(this)">
+      <div class="section-label" style="margin-bottom:0;flex:1;">
+        <div class="section-icon">💡</div>
+        <h3>Consejos prácticos</h3>
+      </div>
+      <span class="acc-arrow">▼</span>
+    </button>
+    <div class="accordion-body">
         <div class="place-item must">
           <div class="place-name">Santa Sofía (Hagia Sophia)</div>
           <div class="place-desc">Construida por Justiniano I entre 532 y 537 d.C., fue durante casi 1.000 años la iglesia más grande del mundo. Su cúpula de 31 metros de diámetro pareció a los contemporáneos "suspendida del cielo por una cadena de oro". Fue catedral cristiana, luego mezquita otomana (1453–1935), luego museo (hasta 2020) y desde 2020 es de nuevo mezquita activa. Los mosaicos bizantinos de los emperadores y la Virgen coexisten hoy con el mihrab islámico —la tensión de siglos visible en una sola sala.</div>
@@ -1087,38 +1443,64 @@
     </div>
 
     <div class="section-block" id="estambul-patrimonio">
-      <div class="section-label"><div class="section-icon">🍽</div><h3>Gastronomía</h3></div>
-      <div class="food-grid">
-        <div class="food-item"><div class="food-type">Icónico</div><div class="food-name">Balık Ekmek</div><div class="food-desc">Bocadillo de caballa asada con cebolla y perejil, vendido en barcos en el Puente de Gálata. El sabor más auténtico de Estambul.</div></div>
+      <button class="accordion-trigger" aria-expanded="false" onclick="toggleAcc(this)">
+      <div class="section-label" style="margin-bottom:0;flex:1;">
+        <div class="section-icon">🏺</div>
+        <h3>Patrimonio, arqueología y arte</h3>
+      </div>
+      <span class="acc-arrow">▼</span>
+    </button>
+    <div class="accordion-body"><div class="food-name">Balık Ekmek</div><div class="food-desc">Bocadillo de caballa asada con cebolla y perejil, vendido en barcos en el Puente de Gálata. El sabor más auténtico de Estambul.</div></div>
         <div class="food-item"><div class="food-type">Plato</div><div class="food-name">Döner / Lahmacun</div><div class="food-desc">Lahmacun: pizza fina turca con carne picada especiada. Diferente y deliciosa. Evitar los döner de apariencia turística.</div></div>
         <div class="food-item"><div class="food-type">Desayuno</div><div class="food-name">Kahvaltı</div><div class="food-desc">El desayuno turco: 20+ platos pequeños (queso, aceitunas, miel, huevos, simit...). Una experiencia cultural en sí mismo.</div></div>
         <div class="food-item"><div class="food-type">Dulce</div><div class="food-name">Baklava de Karaköy Güllüoğlu</div><div class="food-desc">La mejor baklava de Estambul, considerada por muchos la mejor del mundo. A 200m del puerto. Obligatoria.</div></div>
         <div class="food-item"><div class="food-type">Bebida</div><div class="food-name">Çay (té turco)</div><div class="food-desc">El té negro en vasito de tulipán, servido en todas partes. Ritual social cotidiano. Los turcos beben una media de 10 vasos al día.</div></div>
         <div class="food-item"><div class="food-type">Bebida</div><div class="food-name">Türk Kahvesi</div><div class="food-desc">El café turco: sin filtro, intenso, con poso. La leyenda dice que el primer café del mundo se abrió en Estambul en 1554.</div></div>
       </div>
-    </div>
+    
+    </div></div>
 
     <div class="section-block" id="estambul-gastro">
-      <div class="section-label"><div class="section-icon">📷</div><h3>Miradores y fotografía</h3></div>
-      <div class="photo-item"><div class="photo-name">Torre de Gálata (panorámica 360°)</div><div class="photo-tip">Vista completa de Estambul: cuerno de oro, Bósforo, cúpulas de Santa Sofía y Sultanahmet. Mejor al atardecer si el barco zarpa de noche.</div></div>
+      <button class="accordion-trigger" aria-expanded="false" onclick="toggleAcc(this)">
+      <div class="section-label" style="margin-bottom:0;flex:1;">
+        <div class="section-icon">🍽</div>
+        <h3>Gastronomía</h3>
+      </div>
+      <span class="acc-arrow">▼</span>
+    </button>
+    <div class="accordion-body"><div class="photo-tip">Vista completa de Estambul: cuerno de oro, Bósforo, cúpulas de Santa Sofía y Sultanahmet. Mejor al atardecer si el barco zarpa de noche.</div></div>
       <div class="photo-item"><div class="photo-name">Interior de Santa Sofía</div><div class="photo-tip">La luz entra por las ventanas de la base de la cúpula creando haces dorados. Entre las 9 y las 11h la luz es espectacular.</div></div>
       <div class="photo-item"><div class="photo-name">Puente de Gálata al amanecer</div><div class="photo-tip">Pescadores en el puente con las cúpulas de Sultanahmet al fondo y el cuerno de oro reflejando la luz. Una de las imágenes más icónicas de Turquía.</div></div>
       <div class="photo-item"><div class="photo-name">Cisterna Basílica</div><div class="photo-tip">Larga exposición necesaria. Llevar trípode pequeño si es posible. La iluminación artificial crea atmósferas oníricas.</div></div>
-    </div>
+    
+    </div></div>
 
     <div class="section-block" id="estambul-fotos">
-      <div class="section-label"><div class="section-icon">💡</div><h3>Consejos prácticos</h3></div>
-      <div class="tip-item"><span class="tip-icon">🕌</span><span><strong>Mezquitas:</strong> Visita solo fuera de las horas de oración (especialmente la del viernes al mediodía). Llevar calcetines limpios, cubrir hombros y cabeza. El acceso es gratuito pero solo en horas no-rezos.</span></div>
+      <button class="accordion-trigger" aria-expanded="false" onclick="toggleAcc(this)">
+      <div class="section-label" style="margin-bottom:0;flex:1;">
+        <div class="section-icon">📷</div>
+        <h3>Miradores y fotografía</h3>
+      </div>
+      <span class="acc-arrow">▼</span>
+    </button>
+    <div class="accordion-body">
       <div class="tip-item"><span class="tip-icon">💱</span><span><strong>Moneda:</strong> Lira turca (TRY). Los cambios de moneda en zonas turísticas tienen comisiones altas; buscar un banco o cajero. La inflación turca puede hacer que los precios varíen mucho.</span></div>
       <div class="tip-item"><span class="tip-icon">⚠️</span><span><strong>Estafas clásicas:</strong> Hombre amigable que "quiere practicar español/inglés" y te lleva a un bar donde la cuenta es desorbitada. Limpiabotas que "se les cae" el cepillo para pedirte que lo recojas y luego insistir en limpiar tus zapatos. Ser amable pero firme.</span></div>
       <div class="tip-item"><span class="tip-icon">🌡</span><span><strong>Temperatura:</strong> 28–33°C. El interior de la Cisterna es un refugio de 10°C muy agradecido.</span></div>
       <div class="tip-item"><span class="tip-icon">👗</span><span><strong>Ropa:</strong> Pantalón largo o falda midi para hombres y mujeres en las mezquitas. Un pañuelo fino es imprescindible.</span></div>
+    
     </div>
+    </div></div>
 
     <div class="section-block" id="estambul-consejos">
-      <div class="section-label"><div class="section-icon">⭐</div><h3>Valoración</h3></div>
-      <div class="scores-grid">
-        <div class="score-card"><div class="score-label">Historia</div><div class="score-val">10<span>/10</span></div><div class="score-stars">★★★★★</div></div>
+      <button class="accordion-trigger" aria-expanded="false" onclick="toggleAcc(this)">
+      <div class="section-label" style="margin-bottom:0;flex:1;">
+        <div class="section-icon">📷</div>
+        <h3>Miradores y fotografía</h3>
+      </div>
+      <span class="acc-arrow">▼</span>
+    </button>
+    <div class="accordion-body"><div class="score-val">10<span>/10</span></div><div class="score-stars">★★★★★</div></div>
         <div class="score-card"><div class="score-label">Cultura</div><div class="score-val">10<span>/10</span></div><div class="score-stars">★★★★★</div></div>
         <div class="score-card"><div class="score-label">Paisaje</div><div class="score-val">9<span>/10</span></div><div class="score-stars">★★★★★</div></div>
         <div class="score-card"><div class="score-label">Gastronomía</div><div class="score-val">10<span>/10</span></div><div class="score-stars">★★★★★</div></div>
@@ -1143,6 +1525,48 @@
     </div>
     <div id="local-time-mykonos" style="font-size:11px;color:rgba(255,255,255,0.5);margin-top:6px;font-family:'Inter',sans-serif;letter-spacing:0.08em;">🕐 — hora local</div>
   </div>
+<div class="dest-illustration">
+<svg viewBox="0 0 800 180" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="sky-m" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#1a6090"/><stop offset="100%" stop-color="#5ab0e0" stop-opacity="0.6"/></linearGradient>
+  </defs>
+  <rect width="800" height="180" fill="url(#sky-m)"/>
+  <!-- Sea -->
+  <rect x="0" y="130" width="800" height="50" fill="#1a5a8a" opacity="0.7"/>
+  <path d="M0 133 Q100 128 200 133 Q300 138 400 133 Q500 128 600 133 Q700 138 800 133 L800 180 L0 180Z" fill="#0d4070" opacity="0.8"/>
+  <!-- White cubic houses -->
+  <rect x="80" y="85" width="50" height="48" rx="3" fill="white" opacity="0.92"/>
+  <rect x="125" y="95" width="40" height="38" rx="3" fill="#f0f0f0" opacity="0.9"/>
+  <rect x="158" y="80" width="55" height="53" rx="3" fill="white" opacity="0.92"/>
+  <rect x="207" y="90" width="45" height="43" rx="3" fill="#f0f0f0" opacity="0.88"/>
+  <!-- Blue domes -->
+  <ellipse cx="105" cy="85" rx="18" ry="10" fill="#2a7ab8" opacity="0.9"/>
+  <rect x="87" y="85" width="36" height="8" fill="#2a7ab8" opacity="0.9"/>
+  <ellipse cx="185" cy="80" rx="16" ry="9" fill="#1a6aaa" opacity="0.9"/>
+  <rect x="169" y="80" width="32" height="7" fill="#1a6aaa" opacity="0.9"/>
+  <!-- Windmills -->
+  <rect x="560" y="55" width="12" height="75" fill="#e8e0d0" opacity="0.9"/>
+  <ellipse cx="566" cy="55" rx="10" ry="6" fill="#d8d0c0" opacity="0.9"/>
+  <!-- Windmill sails -->
+  <line x1="566" y1="55" x2="566" y2="20" stroke="#c8c0b0" stroke-width="3" opacity="0.8"/>
+  <line x1="566" y1="55" x2="595" y2="62" stroke="#c8c0b0" stroke-width="3" opacity="0.8"/>
+  <line x1="566" y1="55" x2="566" y2="88" stroke="#c8c0b0" stroke-width="3" opacity="0.8"/>
+  <line x1="566" y1="55" x2="537" y2="62" stroke="#c8c0b0" stroke-width="3" opacity="0.8"/>
+  <rect x="595" y="55" width="10" height="70" fill="#e8e0d0" opacity="0.85"/>
+  <line x1="600" y1="55" x2="600" y2="22" stroke="#c8c0b0" stroke-width="2.5" opacity="0.8"/>
+  <line x1="600" y1="55" x2="626" y2="62" stroke="#c8c0b0" stroke-width="2.5" opacity="0.8"/>
+  <line x1="600" y1="55" x2="600" y2="86" stroke="#c8c0b0" stroke-width="2.5" opacity="0.8"/>
+  <line x1="600" y1="55" x2="574" y2="62" stroke="#c8c0b0" stroke-width="2.5" opacity="0.8"/>
+  <!-- Sun -->
+  <circle cx="700" cy="40" r="28" fill="#f5d060" opacity="0.6"/>
+  <circle cx="700" cy="40" r="20" fill="#f5e080" opacity="0.5"/>
+  <!-- Boat -->
+  <path d="M350 138 Q380 132 410 138 L405 148 L355 148Z" fill="#c8a060" opacity="0.7"/>
+  <line x1="380" y1="138" x2="380" y2="108" stroke="#a08040" stroke-width="2" opacity="0.7"/>
+  <polygon points="380,110 380,130 400,122" fill="white" opacity="0.6"/>
+</svg>
+</div>
+
   <div class="dest-body">
     <div class="section-block" id="estambul-valoracion">
       <div class="section-label"><div class="section-icon">🏛</div><h3>Contexto histórico y cultural</h3></div>
@@ -1155,9 +1579,14 @@
     </div>
 
     <div class="section-block" id="mykonos-historia">
-      <div class="section-label"><div class="section-icon">📍</div><h3>Qué ver prioritariamente</h3></div>
-      <div class="priority-group">
-        <div class="priority-badge badge-must">⭐ Imprescindibles</div>
+      <button class="accordion-trigger" aria-expanded="false" onclick="toggleAcc(this)">
+      <div class="section-label" style="margin-bottom:0;flex:1;">
+        <div class="section-icon">📷</div>
+        <h3>Miradores y fotografía</h3>
+      </div>
+      <span class="acc-arrow">▼</span>
+    </button>
+    <div class="accordion-body">
         <div class="place-item must">
           <div class="place-name">Excursión arqueológica a Delos</div>
           <div class="place-desc">La gran joya oculta de este viaje. Delos es un yacimiento arqueológico completamente deshabitado con templos de Apolo, el Barrio del Teatro, la famosa Terraza de los Leones (leones arcaicos de mármol del siglo VII a.C.) y vistas panorámicas desde el Monte Cinto (112 m). El barco hacia Delos sale desde el puerto de Mykonos varias veces al día (30 min). Es EL gran secreto histórico de esta escala.</div>
@@ -1217,23 +1646,43 @@
     </div>
 
     <div class="section-block" id="mykonos-patrimonio">
-      <div class="section-label"><div class="section-icon">📷</div><h3>Miradores y fotografía</h3></div>
-      <div class="photo-item"><div class="photo-name">Kato Myli (molinos de viento)</div><div class="photo-tip">Mejor con la luz del atardecer, con el mar azul de fondo. Llegar al menos 1h antes del ocaso para conseguir la posición.</div></div>
+      <button class="accordion-trigger" aria-expanded="false" onclick="toggleAcc(this)">
+      <div class="section-label" style="margin-bottom:0;flex:1;">
+        <div class="section-icon">🏺</div>
+        <h3>Patrimonio, arqueología y arte</h3>
+      </div>
+      <span class="acc-arrow">▼</span>
+    </button>
+    <div class="accordion-body"><div class="photo-tip">Mejor con la luz del atardecer, con el mar azul de fondo. Llegar al menos 1h antes del ocaso para conseguir la posición.</div></div>
       <div class="photo-item"><div class="photo-name">Little Venice</div><div class="photo-tip">Casas de colores directamente sobre el mar. La luz de tarde es perfecta. Cuidado con la gente saturando el encuadre en temporada alta.</div></div>
       <div class="photo-item"><div class="photo-name">Terraza de los Leones en Delos</div><div class="photo-tip">Los leones arcaicos de mármol del siglo VII a.C. con vistas al Egeo y las islas. Una de las fotografías más poderosas del viaje.</div></div>
-    </div>
+    
+    </div></div>
 
     <div class="section-block" id="mykonos-gastro">
-      <div class="section-label"><div class="section-icon">💡</div><h3>Consejos prácticos</h3></div>
-      <div class="tip-item"><span class="tip-icon">🌡</span><span><strong>Temperatura:</strong> 28–32°C con viento del norte (meltemi) que refresca. El viento puede ser fuerte en cubierta.</span></div>
+      <button class="accordion-trigger" aria-expanded="false" onclick="toggleAcc(this)">
+      <div class="section-label" style="margin-bottom:0;flex:1;">
+        <div class="section-icon">🍽</div>
+        <h3>Gastronomía</h3>
+      </div>
+      <span class="acc-arrow">▼</span>
+    </button>
+    <div class="accordion-body">
       <div class="tip-item"><span class="tip-icon">🏛</span><span><strong>Delos:</strong> No hay sombra en el yacimiento. Llevar sombrero, agua y protector solar. La isla está deshabitada y los servicios son mínimos.</span></div>
       <div class="tip-item"><span class="tip-icon">🗺</span><span><strong>Orientarse en Chora:</strong> El laberinto de calles es deliberado —no te preocupes por perderte, es parte de la experiencia. Siempre se llega al mar.</span></div>
+    
     </div>
+    </div></div>
 
     <div class="section-block" id="mykonos-fotos">
-      <div class="section-label"><div class="section-icon">⭐</div><h3>Valoración</h3></div>
-      <div class="scores-grid">
-        <div class="score-card"><div class="score-label">Historia</div><div class="score-val">9<span>/10</span></div><div class="score-stars">★★★★★</div></div>
+      <button class="accordion-trigger" aria-expanded="false" onclick="toggleAcc(this)">
+      <div class="section-label" style="margin-bottom:0;flex:1;">
+        <div class="section-icon">🍽</div>
+        <h3>Gastronomía</h3>
+      </div>
+      <span class="acc-arrow">▼</span>
+    </button>
+    <div class="accordion-body"><div class="score-val">9<span>/10</span></div><div class="score-stars">★★★★★</div></div>
         <div class="score-card"><div class="score-label">Cultura</div><div class="score-val">7<span>/10</span></div><div class="score-stars">★★★★☆</div></div>
         <div class="score-card"><div class="score-label">Paisaje</div><div class="score-val">9<span>/10</span></div><div class="score-stars">★★★★★</div></div>
         <div class="score-card"><div class="score-label">Gastronomía</div><div class="score-val">7<span>/10</span></div><div class="score-stars">★★★★☆</div></div>
@@ -1258,20 +1707,77 @@
     </div>
     <div id="local-time-creta" style="font-size:11px;color:rgba(255,255,255,0.5);margin-top:6px;font-family:'Inter',sans-serif;letter-spacing:0.08em;">🕐 — hora local</div>
   </div>
+<div class="dest-illustration">
+<svg viewBox="0 0 800 180" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="sky-c" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#1a2a10"/><stop offset="100%" stop-color="#4a8a30" stop-opacity="0.5"/></linearGradient>
+  </defs>
+  <rect width="800" height="180" fill="url(#sky-c)"/>
+  <!-- Hills -->
+  <ellipse cx="200" cy="200" rx="280" ry="100" fill="#2a3a18" opacity="0.7"/>
+  <ellipse cx="650" cy="210" rx="220" ry="90" fill="#1a2a10" opacity="0.6"/>
+  <!-- Knossos palace outline -->
+  <rect x="150" y="80" width="320" height="90" rx="4" fill="#b8956a" opacity="0.7"/>
+  <!-- Palace columns -->
+  <rect x="165" y="62" width="14" height="50" fill="#c8a878" opacity="0.9"/>
+  <rect x="195" y="62" width="14" height="50" fill="#c8a878" opacity="0.9"/>
+  <rect x="225" y="62" width="14" height="50" fill="#c8a878" opacity="0.9"/>
+  <rect x="255" y="62" width="14" height="50" fill="#c8a878" opacity="0.9"/>
+  <rect x="285" y="62" width="14" height="50" fill="#c8a878" opacity="0.9"/>
+  <rect x="315" y="62" width="14" height="50" fill="#c8a878" opacity="0.9"/>
+  <rect x="345" y="62" width="14" height="50" fill="#c8a878" opacity="0.9"/>
+  <rect x="375" y="62" width="14" height="50" fill="#c8a878" opacity="0.9"/>
+  <rect x="405" y="62" width="14" height="50" fill="#c8a878" opacity="0.9"/>
+  <rect x="435" y="62" width="14" height="50" fill="#c8a878" opacity="0.9"/>
+  <!-- Column capitals (Minoan inverted) -->
+  <rect x="158" y="55" width="28" height="10" rx="3" fill="#a87848" opacity="0.9"/>
+  <rect x="188" y="55" width="28" height="10" rx="3" fill="#a87848" opacity="0.9"/>
+  <rect x="218" y="55" width="28" height="10" rx="3" fill="#a87848" opacity="0.9"/>
+  <rect x="248" y="55" width="28" height="10" rx="3" fill="#a87848" opacity="0.9"/>
+  <rect x="278" y="55" width="28" height="10" rx="3" fill="#a87848" opacity="0.9"/>
+  <rect x="308" y="55" width="28" height="10" rx="3" fill="#a87848" opacity="0.9"/>
+  <rect x="338" y="55" width="28" height="10" rx="3" fill="#a87848" opacity="0.9"/>
+  <rect x="368" y="55" width="28" height="10" rx="3" fill="#a87848" opacity="0.9"/>
+  <rect x="398" y="55" width="28" height="10" rx="3" fill="#a87848" opacity="0.9"/>
+  <rect x="428" y="55" width="28" height="10" rx="3" fill="#a87848" opacity="0.9"/>
+  <!-- Beam -->
+  <rect x="148" y="45" width="320" height="14" rx="2" fill="#9a6838" opacity="0.9"/>
+  <!-- Fresco bull symbol -->
+  <ellipse cx="600" cy="110" rx="60" ry="40" fill="#b8956a" opacity="0.5"/>
+  <text x="600" y="118" text-anchor="middle" font-size="40" opacity="0.6">🐂</text>
+  <!-- Olive trees -->
+  <ellipse cx="560" cy="115" rx="22" ry="30" fill="#4a7a28" opacity="0.7"/>
+  <rect x="557" y="130" width="6" height="30" fill="#6a4a20" opacity="0.6"/>
+  <ellipse cx="620" cy="118" rx="18" ry="25" fill="#3a6a20" opacity="0.65"/>
+  <rect x="617" y="133" width="6" height="25" fill="#6a4a20" opacity="0.6"/>
+  <!-- Sun warm -->
+  <circle cx="700" cy="35" r="30" fill="#f5b840" opacity="0.45"/>
+  <!-- Labrys symbol -->
+  <g transform="translate(690,90)" opacity="0.5">
+    <rect x="-1.5" y="-20" width="3" height="40" fill="#c9a84c"/>
+    <ellipse cx="0" cy="-18" rx="10" ry="7" fill="none" stroke="#c9a84c" stroke-width="2"/>
+    <ellipse cx="0" cy="18" rx="10" ry="7" fill="none" stroke="#c9a84c" stroke-width="2"/>
+  </g>
+</svg>
+</div>
+
   <div class="dest-body">
 
     <div class="section-block" id="mykonos-consejos">
-      <div class="section-label"><div class="section-icon">🏛</div><h3>Contexto histórico y cultural</h3></div>
-      <p>Creta alberga la civilización más antigua de Europa: la Minoica (3000–1100 a.C.). Los minoicos crearon el primer sistema de escritura europeo (Lineal A, aún sin descifrar), los primeros frescos figurativos del continente, palacios con fontanería y sistemas de alcantarillado, y una cultura marítima que dominó el Mediterráneo Oriental durante mil años, siglos antes de que los griegos clásicos existieran.</p>
-      <p>El Palacio de Knossos (cerca de Heraklion) fue la sede del rey Minos, el gobernante semi-legendario que da nombre a la civilización. Es el complejo palacial más grande del Egeo (22.000 m²), con hasta cinco plantas, 1.300 habitaciones, frescos polícromos, sistemas hidráulicos avanzados y una distribución laberíntica que inspiró el mito del Minotauro. Fue excavado y "restaurado" (polémicamente) por Arthur Evans a principios del siglo XX.</p>
-      <div class="anecdote">
-        El mito del Minotauro dice que el rey Minos encargó a Dédalo construir un laberinto para encerrar al monstruo —mitad hombre, mitad toro— hijo de su esposa Pasífae y un toro blanco divino. Teseo, con la ayuda del hilo de Ariadna, entró, mató al Minotauro y escapó. La arqueología sugiere que el toro era sagrado para los minoicos —los frescos del "salto del toro" son uno de los temas recurrentes de su arte— y que Knossos era efectivamente tan laberíntico que el mito pudo nacer del edificio real.
+      <button class="accordion-trigger" aria-expanded="false" onclick="toggleAcc(this)">
+      <div class="section-label" style="margin-bottom:0;flex:1;">
+        <div class="section-icon">💡</div>
+        <h3>Consejos prácticos</h3>
       </div>
+      <span class="acc-arrow">▼</span>
+    </button>
+    <div class="accordion-body">
       <p>Tras el colapso minoico (probablemente por la erupción del volcán de Tera/Santorini hacia el 1600 a.C. más invasiones micénicas), Creta pasó sucesivamente por griegos, romanos, bizantinos, árabes (870 años de emirato árabe que los convirtió en piratas del Mediterráneo), luego los venecianos (1204–1669) que dejaron la hermosa arquitectura defensiva de Heraklion, y finalmente los otomanos hasta la unificación con Grecia en 1913.</p>
       <div class="curiosity">
         La civilización minoica es técnicamente pre-griega: hablaban una lengua diferente (Lineal A, no descifrada), tenían dioses propios (predominantemente femeninos), y no existían cuando los dioses olímpicos tomaron forma. El mito griego del laberinto fue, literalmente, construido sobre los cimientos de una cultura anterior cuya lengua y religión aún desconocemos.
       </div>
-    </div>
+    
+    </div></div>
 
     <div class="section-block" id="mykonos-valoracion">
       <div class="section-label"><div class="section-icon">📍</div><h3>Qué ver prioritariamente</h3></div>
@@ -1346,16 +1852,29 @@
     </div>
 
     <div class="section-block" id="creta-patrimonio">
-      <div class="section-label"><div class="section-icon">💡</div><h3>Consejos prácticos</h3></div>
-      <div class="tip-item"><span class="tip-icon">🌡</span><span><strong>Temperatura:</strong> 30–35°C. Knossos es un yacimiento abierto —el calor a mediodía es agobiante. Ir a primera hora.</span></div>
+      <button class="accordion-trigger" aria-expanded="false" onclick="toggleAcc(this)">
+      <div class="section-label" style="margin-bottom:0;flex:1;">
+        <div class="section-icon">🏺</div>
+        <h3>Patrimonio, arqueología y arte</h3>
+      </div>
+      <span class="acc-arrow">▼</span>
+    </button>
+    <div class="accordion-body">
       <div class="tip-item"><span class="tip-icon">🏛</span><span><strong>Knossos:</strong> La polémica restauración de Evans (con hormigón y colores vivos) incomoda a algunos arqueólogos, pero facilita la comprensión del espacio. Si prefieres un yacimiento "puro", visitar Festo (a 60 km, no factible en una escala) es la alternativa.</span></div>
       <div class="tip-item"><span class="tip-icon">🎒</span><span><strong>Guía:</strong> En Knossos, una guía local o audio-guía de calidad marca la diferencia entre ver ruinas y entender una civilización.</span></div>
+    
     </div>
+    </div></div>
 
     <div class="section-block" id="creta-gastro">
-      <div class="section-label"><div class="section-icon">⭐</div><h3>Valoración</h3></div>
-      <div class="scores-grid">
-        <div class="score-card"><div class="score-label">Historia</div><div class="score-val">10<span>/10</span></div><div class="score-stars">★★★★★</div></div>
+      <button class="accordion-trigger" aria-expanded="false" onclick="toggleAcc(this)">
+      <div class="section-label" style="margin-bottom:0;flex:1;">
+        <div class="section-icon">🏺</div>
+        <h3>Patrimonio, arqueología y arte</h3>
+      </div>
+      <span class="acc-arrow">▼</span>
+    </button>
+    <div class="accordion-body"><div class="score-val">10<span>/10</span></div><div class="score-stars">★★★★★</div></div>
         <div class="score-card"><div class="score-label">Cultura</div><div class="score-val">9<span>/10</span></div><div class="score-stars">★★★★★</div></div>
         <div class="score-card"><div class="score-label">Paisaje</div><div class="score-val">7<span>/10</span></div><div class="score-stars">★★★★☆</div></div>
         <div class="score-card"><div class="score-label">Gastronomía</div><div class="score-val">10<span>/10</span></div><div class="score-stars">★★★★★</div></div>
@@ -1380,17 +1899,76 @@
     </div>
     <div id="local-time-rodas" style="font-size:11px;color:rgba(255,255,255,0.5);margin-top:6px;font-family:'Inter',sans-serif;letter-spacing:0.08em;">🕐 — hora local</div>
   </div>
+<div class="dest-illustration">
+<svg viewBox="0 0 800 180" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="sky-r" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#1a1a2e"/><stop offset="100%" stop-color="#3a2a1a" stop-opacity="0.7"/></linearGradient>
+  </defs>
+  <rect width="800" height="180" fill="url(#sky-r)"/>
+  <!-- Sea -->
+  <rect x="0" y="148" width="800" height="32" fill="#0d2240" opacity="0.9"/>
+  <!-- Medieval walls -->
+  <rect x="50" y="90" width="500" height="80" fill="#6a5a40" opacity="0.8"/>
+  <!-- Battlements -->
+  <rect x="50" y="80" width="18" height="15" fill="#7a6a50" opacity="0.85"/>
+  <rect x="78" y="80" width="18" height="15" fill="#7a6a50" opacity="0.85"/>
+  <rect x="106" y="80" width="18" height="15" fill="#7a6a50" opacity="0.85"/>
+  <rect x="134" y="80" width="18" height="15" fill="#7a6a50" opacity="0.85"/>
+  <rect x="162" y="80" width="18" height="15" fill="#7a6a50" opacity="0.85"/>
+  <rect x="190" y="80" width="18" height="15" fill="#7a6a50" opacity="0.85"/>
+  <rect x="218" y="80" width="18" height="15" fill="#7a6a50" opacity="0.85"/>
+  <rect x="246" y="80" width="18" height="15" fill="#7a6a50" opacity="0.85"/>
+  <rect x="274" y="80" width="18" height="15" fill="#7a6a50" opacity="0.85"/>
+  <rect x="302" y="80" width="18" height="15" fill="#7a6a50" opacity="0.85"/>
+  <rect x="330" y="80" width="18" height="15" fill="#7a6a50" opacity="0.85"/>
+  <rect x="358" y="80" width="18" height="15" fill="#7a6a50" opacity="0.85"/>
+  <rect x="386" y="80" width="18" height="15" fill="#7a6a50" opacity="0.85"/>
+  <rect x="414" y="80" width="18" height="15" fill="#7a6a50" opacity="0.85"/>
+  <rect x="442" y="80" width="18" height="15" fill="#7a6a50" opacity="0.85"/>
+  <rect x="470" y="80" width="18" height="15" fill="#7a6a50" opacity="0.85"/>
+  <rect x="498" y="80" width="18" height="15" fill="#7a6a50" opacity="0.85"/>
+  <rect x="526" y="80" width="18" height="15" fill="#7a6a50" opacity="0.85"/>
+  <!-- Tower Grand Master -->
+  <rect x="200" y="40" width="80" height="90" fill="#8a7a58" opacity="0.9"/>
+  <rect x="190" y="32" width="20" height="15" fill="#7a6a48" opacity="0.9"/>
+  <rect x="270" y="32" width="20" height="15" fill="#7a6a48" opacity="0.9"/>
+  <rect x="210" y="30" width="60" height="14" fill="#8a7a58" opacity="0.9"/>
+  <!-- Windmills port -->
+  <rect x="640" y="80" width="14" height="68" fill="#d8c8a8" opacity="0.85"/>
+  <ellipse cx="647" cy="80" rx="11" ry="7" fill="#c8b898" opacity="0.9"/>
+  <line x1="647" y1="80" x2="647" y2="48" stroke="#b8a888" stroke-width="3" opacity="0.8"/>
+  <line x1="647" y1="80" x2="672" y2="88" stroke="#b8a888" stroke-width="3" opacity="0.8"/>
+  <line x1="647" y1="80" x2="647" y2="110" stroke="#b8a888" stroke-width="3" opacity="0.8"/>
+  <line x1="647" y1="80" x2="622" y2="88" stroke="#b8a888" stroke-width="3" opacity="0.8"/>
+  <!-- Stars -->
+  <circle cx="680" cy="20" r="1.5" fill="white" opacity="0.7"/>
+  <circle cx="720" cy="35" r="1" fill="white" opacity="0.5"/>
+  <circle cx="580" cy="15" r="2" fill="white" opacity="0.6"/>
+  <circle cx="100" cy="25" r="1.5" fill="white" opacity="0.5"/>
+  <!-- Moon -->
+  <circle cx="740" cy="28" r="14" fill="#f5e8c0" opacity="0.6"/>
+  <circle cx="747" cy="24" r="12" fill="#1a1a2e" opacity="0.85"/>
+  <!-- Deer silhouettes (Colossus location) -->
+  <text x="590" y="148" font-size="28" opacity="0.5">🦌</text>
+  <text x="618" y="148" font-size="28" opacity="0.5">🦌</text>
+</svg>
+</div>
+
   <div class="dest-body">
 
     <div class="section-block" id="creta-fotos">
-      <div class="section-label"><div class="section-icon">🏛</div><h3>Contexto histórico y cultural</h3></div>
-      <p>Rodas es una de las islas históricamente más ricas del Mediterráneo. Fundada en 408 a.C. mediante la sinecismo (fusión) de tres ciudades-estado antiguas, se convirtió en una de las repúblicas comerciales más prósperas del mundo helenístico. Fue aliada de Roma, sede de una famosa escuela de retórica donde estudió Julio César, y hogar del Coloso —una estatua de Helios (el dios sol) de entre 33 y 70 metros, considerada una de las Siete Maravillas del Mundo Antiguo, destruida por un terremoto en 226 a.C., apenas 54 años después de su construcción.</p>
-      <p>En el siglo XIV, la Orden de los Caballeros Hospitalarios (Orden de San Juan) tomó la isla y la convirtió en su fortaleza principal durante más de dos siglos (1309–1522). La ciudad medieval amurallada que construyeron es considerada el ejemplo mejor conservado de arquitectura militar medieval tardía del mundo, declarada Patrimonio de la Humanidad por la UNESCO. El Gran Maestre de la Orden tenía un poder equivalente al de un rey europeo.</p>
-      <div class="anecdote">
-        En 1522, el sultán Suleimán el Magnífico sitió Rodas con 200.000 soldados y 400 barcos durante 6 meses. Los Caballeros, que no llegaban a 7.000 (incluyendo civiles), resistieron heroicamente. Al rendirse, Suleimán quedó tan impresionado por el valor de los defensores que les permitió marcharse con honores militares, banderas desplegadas y sus armas. Fue uno de los actos de caballerosidad más notables de las Guerras Otomanas.
+      <button class="accordion-trigger" aria-expanded="false" onclick="toggleAcc(this)">
+      <div class="section-label" style="margin-bottom:0;flex:1;">
+        <div class="section-icon">📷</div>
+        <h3>Miradores y fotografía</h3>
       </div>
+      <span class="acc-arrow">▼</span>
+    </button>
+    <div class="accordion-body">
       <p>Rodas también fue colonia italiana (1912–1943), período en que el régimen fascista construyó edificios de estilo Art Déco y neobizantino en el puerto que conviven hoy con la ciudad medieval. Tras la Segunda Guerra Mundial fue cedida a Grecia en 1947.</p>
+    
     </div>
+    </div></div>
 
     <div class="section-block" id="creta-consejos">
       <div class="section-label"><div class="section-icon">📍</div><h3>Qué ver prioritariamente</h3></div>
@@ -1476,7 +2054,8 @@
       <div class="tip-item"><span class="tip-icon">👟</span><span><strong>Calzado:</strong> Los adoquines medievales son irregulares. Zapatillas cómodas obligatorias.</span></div>
       <div class="tip-item"><span class="tip-icon">🗺</span><span><strong>Perderse:</strong> La ciudad medieval tiene 200+ callejuelas. No te preocupes: es pequeña y siempre llegarás a la muralla. El laberinto es parte de la experiencia.</span></div>
       <div class="tip-item"><span class="tip-icon">⚠️</span><span><strong>Lindos:</strong> Si el barco zarpa tarde (20h o después), considera contratar un taxi (70–80€ ida y vuelta) para ver Lindos —merece la pena enormemente. Pero no en verano con calor sin agua suficiente.</span></div>
-    </div>
+    
+    </div></div>
 
     <div class="section-block" id="rodas-patrimonio">
       <div class="section-label"><div class="section-icon">⭐</div><h3>Valoración</h3></div>
@@ -1506,20 +2085,68 @@
     </div>
     <div id="local-time-santorini" style="font-size:11px;color:rgba(255,255,255,0.5);margin-top:6px;font-family:'Inter',sans-serif;letter-spacing:0.08em;">🕐 — hora local</div>
   </div>
+<div class="dest-illustration">
+<svg viewBox="0 0 800 180" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="sky-s" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#2a0a3a"/><stop offset="50%" stop-color="#8a2a1a" stop-opacity="0.8"/><stop offset="100%" stop-color="#f5a030" stop-opacity="0.6"/></linearGradient>
+    <linearGradient id="caldera" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#1a3a6a"/><stop offset="100%" stop-color="#0a2040"/></linearGradient>
+  </defs>
+  <rect width="800" height="180" fill="url(#sky-s)"/>
+  <!-- Caldera water -->
+  <rect x="0" y="130" width="800" height="50" fill="url(#caldera)"/>
+  <!-- Cliff face left -->
+  <polygon points="0,60 0,180 180,180 140,60 60,40" fill="#2a1a0a" opacity="0.9"/>
+  <!-- Cliff face right -->
+  <polygon points="800,50 800,180 580,180 620,55 720,35" fill="#1a1008" opacity="0.9"/>
+  <!-- White cubic houses on cliff edge -->
+  <rect x="55" y="35" width="35" height="28" rx="4" fill="white" opacity="0.95"/>
+  <rect x="85" y="28" width="30" height="35" rx="4" fill="#f5f5f5" opacity="0.92"/>
+  <rect x="110" y="22" width="38" height="42" rx="4" fill="white" opacity="0.95"/>
+  <!-- Blue domes Santorini -->
+  <ellipse cx="72" cy="35" rx="14" ry="8" fill="#1a5a9a" opacity="0.95"/>
+  <rect x="58" y="35" width="28" height="6" fill="#1a5a9a" opacity="0.95"/>
+  <ellipse cx="129" cy="22" rx="16" ry="9" fill="#2a6aaa" opacity="0.95"/>
+  <rect x="113" y="22" width="32" height="7" fill="#2a6aaa" opacity="0.95"/>
+  <!-- Houses right cliff -->
+  <rect x="625" y="30" width="38" height="30" rx="4" fill="white" opacity="0.93"/>
+  <rect x="658" y="22" width="32" height="38" rx="4" fill="#f5f5f5" opacity="0.9"/>
+  <rect x="685" y="30" width="35" height="30" rx="4" fill="white" opacity="0.93"/>
+  <ellipse cx="644" cy="30" rx="14" ry="8" fill="#1a5a9a" opacity="0.92"/>
+  <rect x="630" y="30" width="28" height="6" fill="#1a5a9a" opacity="0.92"/>
+  <!-- Volcanic island Nea Kameni -->
+  <ellipse cx="400" cy="148" rx="60" ry="18" fill="#1a0a08" opacity="0.85"/>
+  <!-- Volcanic smoke -->
+  <ellipse cx="400" cy="132" rx="12" ry="18" fill="#2a1a18" opacity="0.5"/>
+  <ellipse cx="398" cy="115" rx="10" ry="15" fill="#1a1010" opacity="0.35"/>
+  <ellipse cx="402" cy="100" rx="8" ry="12" fill="#1a1010" opacity="0.2"/>
+  <!-- Sunset glow -->
+  <circle cx="400" cy="165" r="55" fill="#f5a030" opacity="0.25"/>
+  <!-- Stars -->
+  <circle cx="300" cy="20" r="2" fill="white" opacity="0.7"/>
+  <circle cx="500" cy="15" r="1.5" fill="white" opacity="0.6"/>
+  <circle cx="200" cy="10" r="1" fill="white" opacity="0.5"/>
+  <circle cx="600" cy="18" r="2" fill="white" opacity="0.65"/>
+</svg>
+</div>
+
   <div class="dest-body">
 
     <div class="section-block" id="rodas-gastro">
-      <div class="section-label"><div class="section-icon">🏛</div><h3>Contexto histórico y cultural</h3></div>
-      <p>Santorini es el fragmento de lo que fue una isla circular llamada Tera. En torno al 1600 a.C. (la datación exacta sigue en debate: algunos dicen 1628, otros 1520), el volcán que ocupaba el centro de la isla sufrió una de las erupciones más colosales de la historia humana registrada: cuatro veces más potente que el Krakatoa de 1883. La explosión hundió el centro de la isla, creando la caldera actual (un lago de agua de mar de 12 km de diámetro), generó tsunamis que devastaron las costas del Mediterráneo Oriental, y muy probablemente aceleró el colapso de la civilización minoica en Creta, apenas 100 km al sur.</p>
-      <p>En el yacimiento de Akrotiri (al sur de la isla) se conserva una ciudad minoica perfectamente preservada bajo la ceniza volcánica —el "Pompeya del Egeo". Sus habitantes evacuaron antes de la erupción (no se han encontrado cadáveres) llevándose los objetos de valor, pero dejando intactos frescos extraordinarios, muebles, vasijas y una organización urbana sofisticadísima con agua corriente y calefacción por suelo radiante. Es uno de los yacimientos arqueológicos más impresionantes del mundo.</p>
-      <div class="anecdote">
-        Platón describió en sus diálogos Timeo y Critias (360 a.C.) una isla civilización avanzada llamada Atlántida, destruida en un cataclismo y hundida bajo el mar. Muchos historiadores y arqueólogos han especulado que Platón pudo haberse basado en la memoria colectiva de la erupción de Tera y la desaparición de la civilización minoica. Aunque la hipótesis es controvertida, la coincidencia de una civilización insular avanzada destruida por una catástrofe geológica es llamativa.
+      <button class="accordion-trigger" aria-expanded="false" onclick="toggleAcc(this)">
+      <div class="section-label" style="margin-bottom:0;flex:1;">
+        <div class="section-icon">🍽</div>
+        <h3>Gastronomía</h3>
       </div>
+      <span class="acc-arrow">▼</span>
+    </button>
+    <div class="accordion-body">
       <p>La Santorini moderna fue colonizada por dorios, luego por romanos, luego por venecianos (que la llamaron Santorini, de Santa Irene), y finalmente por los otomanos. Los asentamientos en el borde de la caldera —Fira, Oia, Imerovigli— son relativamente modernos, reconstruidos tras el terremoto devastador de 1956.</p>
       <div class="curiosity">
         El suelo de Santorini es pura piedra volcánica (pómez). El vino assyrtiko de Santorini se produce con viñas trenzadas en forma de canasta (kouloura) que protegen la uva del viento meltemi. Son viñas muy antiguas, algunas con más de 200 años, que sobrevivieron a la filoxera del siglo XIX porque el suelo volcánico y la aridez impiden que el parásito sobreviva.
       </div>
+    
     </div>
+    </div></div>
 
     <div class="section-block" id="rodas-fotos">
       <div class="section-label"><div class="section-icon">📍</div><h3>Qué ver prioritariamente</h3></div>
@@ -1565,10 +2192,14 @@
     </div>
 
     <div class="section-block" id="rodas-consejos">
-      <div class="section-label"><div class="section-icon">🗺</div><h3>Ruta optimizada</h3></div>
-      <div class="highlight-box">
-        <strong>Logística importante:</strong> El crucero atraca en la caldera (anclaje, no muelle) y el trayecto en lancha hasta el puerto de Fira tarda 20 minutos. Desde Fira, el teleférico o las mulas suben al pueblo (5 min / 10 min). Los teleféricos tienen colas enormes en verano —valorar subir a pie (587 escalones). Un ATV (quod) de alquiler permite moverse libremente por la isla.
+      <button class="accordion-trigger" aria-expanded="false" onclick="toggleAcc(this)">
+      <div class="section-label" style="margin-bottom:0;flex:1;">
+        <div class="section-icon">💡</div>
+        <h3>Consejos prácticos</h3>
       </div>
+      <span class="acc-arrow">▼</span>
+    </button>
+    <div class="accordion-body">
       <table class="route-table">
         <tr><th>Hora</th><th>Lugar</th><th>Duración</th><th>Nota</th></tr>
         <tr><td class="time">08:00</td><td>Lancha → Fira → Teleférico / escaleras</td><td class="dur">35 min</td><td>Ir temprano evita las colas del teleférico</td></tr>
@@ -1581,7 +2212,8 @@
         <tr><td class="time">13:30</td><td>Oia</td><td class="dur">1h</td><td>Paseo, fotografía de cúpulas azules y caldera</td></tr>
         <tr><td class="time">14:30</td><td>Regreso a Fira y lancha</td><td class="dur">45 min</td><td>Calcular holgura —las colas del teleférico son largas</td></tr>
       </table>
-    </div>
+    
+    </div></div>
 
     <div class="section-block" id="rodas-valoracion">
       <div class="section-label"><div class="section-icon">🍽</div><h3>Gastronomía</h3></div>
@@ -2385,5 +3017,98 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 })();
 </script>
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script>
+// ════════════════════════════════
+// SCROLL TO SECTION (briefing cards)
+// ════════════════════════════════
+function scrollToSection(id) {
+  const el = document.getElementById(id);
+  if (!el) return;
+  const NAV_HEIGHT = 52;
+  const top = el.getBoundingClientRect().top + window.scrollY - NAV_HEIGHT - 16;
+  window.scrollTo({ top, behavior: 'smooth' });
+}
+
+// ════════════════════════════════
+// LEAFLET MAP
+// ════════════════════════════════
+(function initMap() {
+  const map = L.map('cruise-map', {
+    center: [38.5, 26.5],
+    zoom: 5,
+    zoomControl: true,
+    scrollWheelZoom: false,
+  });
+
+  L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
+    attribution: '© OpenStreetMap © CARTO',
+    subdomains: 'abcd', maxZoom: 19
+  }).addTo(map);
+
+  const stops = [
+    { id:'atenas',    name:'⚓ El Pireo · Atenas',  lat:37.9838, lon:23.7275, date:'19 jun', color:'#c9a84c' },
+    { id:'dardanelos',name:'🌊 Dardanelos',          lat:40.1553, lon:26.4142, date:'20 jun', color:'#7a8a9a' },
+    { id:'estambul',  name:'🕌 Estambul',            lat:41.0082, lon:28.9784, date:'21 jun', color:'#e8a060' },
+    { id:'mykonos',   name:'🏛 Mykonos · Delos',    lat:37.4415, lon:25.3267, date:'22 jun', color:'#5ab0e0' },
+    { id:'creta',     name:'🏺 Heraklion · Creta',  lat:35.3387, lon:25.1442, date:'23 jun', color:'#8a6840' },
+    { id:'rodas',     name:'⚔️ Rodas',               lat:36.4341, lon:28.2176, date:'24 jun', color:'#7a9a60' },
+    { id:'santorini', name:'🌋 Santorini',           lat:36.3932, lon:25.4615, date:'25 jun', color:'#c06080' },
+  ];
+
+  // Draw route line
+  const latlngs = stops.map(s => [s.lat, s.lon]);
+  L.polyline(latlngs, {
+    color: '#c9a84c', weight: 2, opacity: 0.6, dashArray: '6 4'
+  }).addTo(map);
+
+  // Custom marker icon
+  stops.forEach((stop, i) => {
+    const icon = L.divIcon({
+      className: '',
+      html: `<div style="
+        background:${stop.color};
+        color:#0d1a2a;
+        border-radius:50%;
+        width:28px;height:28px;
+        display:flex;align-items:center;justify-content:center;
+        font-size:11px;font-weight:800;
+        border:2px solid rgba(255,255,255,0.3);
+        box-shadow:0 2px 8px rgba(0,0,0,0.5);
+        font-family:Inter,sans-serif;
+        cursor:pointer;
+      ">${i + 1}</div>`,
+      iconSize: [28, 28],
+      iconAnchor: [14, 14],
+    });
+
+    const marker = L.marker([stop.lat, stop.lon], { icon }).addTo(map);
+    marker.bindPopup(`
+      <div style="font-family:Inter,sans-serif;min-width:140px;">
+        <div style="font-size:13px;font-weight:800;color:#1a3a5c;margin-bottom:3px;">${stop.name}</div>
+        <div style="font-size:11px;color:#888;">${stop.date}</div>
+        <a onclick="scrollToSection('${stop.id}');return false;"
+           href="#${stop.id}"
+           style="display:inline-block;margin-top:6px;font-size:11px;
+           color:#2f7fd4;font-weight:700;text-decoration:none;">
+          Ver guía →
+        </a>
+      </div>
+    `, { maxWidth: 180 });
+  });
+})();
+
+// ════════════════════════════════
+// ACORDEÓN
+// ════════════════════════════════
+function toggleAcc(btn) {
+  const body = btn.nextElementSibling;
+  const isOpen = body.classList.contains('open');
+  body.classList.toggle('open', !isOpen);
+  btn.setAttribute('aria-expanded', !isOpen);
+}
+</script>
+
 </body>
 </html>
