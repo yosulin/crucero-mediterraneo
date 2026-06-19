@@ -2075,19 +2075,66 @@ nav a.active {
       if (el && el.offsetTop <= scrollY) newDest = el.id;
     });
 
-    // Update nav active link
+    // Update nav active link + scroll nav to keep it centered
     navLinks.forEach(link => {
       const href = link.getAttribute('href')?.replace('#', '');
-      link.classList.toggle('active', href === newDest);
+      const isActive = href === newDest;
+      link.classList.toggle('active', isActive);
+      if (isActive) {
+        // Scroll nav bar so active link is roughly centered
+        const nav = link.closest('nav');
+        if (nav) {
+          const linkCenter = link.offsetLeft + link.offsetWidth / 2;
+          const navWidth   = nav.offsetWidth;
+          nav.scrollTo({ left: linkCenter - navWidth / 2, behavior: 'smooth' });
+        }
+      }
     });
 
-    // Rebuild dock buttons when destination changes
-    if (newDest && newDest !== currentDest && destinations[newDest]?.sections?.length) {
+    // Check if in final sections (ranking, top25)
+    const finalIds = ['ranking', 'imprescindibles'];
+    const inFinal = finalIds.some(id => {
+      const el = document.getElementById(id);
+      return el && el.offsetTop <= scrollY;
+    });
+
+    if (inFinal) {
+      // Show summary dock for final sections
+      if (currentDest !== '__final__') {
+        currentDest = '__final__';
+        dockLabel.textContent = 'Resumen del viaje';
+        dockButtons.innerHTML = '';
+        [
+          { id: 'ranking',         icon: '🏆', label: 'Ranking'  },
+          { id: 'imprescindibles', icon: '📋', label: 'Top 25'   },
+        ].forEach(({ id, icon, label }) => {
+          const el = document.getElementById(id);
+          if (!el) return;
+          const btn = document.createElement('a');
+          btn.className = 'dock-btn';
+          btn.href = '#' + id;
+          btn.dataset.section = id;
+          btn.innerHTML = `<span class="dock-icon">${icon}</span><span class="dock-txt">${label}</span>`;
+          btn.addEventListener('click', e => {
+            e.preventDefault();
+            el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          });
+          dockButtons.appendChild(btn);
+        });
+      }
+      // Highlight active final section
+      dockButtons.querySelectorAll('.dock-btn').forEach(btn => {
+        const el = document.getElementById(btn.dataset.section);
+        btn.classList.toggle('active-section', el && el.offsetTop <= scrollY);
+      });
+    } else if (newDest && newDest !== currentDest && destinations[newDest]?.sections?.length) {
       currentDest = newDest;
       buildDock(newDest);
+    } else if (!inFinal) {
+      updateActiveDockBtn();
     }
 
-    updateActiveDockBtn();
+    if (!inFinal) updateActiveDockBtn();
   }
 
   // Build initial dock with first destination
@@ -2145,14 +2192,14 @@ async function fetchWeather(widgetEl) {
     // Archive API — has actual recorded data, no rain probability
     url = `https://archive-api.open-meteo.com/v1/archive?`
       + `latitude=${lat}&longitude=${lon}`
-      + `&daily=temperature_2m_max,temperature_2m_min,weathercode,precipitation_sum,windspeed_10m_max,uv_index_max`
+      + `&daily=temperature_2m_max,temperature_2m_min,weathercode,precipitation_sum,windspeed_10m_max,uv_index_max,sunrise,sunset`
       + `&timezone=auto&start_date=${date}&end_date=${date}`;
     rainKey = 'precipitation_sum';
   } else {
     // Forecast API — future dates
     url = `https://api.open-meteo.com/v1/forecast?`
       + `latitude=${lat}&longitude=${lon}`
-      + `&daily=temperature_2m_max,temperature_2m_min,weathercode,precipitation_probability_max,windspeed_10m_max,uv_index_max`
+      + `&daily=temperature_2m_max,temperature_2m_min,weathercode,precipitation_probability_max,windspeed_10m_max,uv_index_max,sunrise,sunset`
       + `&timezone=auto&start_date=${date}&end_date=${date}`;
     rainKey = 'precipitation_probability_max';
   }
@@ -2180,6 +2227,13 @@ async function fetchWeather(widgetEl) {
     const uvLabel = uvRaw !== null ? Math.round(uvRaw) : '—';
     const uvWarning = uvRaw >= 8 ? '🔴 Muy alto' : uvRaw >= 6 ? '🟠 Alto' : uvRaw >= 3 ? '🟡 Moderado' : '🟢 Bajo';
 
+    // Parse sunrise/sunset times (ISO format: 2026-06-19T06:04)
+    const sunriseRaw = d.sunrise ? d.sunrise[0] : null;
+    const sunsetRaw  = d.sunset  ? d.sunset[0]  : null;
+    const fmtTime = iso => iso ? iso.slice(11,16) : '—';
+    const sunrise = fmtTime(sunriseRaw);
+    const sunset  = fmtTime(sunsetRaw);
+
     widgetEl.classList.remove('loading');
     widgetEl.innerHTML = `
       <span class="weather-icon">${wInfo.icon}</span>
@@ -2194,6 +2248,10 @@ async function fetchWeather(widgetEl) {
           <span class="weather-extra">💧 ${rainLabel}</span>
           <span class="weather-extra">💨 ${wind} km/h</span>
           <span class="weather-extra">☀️ UV ${uvLabel} · ${uvWarning}</span>
+        </div>
+        <div class="weather-extras" style="margin-top:3px;">
+          <span class="weather-extra">🌅 ${sunrise}</span>
+          <span class="weather-extra">🌇 ${sunset}</span>
         </div>
       </div>
     `;
