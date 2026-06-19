@@ -638,6 +638,95 @@
     .container { color: #c8d0e0; }
   }
 
+
+  /* ═══════════════ PWA INSTALL BANNER ═══════════════ */
+  #pwa-banner {
+    position: fixed;
+    bottom: 100px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 300;
+    background: rgba(13,25,40,0.96);
+    backdrop-filter: blur(16px);
+    border: 1px solid rgba(201,168,76,0.4);
+    border-radius: 18px;
+    padding: 14px 18px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.5);
+    max-width: 340px;
+    width: calc(100vw - 2rem);
+    animation: banner-in 0.4s cubic-bezier(0.34,1.56,0.64,1) both;
+  }
+  #pwa-banner.hidden {
+    animation: banner-out 0.3s ease forwards;
+    pointer-events: none;
+  }
+  @keyframes banner-in {
+    from { opacity:0; transform: translateX(-50%) translateY(20px); }
+    to   { opacity:1; transform: translateX(-50%) translateY(0); }
+  }
+  @keyframes banner-out {
+    from { opacity:1; transform: translateX(-50%) translateY(0); }
+    to   { opacity:0; transform: translateX(-50%) translateY(20px); }
+  }
+  #pwa-banner .pwa-icon {
+    width: 48px; height: 48px;
+    border-radius: 12px;
+    flex-shrink: 0;
+    object-fit: cover;
+  }
+  #pwa-banner .pwa-text {
+    flex: 1;
+    min-width: 0;
+  }
+  #pwa-banner .pwa-title {
+    font-size: 13px;
+    font-weight: 800;
+    color: white;
+    line-height: 1.3;
+    margin-bottom: 2px;
+  }
+  #pwa-banner .pwa-sub {
+    font-size: 11px;
+    color: rgba(255,255,255,0.5);
+    line-height: 1.4;
+  }
+  #pwa-banner .pwa-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    flex-shrink: 0;
+  }
+  #pwa-install-btn {
+    background: var(--gold, #c9a84c);
+    color: #0d1a2a;
+    border: none;
+    border-radius: 20px;
+    padding: 6px 14px;
+    font-family: 'Inter', sans-serif;
+    font-size: 12px;
+    font-weight: 800;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: opacity 0.15s;
+  }
+  #pwa-install-btn:active { opacity: 0.75; }
+  #pwa-dismiss-btn {
+    background: none;
+    border: none;
+    color: rgba(255,255,255,0.35);
+    font-size: 11px;
+    font-weight: 600;
+    cursor: pointer;
+    text-align: center;
+    font-family: 'Inter', sans-serif;
+    padding: 2px 0;
+    transition: color 0.15s;
+  }
+  #pwa-dismiss-btn:hover { color: rgba(255,255,255,0.6); }
+
 </style>
   <link rel="manifest" href="manifest.json">
   <link rel="apple-touch-icon" href="apple-touch-icon.png">
@@ -2125,5 +2214,109 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 </script>
 
+
+<!-- PWA INSTALL BANNER -->
+<div id="pwa-banner" style="display:none">
+  <img class="pwa-icon" src="apple-touch-icon.png" alt="Mare Nostrum">
+  <div class="pwa-text">
+    <div class="pwa-title">Instalar guía del crucero</div>
+    <div class="pwa-sub">Accede sin internet, como una app</div>
+  </div>
+  <div class="pwa-actions">
+    <button id="pwa-install-btn">Instalar</button>
+    <button id="pwa-dismiss-btn">Ahora no</button>
+  </div>
+</div>
+
+<script>
+// ════════════════════════════════
+// PWA INSTALL PROMPT
+// ════════════════════════════════
+(function() {
+  // Don't show if already dismissed or installed
+  if (localStorage.getItem('pwa-dismissed')) return;
+
+  let deferredPrompt = null;
+  const banner = document.getElementById('pwa-banner');
+
+  // Catch the browser's beforeinstallprompt event
+  window.addEventListener('beforeinstallprompt', (e) => {
+    e.preventDefault();
+    deferredPrompt = e;
+    // Show banner after a short delay so it doesn't appear instantly
+    setTimeout(() => {
+      banner.style.display = 'flex';
+    }, 2500);
+  });
+
+  // Install button
+  document.getElementById('pwa-install-btn').addEventListener('click', async () => {
+    if (!deferredPrompt) {
+      // Fallback for iOS (Safari doesn't support beforeinstallprompt)
+      showIOSInstructions();
+      return;
+    }
+    deferredPrompt.prompt();
+    const { outcome } = await deferredPrompt.userChoice;
+    deferredPrompt = null;
+    dismissBanner();
+  });
+
+  // Dismiss button
+  document.getElementById('pwa-dismiss-btn').addEventListener('click', () => {
+    dismissBanner();
+  });
+
+  function dismissBanner() {
+    banner.classList.add('hidden');
+    setTimeout(() => { banner.style.display = 'none'; }, 300);
+    localStorage.setItem('pwa-dismissed', '1');
+  }
+
+  // iOS Safari: no beforeinstallprompt — detect and show manual instructions
+  function isIOS() {
+    return /iphone|ipad|ipod/i.test(navigator.userAgent) && !window.MSStream;
+  }
+  function isInStandaloneMode() {
+    return window.navigator.standalone === true;
+  }
+
+  if (isIOS() && !isInStandaloneMode() && !localStorage.getItem('pwa-dismissed')) {
+    // Replace install button with iOS instructions
+    setTimeout(() => {
+      document.getElementById('pwa-install-btn').textContent = 'Cómo instalar';
+      document.getElementById('pwa-install-btn').addEventListener('click', showIOSInstructions);
+      banner.style.display = 'flex';
+    }, 2500);
+  }
+
+  function showIOSInstructions() {
+    const banner = document.getElementById('pwa-banner');
+    banner.innerHTML = `
+      <div style="width:100%">
+        <div style="font-size:13px;font-weight:800;color:white;margin-bottom:8px;">
+          📲 Instalar en iPhone
+        </div>
+        <div style="font-size:12px;color:rgba(255,255,255,0.7);line-height:1.7;">
+          1. Pulsa el botón <strong style="color:#c9a84c">Compartir</strong> ↑ en Safari<br>
+          2. Selecciona <strong style="color:#c9a84c">"Añadir a pantalla de inicio"</strong><br>
+          3. Pulsa <strong style="color:#c9a84c">Añadir</strong> — ¡listo!
+        </div>
+        <button onclick="this.closest('#pwa-banner').classList.add('hidden');localStorage.setItem('pwa-dismissed','1')"
+          style="margin-top:10px;background:none;border:1px solid rgba(255,255,255,0.2);
+          color:rgba(255,255,255,0.5);border-radius:20px;padding:5px 14px;
+          font-size:11px;cursor:pointer;font-family:Inter,sans-serif;">
+          Entendido
+        </button>
+      </div>
+    `;
+  }
+
+  // Hide banner if app is already installed
+  window.addEventListener('appinstalled', () => {
+    dismissBanner();
+  });
+})();
+</script>
 </body>
 </html>
