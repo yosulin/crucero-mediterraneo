@@ -610,7 +610,41 @@
     gap: 0.6rem;
   }
 
+
+  /* ═══════════════ DARK MODE ═══════════════ */
+  @media (prefers-color-scheme: dark) {
+    body { background: #0d1a2a; color: #e8e4d8; }
+    .dest-body { background: #111e2e; border-color: #1e3050; }
+    .section-block { border-bottom-color: #1e3050; }
+    .section-label h3 { color: #7ab8e8; }
+    .place-item { background: #0d1a2a; }
+    .place-name { color: #e8e4d8; }
+    .place-desc { color: #8a9ab8; }
+    .highlight-box { background: #1a2a0a; border-color: #4a6820; }
+    .highlight-box strong { color: #c9a84c; }
+    .anecdote { background: #0a1525; color: #b8c8d8; border-left-color: #2f5a8a; }
+    .curiosity { background: #1a1008; color: #c8b890; }
+    .route-table tr:nth-child(even) td { background: #0d1a2a; }
+    .route-table td { border-bottom-color: #1e3050; color: #c8d0e0; }
+    .food-item { background: #0d1a2a; border-color: #1e3050; }
+    .food-name { color: #e8a060; }
+    .food-desc { color: #8a9ab8; }
+    .photo-item { background: #0d1a2a; border-color: #1e3050; }
+    .photo-name { color: #e8e4d8; }
+    .photo-tip { color: #6a7a98; }
+    .score-card { background: #0d1a2a; border-color: #1e3050; }
+    .score-val { color: #7ab8e8; }
+    p { color: #c8d0e0; }
+    .container { color: #c8d0e0; }
+  }
+
 </style>
+  <link rel="manifest" href="manifest.json">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Mare Nostrum">
+  <meta name="theme-color" content="#1a3a5c">
 </head>
 <body>
 
@@ -668,6 +702,7 @@
       <span class="weather-icon">⏳</span>
       <span class="weather-desc"><span class="weather-label">Meteorología · Tiempo previsto</span>Cargando previsión...</span>
     </div>
+    <div id="local-time-atenas" style="font-size:11px;color:rgba(255,255,255,0.5);margin-top:6px;font-family:'Inter',sans-serif;letter-spacing:0.08em;">🕐 — hora local</div>
   </div>
   <div class="dest-body">
 
@@ -874,6 +909,7 @@
       <span class="weather-icon">⏳</span>
       <span class="weather-desc"><span class="weather-label">Meteorología · Tiempo previsto</span>Cargando previsión...</span>
     </div>
+    <div id="local-time-estambul" style="font-size:11px;color:rgba(255,255,255,0.5);margin-top:6px;font-family:'Inter',sans-serif;letter-spacing:0.08em;">🕐 — hora local</div>
   </div>
   <div class="dest-body">
 
@@ -1016,6 +1052,7 @@
       <span class="weather-icon">⏳</span>
       <span class="weather-desc"><span class="weather-label">Meteorología · Tiempo previsto</span>Cargando previsión...</span>
     </div>
+    <div id="local-time-mykonos" style="font-size:11px;color:rgba(255,255,255,0.5);margin-top:6px;font-family:'Inter',sans-serif;letter-spacing:0.08em;">🕐 — hora local</div>
   </div>
   <div class="dest-body">
     <div class="section-block" id="estambul-valoracion">
@@ -1130,6 +1167,7 @@
       <span class="weather-icon">⏳</span>
       <span class="weather-desc"><span class="weather-label">Meteorología · Tiempo previsto</span>Cargando previsión...</span>
     </div>
+    <div id="local-time-creta" style="font-size:11px;color:rgba(255,255,255,0.5);margin-top:6px;font-family:'Inter',sans-serif;letter-spacing:0.08em;">🕐 — hora local</div>
   </div>
   <div class="dest-body">
 
@@ -1251,6 +1289,7 @@
       <span class="weather-icon">⏳</span>
       <span class="weather-desc"><span class="weather-label">Meteorología · Tiempo previsto</span>Cargando previsión...</span>
     </div>
+    <div id="local-time-rodas" style="font-size:11px;color:rgba(255,255,255,0.5);margin-top:6px;font-family:'Inter',sans-serif;letter-spacing:0.08em;">🕐 — hora local</div>
   </div>
   <div class="dest-body">
 
@@ -1376,6 +1415,7 @@
       <span class="weather-icon">⏳</span>
       <span class="weather-desc"><span class="weather-label">Meteorología · Tiempo previsto</span>Cargando previsión...</span>
     </div>
+    <div id="local-time-santorini" style="font-size:11px;color:rgba(255,255,255,0.5);margin-top:6px;font-family:'Inter',sans-serif;letter-spacing:0.08em;">🕐 — hora local</div>
   </div>
   <div class="dest-body">
 
@@ -2046,14 +2086,14 @@ async function fetchWeather(widgetEl) {
     // Archive API — has actual recorded data, no rain probability
     url = `https://archive-api.open-meteo.com/v1/archive?`
       + `latitude=${lat}&longitude=${lon}`
-      + `&daily=temperature_2m_max,temperature_2m_min,weathercode,precipitation_sum,windspeed_10m_max`
+      + `&daily=temperature_2m_max,temperature_2m_min,weathercode,precipitation_sum,windspeed_10m_max,uv_index_max`
       + `&timezone=auto&start_date=${date}&end_date=${date}`;
     rainKey = 'precipitation_sum';
   } else {
     // Forecast API — future dates
     url = `https://api.open-meteo.com/v1/forecast?`
       + `latitude=${lat}&longitude=${lon}`
-      + `&daily=temperature_2m_max,temperature_2m_min,weathercode,precipitation_probability_max,windspeed_10m_max`
+      + `&daily=temperature_2m_max,temperature_2m_min,weathercode,precipitation_probability_max,windspeed_10m_max,uv_index_max`
       + `&timezone=auto&start_date=${date}&end_date=${date}`;
     rainKey = 'precipitation_probability_max';
   }
@@ -2077,6 +2117,9 @@ async function fetchWeather(widgetEl) {
       ? (rainVal !== null ? `${rainVal.toFixed(1)} mm` : '—')
       : (rainVal !== null ? `${rainVal}% lluvia` : '—');
     const dataLabel = isPast ? 'Datos reales registrados' : 'Previsión meteorológica';
+    const uvRaw = d.uv_index_max ? d.uv_index_max[0] : null;
+    const uvLabel = uvRaw !== null ? Math.round(uvRaw) : '—';
+    const uvWarning = uvRaw >= 8 ? '🔴 Muy alto' : uvRaw >= 6 ? '🟠 Alto' : uvRaw >= 3 ? '🟡 Moderado' : '🟢 Bajo';
 
     widgetEl.classList.remove('loading');
     widgetEl.innerHTML = `
@@ -2091,6 +2134,7 @@ async function fetchWeather(widgetEl) {
         <div class="weather-extras">
           <span class="weather-extra">💧 ${rainLabel}</span>
           <span class="weather-extra">💨 ${wind} km/h</span>
+          <span class="weather-extra">☀️ UV ${uvLabel} · ${uvWarning}</span>
         </div>
       </div>
     `;
