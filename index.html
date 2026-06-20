@@ -846,6 +846,32 @@
   
   }
 
+
+  /* ── MAPS BUTTON IN DOCK ── */
+  #dock-maps-btn {
+    display: none;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    right: -8px;
+    top: -8px;
+    background: #4285F4;
+    color: white;
+    border-radius: 50%;
+    width: 26px; height: 26px;
+    font-size: 13px;
+    text-decoration: none;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.4);
+    transition: transform 0.15s;
+    z-index: 10;
+  }
+  #dock-maps-btn:hover { transform: scale(1.15); }
+  #dock-label-wrap {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+  }
+
 </style>
   <link rel="manifest" href="manifest.json">
   <link rel="apple-touch-icon" href="apple-touch-icon.png">
@@ -1206,6 +1232,10 @@
   <div class="dest-number" style="color:var(--gold);font-size:10px;letter-spacing:0.2em;text-transform:uppercase;margin-bottom:0.5rem;">Jornada de navegación · 20 de junio</div>
   <h2>El Estrecho de los Dardanelos</h2>
   <div class="nav-section-date">Navegación desde el Mar Egeo hacia el Mar de Mármara</div>
+  <div class="dest-illustration" style="border-radius:12px;overflow:hidden;margin-top:1.5rem;">
+    <img src="wc-37590.jpg" alt="El estrecho de los Dardanelos · Atardecer · Acuarela"
+         style="width:100%;height:220px;object-fit:cover;object-position:center top;display:block;">
+  </div>
   <p style="color:rgba(255,255,255,0.7);max-width:640px;font-size:14px;line-height:1.7;margin-bottom:1.5rem;">Uno de los pasos marítimos más estratégicamente decisivos de la historia de la humanidad. Solo 1,2 km de ancho en su punto más estrecho, ha sido escenario de batallas que cambiaron el curso de la civilización.</p>
 
   <div class="nav-col-grid">
@@ -1842,47 +1872,7 @@
     <div id="local-time-santorini" style="font-size:11px;color:rgba(255,255,255,0.5);margin-top:6px;font-family:'Inter',sans-serif;letter-spacing:0.08em;">🕐 — hora local</div>
   </div>
 <div class="dest-illustration">
-<svg viewBox="0 0 800 180" xmlns="http://www.w3.org/2000/svg">
-  <defs>
-    <linearGradient id="sky-s" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#2a0a3a"/><stop offset="50%" stop-color="#8a2a1a" stop-opacity="0.8"/><stop offset="100%" stop-color="#f5a030" stop-opacity="0.6"/></linearGradient>
-    <linearGradient id="caldera" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#1a3a6a"/><stop offset="100%" stop-color="#0a2040"/></linearGradient>
-  </defs>
-  <rect width="800" height="180" fill="url(#sky-s)"/>
-  <!-- Caldera water -->
-  <rect x="0" y="130" width="800" height="50" fill="url(#caldera)"/>
-  <!-- Cliff face left -->
-  <polygon points="0,60 0,180 180,180 140,60 60,40" fill="#2a1a0a" opacity="0.9"/>
-  <!-- Cliff face right -->
-  <polygon points="800,50 800,180 580,180 620,55 720,35" fill="#1a1008" opacity="0.9"/>
-  <!-- White cubic houses on cliff edge -->
-  <rect x="55" y="35" width="35" height="28" rx="4" fill="white" opacity="0.95"/>
-  <rect x="85" y="28" width="30" height="35" rx="4" fill="#f5f5f5" opacity="0.92"/>
-  <rect x="110" y="22" width="38" height="42" rx="4" fill="white" opacity="0.95"/>
-  <!-- Blue domes Santorini -->
-  <ellipse cx="72" cy="35" rx="14" ry="8" fill="#1a5a9a" opacity="0.95"/>
-  <rect x="58" y="35" width="28" height="6" fill="#1a5a9a" opacity="0.95"/>
-  <ellipse cx="129" cy="22" rx="16" ry="9" fill="#2a6aaa" opacity="0.95"/>
-  <rect x="113" y="22" width="32" height="7" fill="#2a6aaa" opacity="0.95"/>
-  <!-- Houses right cliff -->
-  <rect x="625" y="30" width="38" height="30" rx="4" fill="white" opacity="0.93"/>
-  <rect x="658" y="22" width="32" height="38" rx="4" fill="#f5f5f5" opacity="0.9"/>
-  <rect x="685" y="30" width="35" height="30" rx="4" fill="white" opacity="0.93"/>
-  <ellipse cx="644" cy="30" rx="14" ry="8" fill="#1a5a9a" opacity="0.92"/>
-  <rect x="630" y="30" width="28" height="6" fill="#1a5a9a" opacity="0.92"/>
-  <!-- Volcanic island Nea Kameni -->
-  <ellipse cx="400" cy="148" rx="60" ry="18" fill="#1a0a08" opacity="0.85"/>
-  <!-- Volcanic smoke -->
-  <ellipse cx="400" cy="132" rx="12" ry="18" fill="#2a1a18" opacity="0.5"/>
-  <ellipse cx="398" cy="115" rx="10" ry="15" fill="#1a1010" opacity="0.35"/>
-  <ellipse cx="402" cy="100" rx="8" ry="12" fill="#1a1010" opacity="0.2"/>
-  <!-- Sunset glow -->
-  <circle cx="400" cy="165" r="55" fill="#f5a030" opacity="0.25"/>
-  <!-- Stars -->
-  <circle cx="300" cy="20" r="2" fill="white" opacity="0.7"/>
-  <circle cx="500" cy="15" r="1.5" fill="white" opacity="0.6"/>
-  <circle cx="200" cy="10" r="1" fill="white" opacity="0.5"/>
-  <circle cx="600" cy="18" r="2" fill="white" opacity="0.65"/>
-</svg>
+  <img src="wc-37589.jpg" alt="Santorini · Atardecer sobre Oia · Acuarela" style="width:100%;height:220px;object-fit:cover;object-position:center;display:block;">
 </div>
 
   <div class="dest-body">
@@ -2363,7 +2353,10 @@ nav a.active {
 
 <!-- MINI DOCK -->
 <div id="dest-dock">
+  <div id="dock-label-wrap">
   <div id="dock-label">· · ·</div>
+  <a id="dock-maps-btn" href="#" target="_blank" rel="noopener" title="Ver en Google Maps">📍</a>
+</div>
   <div id="dock-buttons"></div>
 </div>
 
@@ -2394,6 +2387,29 @@ nav a.active {
   };
 
   const dock = document.getElementById('dest-dock');
+
+  const MAPS_URLS = {
+    'atenas':    'https://maps.google.com/?q=Acropolis+of+Athens,+Athens,+Greece',
+    'estambul':  'https://maps.google.com/?q=Hagia+Sophia,+Istanbul,+Turkey',
+    'mykonos':   'https://maps.google.com/?q=Mykonos,+Greece',
+    'creta':     'https://maps.google.com/?q=Knossos+Palace,+Heraklion,+Crete,+Greece',
+    'rodas':     'https://maps.google.com/?q=Medieval+City+of+Rhodes,+Greece',
+    'santorini': 'https://maps.google.com/?q=Oia,+Santorini,+Greece',
+    'dardanelos':'https://maps.google.com/?q=Dardanelles+Strait,+Turkey',
+  };
+
+  function updateMapsBtn(destId) {
+    const btn = document.getElementById('dock-maps-btn');
+    if (!btn) return;
+    const url = MAPS_URLS[destId];
+    if (url) {
+      btn.href = url;
+      btn.style.display = 'flex';
+    } else {
+      btn.style.display = 'none';
+    }
+  }
+
   const dockLabel = document.getElementById('dock-label');
   const dockButtons = document.getElementById('dock-buttons');
   const navLinks = document.querySelectorAll('nav a');
@@ -2416,6 +2432,7 @@ nav a.active {
 
     dockLabel.textContent = config.label;
     dockButtons.innerHTML = '';
+    updateMapsBtn(destId);
 
     config.sections.forEach(sec => {
       const meta = sectionMeta[sec];
@@ -2497,6 +2514,7 @@ nav a.active {
         currentDest = '__final__';
         dockLabel.textContent = 'Resumen del viaje';
         dockButtons.innerHTML = '';
+        updateMapsBtn(null);
         [
           { id: 'ranking',         icon: '🏆', label: 'Ranking'  },
           { id: 'imprescindibles', icon: '📋', label: 'Top 25'   },
@@ -2533,6 +2551,7 @@ nav a.active {
   // Build initial dock with first destination
   buildDock('atenas');
   currentDest = 'atenas';
+  updateMapsBtn('atenas');
 
   window.addEventListener('scroll', onScroll, { passive: true });
   onScroll();
