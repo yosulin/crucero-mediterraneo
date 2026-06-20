@@ -1,14 +1,24 @@
 {
-  "name": "Crucero Mediterráneo — Guía Cultural",
-  "short_name": "Mare Nostrum",
-  "description": "Guía cultural profunda del crucero por el Egeo: Atenas, Estambul, Mykonos, Creta, Rodas y Santorini",
+  "name": "Crucero por el Egeo — Guía Cultural",
+  "short_name": "Egeo",
+  "description": "Guía cultural del crucero por el Mar Egeo: Atenas, Estambul, Mykonos, Creta, Rodas y Santorini",
   "start_url": "/crucero-mediterraneo/",
   "display": "standalone",
   "background_color": "#0d2240",
   "theme_color": "#1a3a5c",
   "orientation": "portrait-primary",
   "icons": [
-    { "src": "icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any maskable" },
-    { "src": "icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any maskable" }
+    {
+      "src": "icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
   ]
 }
