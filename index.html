@@ -847,30 +847,25 @@
   }
 
 
-  /* ── MAPS BUTTON IN DOCK ── */
-  #dock-maps-btn {
-    display: none;
-    align-items: center;
-    justify-content: center;
-    position: absolute;
-    right: -8px;
-    top: -8px;
-    background: #4285F4;
-    color: white;
-    border-radius: 50%;
-    width: 26px; height: 26px;
-    font-size: 13px;
-    text-decoration: none;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.4);
-    transition: transform 0.15s;
-    z-index: 10;
-  }
-  #dock-maps-btn:hover { transform: scale(1.15); }
-  #dock-label-wrap {
-    position: relative;
+
+  /* ── MAPS LINKS IN PLACES ── */
+  .maps-link {
     display: inline-flex;
     align-items: center;
+    gap: 4px;
+    font-size: 11px;
+    font-weight: 700;
+    color: #4285F4;
+    text-decoration: none;
+    background: #e8f0fe;
+    padding: 3px 9px;
+    border-radius: 20px;
+    margin-top: 6px;
+    transition: background 0.15s;
+    white-space: nowrap;
   }
+  .maps-link:hover { background: #d2e3fc; }
+  .maps-link svg { width:11px; height:11px; fill:#4285F4; flex-shrink:0; }
 
 </style>
   <link rel="manifest" href="manifest.json">
@@ -1087,14 +1082,17 @@
         <div class="place-item must">
           <div class="place-name">La Acrópolis y el Partenón</div>
           <div class="place-desc">El monumento más importante del mundo occidental. Construido entre 447 y 432 a.C. bajo la dirección del escultor Fidias y el arquitecto Ictino. Es imposible estar en Atenas sin subir a la Acrópolis, aunque haya cola. El Partenón estaba originalmente pintado con colores vivos —azul, rojo y dorado— y albergaba una estatua criselefantina de Atenea de 12 metros. El conjunto arquitectónico incluye además los Propileos, el Erecteion (con las cariátides) y el Templo de Atenea Niké.</div>
+          <a class="maps-link" href="https://maps.google.com/?q=Acropolis+of+Athens" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg> Ver en Maps</a>
         </div>
         <div class="place-item must">
           <div class="place-name">Museo de la Acrópolis (Nuevo Museo)</div>
           <div class="place-desc">Inaugurado en 2009, es uno de los mejores museos del mundo. Alberga las cariátides originales, fragmentos del friso del Partenón y miles de piezas del santuario. Su arquitectura —con el pavimento de cristal sobre restos arqueológicos— es en sí misma una experiencia. Imprescindible para entender lo que estás viendo en la colina.</div>
+          <a class="maps-link" href="https://maps.google.com/?q=Acropolis+Museum+Athens" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg> Ver en Maps</a>
         </div>
         <div class="place-item must">
           <div class="place-name">Ágora Antigua y Templo de Hefesto</div>
           <div class="place-desc">El corazón político y comercial de la Atenas clásica, donde Sócrates discutía con los ciudadanos. El Templo de Hefesto (siglo V a.C.) es el templo dórico mejor conservado del mundo, incluso más que el Partenón. El stoa de Átalo, reconstruido, alberga el Museo del Ágora.</div>
+          <a class="maps-link" href="https://maps.google.com/?q=Ancient+Agora+Athens" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg> Ver en Maps</a>
         </div>
       </div>
 
@@ -1103,14 +1101,17 @@
         <div class="place-item rec">
           <div class="place-name">Barrio de Monastiráki y Plaka</div>
           <div class="place-desc">El casco histórico de Atenas, laberíntico y colorido, al pie de la Acrópolis. Plaka es el barrio más antiguo habitado continuamente. Encontrarás tabernas tradicionales, tiendas de artesanía y restos arqueológicos integrados en las calles.</div>
+          <a class="maps-link" href="https://maps.google.com/?q=Monastiraki+Athens" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg> Ver en Maps</a>
         </div>
         <div class="place-item rec">
           <div class="place-name">Museo Arqueológico Nacional</div>
           <div class="place-desc">El museo de arqueología más importante del mundo griego. Alberga la Máscara de Agamenón (hallada por Schliemann en Micenas), estatuas kouroi arcaicas, el tesoro de Vafio y miles de objetos que abarcan 7000 años de historia griega. Si tienes tiempo de calidad, no te lo pierdas.</div>
+          <a class="maps-link" href="https://maps.google.com/?q=National+Archaeological+Museum+Athens" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg> Ver en Maps</a>
         </div>
         <div class="place-item rec">
           <div class="place-name">Odeón de Herodes Ático</div>
           <div class="place-desc">Teatro romano del siglo II d.C. construido al pie de la Acrópolis. Sigue siendo utilizado para conciertos y espectáculos. Su visión nocturna, si el crucero lo permite, es espectacular.</div>
+          <a class="maps-link" href="https://maps.google.com/?q=Odeon+of+Herodes+Atticus+Athens" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg> Ver en Maps</a>
         </div>
       </div>
 
@@ -1119,10 +1120,12 @@
         <div class="place-item opt">
           <div class="place-name">Colina del Licabeto</div>
           <div class="place-desc">El punto más alto de Atenas (277 m). Vistas panorámicas de la ciudad, la Acrópolis, el Pireo y el mar Egeo. Se puede subir en funicular.</div>
+          <a class="maps-link" href="https://maps.google.com/?q=Lycabettus+Hill+Athens" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg> Ver en Maps</a>
         </div>
         <div class="place-item opt">
           <div class="place-name">Templo de Zeus Olímpico y Arco de Adriano</div>
           <div class="place-desc">Las columnas colosales del mayor templo de Grecia (siglo II d.C.). Solo quedan 15 de las 104 columnas originales, pero su escala impone respeto.</div>
+          <a class="maps-link" href="https://maps.google.com/?q=Temple+of+Olympian+Zeus+Athens" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg> Ver en Maps</a>
         </div>
       </div>
     </div>
@@ -1321,18 +1324,22 @@
     <div class="place-item must">
           <div class="place-name">Santa Sofía (Hagia Sophia)</div>
           <div class="place-desc">Construida por Justiniano I entre 532 y 537 d.C., fue durante casi 1.000 años la iglesia más grande del mundo. Su cúpula de 31 metros de diámetro pareció a los contemporáneos "suspendida del cielo por una cadena de oro". Fue catedral cristiana, luego mezquita otomana (1453–1935), luego museo (hasta 2020) y desde 2020 es de nuevo mezquita activa. Los mosaicos bizantinos de los emperadores y la Virgen coexisten hoy con el mihrab islámico —la tensión de siglos visible en una sola sala.</div>
+          <a class="maps-link" href="https://maps.google.com/?q=Hagia+Sophia+Istanbul" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg> Ver en Maps</a>
         </div>
         <div class="place-item must">
           <div class="place-name">Mezquita Azul (Sultanahmet Camii)</div>
           <div class="place-desc">Construida entre 1609 y 1616 por el sultán Ahmed I, es la única mezquita del mundo con seis minaretes. Su interior está cubierto por más de 20.000 azulejos İznik azules y blancos, y 260 ventanas. Es una de las arquitecturas islámicas más perfectas del planeta. Actualmente en restauración parcial, pero visitable.</div>
+          <a class="maps-link" href="https://maps.google.com/?q=Blue+Mosque+Istanbul" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg> Ver en Maps</a>
         </div>
         <div class="place-item must">
           <div class="place-name">Cisterna Basílica (Yerebatan Sarnıcı)</div>
           <div class="place-desc">Una de las más grandes de las 36 cisternas subterráneas construidas por el Imperio Bizantino bajo Justiniano I. Almacenaba agua para palacio y ciudad. 336 columnas, muchas reutilizadas de templos paganos, incluyendo dos bases con cabezas de Medusa en posición invertida —una curiosidad arqueológica que genera mucho debate. Atmosférica, fresca (10°C) y perfecta para el calor de junio.</div>
+          <a class="maps-link" href="https://maps.google.com/?q=Basilica+Cistern+Istanbul" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg> Ver en Maps</a>
         </div>
         <div class="place-item must">
           <div class="place-name">El Bósforo</div>
           <div class="place-desc">El estrecho que divide Europa y Asia. Un crucero corto por el Bósforo (hay ferrys regulares desde Eminönü) es la forma más impresionante de ver Estambul: los palacios otomanos sobre el agua, la fortaleza de Rumeli Hisarı, los puentes colgantes... El Bósforo es la columna vertebral histórica y geopolítica de la ciudad.</div>
+          <a class="maps-link" href="https://maps.google.com/?q=Bosphorus+Istanbul" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg> Ver en Maps</a>
         </div>
       </div>
 
@@ -1341,14 +1348,17 @@
         <div class="place-item rec">
           <div class="place-name">Palacio de Topkapi</div>
           <div class="place-desc">Centro del Imperio Otomano durante 400 años (1465–1856). Alberga la espada de Mahoma, el manto del Profeta, la Cuchilla de David y el bastón de Moisés —las reliquias más sagradas del Islam. El Harem y los tesoros son extraordinarios. Con tiempo limitado, priorizar el patio del Harem y las salas del Tesoro Imperial.</div>
+          <a class="maps-link" href="https://maps.google.com/?q=Topkapi+Palace+Istanbul" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg> Ver en Maps</a>
         </div>
         <div class="place-item rec">
           <div class="place-name">Gran Bazar (Kapalıçarşı)</div>
           <div class="place-desc">El mayor mercado cubierto del mundo: 60 calles, 4.000 tiendas, construido en 1461 sobre el ágora bizantino. Una experiencia sensorial absoluta aunque sepas que no vas a comprar nada. Las alfombras, las especias, las lámparas de mosaico y el ambiente son únicos.</div>
+          <a class="maps-link" href="https://maps.google.com/?q=Grand+Bazaar+Istanbul" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg> Ver en Maps</a>
         </div>
         <div class="place-item rec">
           <div class="place-name">Plaza Sultanahmet e Hipódromo</div>
           <div class="place-desc">El espacio donde convergieron tres civilizaciones: el obelisco de Tutmosis III (1400 a.C., traído desde Egipto por Teodosio en 390 d.C.), la columna de serpientes de Delfos (479 a.C.) y la columna de Constantino. Todo en el mismo espacio de 200 metros.</div>
+          <a class="maps-link" href="https://maps.google.com/?q=Hippodrome+of+Constantinople+Istanbul" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg> Ver en Maps</a>
         </div>
       </div>
 
@@ -1357,10 +1367,12 @@
         <div class="place-item opt">
           <div class="place-name">Barrio de Balat y Fener</div>
           <div class="place-desc">Los antiguos barrios judío y griego de Estambul, con casas de colores, escaleras empinadas y una autenticidad que Sultanahmet ha perdido.</div>
+          <a class="maps-link" href="https://maps.google.com/?q=Balat+Istanbul" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg> Ver en Maps</a>
         </div>
         <div class="place-item opt">
           <div class="place-name">Museo de Arte Islámico</div>
           <div class="place-desc">Colección extraordinaria de alfombras, manuscritos coránicos y arte islámico que abarca 13 siglos. El más importante de su tipo fuera de El Cairo.</div>
+          <a class="maps-link" href="https://maps.google.com/?q=Museum+of+Turkish+and+Islamic+Arts+Istanbul" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg> Ver en Maps</a>
         </div>
       </div>
     </div>
@@ -1488,10 +1500,12 @@
     <div class="place-item must">
           <div class="place-name">Excursión arqueológica a Delos</div>
           <div class="place-desc">La gran joya oculta de este viaje. Delos es un yacimiento arqueológico completamente deshabitado con templos de Apolo, el Barrio del Teatro, la famosa Terraza de los Leones (leones arcaicos de mármol del siglo VII a.C.) y vistas panorámicas desde el Monte Cinto (112 m). El barco hacia Delos sale desde el puerto de Mykonos varias veces al día (30 min). Es EL gran secreto histórico de esta escala.</div>
+          <a class="maps-link" href="https://maps.google.com/?q=Delos+Island+Greece" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg> Ver en Maps</a>
         </div>
         <div class="place-item must">
           <div class="place-name">Chora (casco histórico de Mykonos)</div>
           <div class="place-desc">El laberinto de cal blanca más fotogénico del Egeo. La Little Venice, con las casas de los capitanes directamente sobre el mar, los molinos de viento y la iglesia de Paraportiani (una agregación de cinco capillas blancas que se han fusionado en un solo bloque icónico) son imprescindibles.</div>
+          <a class="maps-link" href="https://maps.google.com/?q=Mykonos+Town+Greece" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg> Ver en Maps</a>
         </div>
       </div>
 
@@ -1500,10 +1514,12 @@
         <div class="place-item rec">
           <div class="place-name">Iglesia de Paraportiani</div>
           <div class="place-desc">Una de las iglesias más fotografiadas del mundo, aunque rara vez se menciona que no es una sola iglesia sino cinco capillas del siglo XV fusionadas en un único volumen escultórico de cal blanca. La forma más pura de la arquitectura de las Cícladas.</div>
+          <a class="maps-link" href="https://maps.google.com/?q=Paraportiani+Church+Mykonos" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg> Ver en Maps</a>
         </div>
         <div class="place-item rec">
           <div class="place-name">Museo Arqueológico de Mykonos</div>
           <div class="place-desc">Alberga hallazgos de Delos y de la necrópolis de Renia. Destaca un famoso pithos (urna funeraria) con relieves que narran la caída de Troya.</div>
+          <a class="maps-link" href="https://maps.google.com/?q=Archaeological+Museum+Mykonos" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg> Ver en Maps</a>
         </div>
       </div>
 
@@ -1628,10 +1644,12 @@
         <div class="place-item must">
           <div class="place-name">Palacio de Knossos</div>
           <div class="place-desc">A 5 km de Heraklion, es la razón principal para visitar Creta. El mayor yacimiento minoico del mundo. Aunque la "restauración" de Arthur Evans en hormigón armado (1900–1931) es polémica arqueológicamente, permite visualizar la escala y complejidad del palacio con sus frescos in situ. Esencial para comprender los 1.500 años de historia pre-griega de Europa.</div>
+          <a class="maps-link" href="https://maps.google.com/?q=Palace+of+Knossos+Crete" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg> Ver en Maps</a>
         </div>
         <div class="place-item must">
           <div class="place-name">Museo Arqueológico de Heraklion</div>
           <div class="place-desc">El mejor museo de arte minoico del mundo. Alberga el Disco de Festo (inscripción espiral en arcilla, aún sin descifrar, considerado el primer "documento impreso" de la historia), el fresco del Salto del Toro, la diosa de las serpientes y el sarcófago de Hagia Triada. Visitar ANTES que Knossos para contextualizar.</div>
+          <a class="maps-link" href="https://maps.google.com/?q=Heraklion+Archaeological+Museum+Crete" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg> Ver en Maps</a>
         </div>
       </div>
 
@@ -1640,10 +1658,12 @@
         <div class="place-item rec">
           <div class="place-name">Fortaleza veneciana de Koules (Rocca al Mare)</div>
           <div class="place-desc">El castillo veneciano del puerto de Heraklion, construido en el siglo XVI. Custodió la ciudad durante 21 años de asedio otomano (1648–1669). Desde aquí se ve la ciudad, el puerto y el mar. El interior muestra la maestría defensiva veneciana.</div>
+          <a class="maps-link" href="https://maps.google.com/?q=Koules+Fortress+Heraklion" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg> Ver en Maps</a>
         </div>
         <div class="place-item rec">
           <div class="place-name">Casco histórico veneciano</div>
           <div class="place-desc">La ciudad vieja dentro de las murallas venecianas: la Loggia, la Fuente Morosini (con sus leones de mármol), la catedral de San Tito. Un fragmento de la República de Venecia trasplantado al Mediterráneo oriental.</div>
+          <a class="maps-link" href="https://maps.google.com/?q=Venetian+Harbor+Heraklion+Crete" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg> Ver en Maps</a>
         </div>
       </div>
 
@@ -1763,14 +1783,17 @@
         <div class="place-item must">
           <div class="place-name">Ciudad Medieval amurallada (casco histórico UNESCO)</div>
           <div class="place-desc">Las murallas medievales de 4 km de longitud, los fosos, las torres y las puertas son el corazón de la visita. La Calle de los Caballeros (Ippoton) es la calle medieval mejor conservada de Europa: bordeada por los distintos "hostales" (posadas) de las diferentes lenguas de la Orden, construidos entre los siglos XIV y XVI. Una caminata por ella es como retroceder 600 años.</div>
+          <a class="maps-link" href="https://maps.google.com/?q=Medieval+City+of+Rhodes" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg> Ver en Maps</a>
         </div>
         <div class="place-item must">
           <div class="place-name">Palacio del Gran Maestre</div>
           <div class="place-desc">La fortaleza-residencia del Gran Maestre de los Caballeros. Construido sobre una acrópolis helenística, fue destruido en una explosión de polvorín en 1856 y reconstruido por los italianos en 1937 como residencia de verano de Mussolini y el rey Víctor Manuel III (aunque nunca lo usaron). El interior alberga mosaicos romanos traídos de Cos y una colección de arte medieval. Imponente architectura militar.</div>
+          <a class="maps-link" href="https://maps.google.com/?q=Palace+of+the+Grand+Master+Rhodes" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg> Ver en Maps</a>
         </div>
         <div class="place-item must">
           <div class="place-name">Bazar turco y Mezquita de Suleimán</div>
           <div class="place-desc">El barrio turco dentro de la ciudad medieval —un laberinto de callecitas con bazares, mezquitas y fuentes otomanas— es uno de los contrastes históricos más fascinantes del Mediterráneo: arquitectura de cruzados medievales con superposición otomana. La Mezquita de Suleimán (siglo XVI) domina el horizonte de la ciudad medieval.</div>
+          <a class="maps-link" href="https://maps.google.com/?q=Mosque+of+Suleiman+Rhodes" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg> Ver en Maps</a>
         </div>
       </div>
 
@@ -1779,10 +1802,12 @@
         <div class="place-item rec">
           <div class="place-name">Museo Arqueológico de Rodas (Hospital Medieval)</div>
           <div class="place-desc">Instalado en el antiguo hospital medieval de los Caballeros (siglo XV), alberga la famosa Afrodita de Rodas (escultura helenística del siglo I a.C.) y una rica colección de arte antiguo. El edificio en sí —con sus arcos góticos y patios— es una obra maestra de la arquitectura hospitalaria medieval.</div>
+          <a class="maps-link" href="https://maps.google.com/?q=Archaeological+Museum+Rhodes" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg> Ver en Maps</a>
         </div>
         <div class="place-item rec">
           <div class="place-name">Puerto de Mandráki y las columnas del Coloso</div>
           <div class="place-desc">Los dos ciervos de bronce que flanquean la entrada del puerto marcan (según la tradición) el lugar donde se alzaba el Coloso. El puerto veneciano, con sus tres molinos medievales y el Castillo de Naillac, es muy fotogénico.</div>
+          <a class="maps-link" href="https://maps.google.com/?q=Mandraki+Harbour+Rhodes" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg> Ver en Maps</a>
         </div>
       </div>
 
@@ -1791,6 +1816,7 @@
         <div class="place-item opt">
           <div class="place-name">Acrópolis de Rodas (Colina Monte Smith)</div>
           <div class="place-desc">Restos del templo de Apolo y el estadio helenístico. A 20 minutos a pie del centro. Impresionantes vistas pero menos impactante que el interior medieval.</div>
+          <a class="maps-link" href="https://maps.google.com/?q=Acropolis+of+Rhodes" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg> Ver en Maps</a>
         </div>
         <div class="place-item opt">
           <div class="place-name">Lindos (a 50 km)</div>
@@ -1899,14 +1925,17 @@
         <div class="place-item must">
           <div class="place-name">Akrotiri — el "Pompeya minoico"</div>
           <div class="place-desc">El yacimiento arqueológico más importante de la isla. Una ciudad de 3.600 años perfectamente conservada bajo la ceniza volcánica: calles de dos pisos, frescos in situ, vasijas, muebles. La cubierta moderna protege el yacimiento del sol. El fresco del "Flotilla" (barcos en procesión) y el "Pescador" son piezas maestras del arte prehelénico. Este lugar, junto con el Disco de Festo, es uno de los grandes misterios arqueológicos de Europa.</div>
+          <a class="maps-link" href="https://maps.google.com/?q=Akrotiri+Archaeological+Site+Santorini" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg> Ver en Maps</a>
         </div>
         <div class="place-item must">
           <div class="place-name">La Caldera desde Fira o Oia</div>
           <div class="place-desc">La vista de la caldera volcánica desde el borde del acantilado es una de las experiencias visuales más poderosas del Mediterráneo: casas blancas y cúpulas azules sobre acantilados de 300 metros que caen verticalmente al mar, con la pequeña isla volcánica de Nea Kameni humeando en el centro. Es el paisaje más reconocible de Grecia.</div>
+          <a class="maps-link" href="https://maps.google.com/?q=Fira+Santorini+Greece" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg> Ver en Maps</a>
         </div>
         <div class="place-item must">
           <div class="place-name">Oia (atardecer)</div>
           <div class="place-desc">El pueblo de Oia, en el extremo norte de la isla, tiene el atardecer más fotografiado del mundo. Miles de personas se congregan cada tarde para verlo. Si el barco zarpa al atardecer, este es el espectáculo que no debe perderse. Llegar con 1h de antelación para conseguir posición.</div>
+          <a class="maps-link" href="https://maps.google.com/?q=Oia+Santorini+Greece" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg> Ver en Maps</a>
         </div>
       </div>
 
@@ -1915,10 +1944,12 @@
         <div class="place-item rec">
           <div class="place-name">Museo Prehistórico de Fira</div>
           <div class="place-desc">Alberga los frescos originales de Akrotiri. Los frescos del "Flotilla", el "Joven Pescador" y los "Antílopes" son piezas únicas en la historia del arte prehelénico. Visitar antes de ir a Akrotiri para ver los originales.</div>
+          <a class="maps-link" href="https://maps.google.com/?q=Museum+of+Prehistoric+Thera+Santorini" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg> Ver en Maps</a>
         </div>
         <div class="place-item rec">
           <div class="place-name">Nea Kameni (volcán activo en la caldera)</div>
           <div class="place-desc">Un barco corto desde el puerto de Fira lleva a la pequeña isla volcánica donde se puede ver y oler azufre activo. Una experiencia geológica única. Las aguas termales adyacentes son naranjas por el mineral.</div>
+          <a class="maps-link" href="https://maps.google.com/?q=Nea+Kameni+Santorini" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg> Ver en Maps</a>
         </div>
       </div>
 
@@ -1927,10 +1958,12 @@
         <div class="place-item opt">
           <div class="place-name">Pirgos (pueblo medieval)</div>
           <div class="place-desc">El pueblo más alto de la isla con restos de castillo veneciano y tabernas auténticas lejos del turismo masivo.</div>
+          <a class="maps-link" href="https://maps.google.com/?q=Pyrgos+Santorini+Greece" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg> Ver en Maps</a>
         </div>
         <div class="place-item opt">
           <div class="place-name">Playa Roja (Kokkini Paralia)</div>
           <div class="place-desc">Playa de arena roja volcánica y acantilados de lava —un paisaje lunar único. A 500m de Akrotiri.</div>
+          <a class="maps-link" href="https://maps.google.com/?q=Red+Beach+Santorini" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg> Ver en Maps</a>
         </div>
       </div>
     </div>
@@ -2353,10 +2386,7 @@ nav a.active {
 
 <!-- MINI DOCK -->
 <div id="dest-dock">
-  <div id="dock-label-wrap">
   <div id="dock-label">· · ·</div>
-  <a id="dock-maps-btn" href="#" target="_blank" rel="noopener" title="Ver en Google Maps">📍</a>
-</div>
   <div id="dock-buttons"></div>
 </div>
 
