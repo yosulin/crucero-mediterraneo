@@ -867,6 +867,131 @@
   .maps-link:hover { background: #d2e3fc; }
   .maps-link svg { width:11px; height:11px; fill:#4285F4; flex-shrink:0; }
 
+
+  /* ════════════════════════════════════════════════════
+     DESTINATION CAROUSEL
+  ════════════════════════════════════════════════════ */
+  body { overflow-x: hidden; }
+
+  /* Carousel wrapper — full viewport minus nav */
+  #carousel-container {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+    /* sits below nav */
+  }
+
+  /* The sliding track */
+  #carousel-track {
+    display: flex;
+    will-change: transform;
+    transition: transform 0.42s cubic-bezier(0.25,0.8,0.25,1);
+  }
+
+  /* Each slide = one destination, full viewport width */
+  .carousel-slide {
+    min-width: 100vw;
+    width: 100vw;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    /* height = viewport minus fixed nav (52px) minus bottom indicator (44px) */
+    height: calc(100dvh - 52px - 44px);
+    scroll-behavior: smooth;
+  }
+
+  /* Bottom carousel indicator bar */
+  #carousel-indicator {
+    position: fixed;
+    bottom: 0; left: 0; right: 0;
+    height: 44px;
+    background: var(--aegean);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    z-index: 90;
+    border-top: 1px solid rgba(255,255,255,0.1);
+  }
+  .c-dot {
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.25);
+    transition: all 0.25s;
+    cursor: pointer;
+    flex-shrink: 0;
+  }
+  .c-dot.active {
+    background: var(--gold);
+    transform: scale(1.5);
+  }
+  .c-arrow {
+    background: none;
+    border: none;
+    color: rgba(255,255,255,0.5);
+    font-size: 18px;
+    cursor: pointer;
+    padding: 0 10px;
+    line-height: 1;
+    transition: color 0.15s;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .c-arrow:hover { color: var(--gold); }
+  .c-arrow:disabled { opacity: 0.2; cursor: default; }
+  .c-dest-label {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--gold);
+    min-width: 90px;
+    text-align: center;
+    white-space: nowrap;
+  }
+
+  /* Adjust final sections so they're not in the carousel */
+  #carousel-after {
+    /* normal page flow after carousel */
+  }
+
+  /* Section blocks — consistent style across all destinations */
+  .section-block {
+    border-bottom: 1px solid #ede8df;
+    padding: 2rem 2rem;
+  }
+  .section-block:last-child { border-bottom: none; }
+
+  /* Destination header — consistent */
+  .dest-header {
+    padding: 2rem 2rem 1.5rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  /* Swipe hint animation on first load */
+  @keyframes swipe-hint {
+    0%   { transform: translateX(0);     opacity: 1; }
+    30%  { transform: translateX(-18px); opacity: 0.6; }
+    60%  { transform: translateX(0);     opacity: 1; }
+    100% { transform: translateX(0);     opacity: 1; }
+  }
+  #swipe-hint {
+    position: fixed;
+    bottom: 58px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(0,0,0,0.65);
+    color: white;
+    font-size: 12px;
+    padding: 6px 16px;
+    border-radius: 20px;
+    z-index: 200;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.4s;
+    white-space: nowrap;
+  }
+  #swipe-hint.show { opacity: 1; }
+
 </style>
   <link rel="manifest" href="manifest.json">
   <link rel="apple-touch-icon" href="apple-touch-icon.png">
@@ -1034,12 +1159,13 @@
   </div>
 </div>
 
-<div class="container">
 
-<!-- ================================ -->
-<!-- DESTINO 1: ATENAS / EL PIREO -->
-<!-- ================================ -->
-<div class="destination" id="atenas">
+<div id="carousel-container">
+  <div id="carousel-track">
+
+    <div class="carousel-slide" id="slide-atenas" data-dest="atenas">
+      <div class="container">
+        id="atenas">
   <div class="dest-header">
     <div class="dest-number">Escala 01 · 19 de junio</div>
     <h2>El Pireo — <em>Atenas</em></h2>
@@ -1231,7 +1357,13 @@
 <!-- ================================ -->
 <!-- DARDANELOS (NAVEGACIÓN) -->
 <!-- ================================ -->
-<div class="navigation-section" id="dardanelos">
+<div
+      </div>
+    </div>
+
+    <div class="carousel-slide" id="slide-dardanelos" data-dest="dardanelos">
+      <div class="container">
+        class="navigation-section" id="dardanelos">
   <div class="dest-number" style="color:var(--gold);font-size:10px;letter-spacing:0.2em;text-transform:uppercase;margin-bottom:0.5rem;">Jornada de navegación · 20 de junio</div>
   <h2>El Estrecho de los Dardanelos</h2>
   <div class="nav-section-date">Navegación desde el Mar Egeo hacia el Mar de Mármara</div>
@@ -1282,7 +1414,13 @@
 <!-- ================================ -->
 <!-- ESTAMBUL -->
 <!-- ================================ -->
-<div class="destination" id="estambul">
+<div class="destination"
+      </div>
+    </div>
+
+    <div class="carousel-slide" id="slide-estambul" data-dest="estambul">
+      <div class="container">
+        id="estambul">
   <div class="dest-header">
     <div class="dest-number">Escala 02 · 21 de junio</div>
     <h2>Estambul <em>— Turquía</em></h2>
@@ -1463,7 +1601,13 @@
 <!-- ================================ -->
 <!-- MYKONOS -->
 <!-- ================================ -->
-<div class="destination" id="mykonos">
+<div class="destination"
+      </div>
+    </div>
+
+    <div class="carousel-slide" id="slide-mykonos" data-dest="mykonos">
+      <div class="container">
+        id="mykonos">
   <div class="dest-header" style="background: linear-gradient(135deg, #1a3a5c, #2d5986);">
     <div class="dest-number">Escala 03 · 22 de junio</div>
     <h2>Mykonos <em>— Cícladas, Grecia</em></h2>
@@ -1605,7 +1749,13 @@
 <!-- ================================ -->
 <!-- CRETA -->
 <!-- ================================ -->
-<div class="destination" id="creta">
+<div class="destination"
+      </div>
+    </div>
+
+    <div class="carousel-slide" id="slide-creta" data-dest="creta">
+      <div class="container">
+        id="creta">
   <div class="dest-header" style="background: linear-gradient(135deg, #2d1a0e, #7a3520);">
     <div class="dest-number">Escala 04 · 23 de junio</div>
     <h2>Heraklion — <em>Creta, Grecia</em></h2>
@@ -1746,7 +1896,13 @@
 <!-- ================================ -->
 <!-- RODAS -->
 <!-- ================================ -->
-<div class="destination" id="rodas">
+<div class="destination"
+      </div>
+    </div>
+
+    <div class="carousel-slide" id="slide-rodas" data-dest="rodas">
+      <div class="container">
+        id="rodas">
   <div class="dest-header" style="background: linear-gradient(135deg, #1a3a1a, #2d6a3a);">
     <div class="dest-number">Escala 05 · 24 de junio</div>
     <h2>Rodas <em>— Dodecaneso, Grecia</em></h2>
@@ -1885,7 +2041,13 @@
 <!-- ================================ -->
 <!-- SANTORINI -->
 <!-- ================================ -->
-<div class="destination" id="santorini">
+<div class="destination"
+      </div>
+    </div>
+
+    <div class="carousel-slide" id="slide-santorini" data-dest="santorini">
+      <div class="container">
+        id="santorini">
   <div class="dest-header" style="background: linear-gradient(135deg, #1a0a2e, #4a1a6a);">
     <div class="dest-number">Escala 06 · 25 de junio</div>
     <h2>Santorini <em>— Cícladas, Grecia</em></h2>
@@ -2029,8 +2191,28 @@
     </div>
   </div>
 </div>
+      </div>
+    </div>
+  </div><!-- /carousel-track -->
+</div><!-- /carousel-container -->
 
-</div><!-- /container -->
+<!-- Swipe hint -->
+<div id="swipe-hint">← Desliza para cambiar destino →</div>
+
+<!-- Carousel indicator -->
+<div id="carousel-indicator">
+  <button class="c-arrow" id="c-prev" onclick="carouselPrev()">←</button>
+  <div class="c-dot active" onclick="carouselGoTo(0)" title="Atenas"></div>
+  <div class="c-dot" onclick="carouselGoTo(1)" title="Dardanelos"></div>
+  <div class="c-dot" onclick="carouselGoTo(2)" title="Estambul"></div>
+  <div class="c-dot" onclick="carouselGoTo(3)" title="Mykonos"></div>
+  <div class="c-dot" onclick="carouselGoTo(4)" title="Creta"></div>
+  <div class="c-dot" onclick="carouselGoTo(5)" title="Rodas"></div>
+  <div class="c-dot" onclick="carouselGoTo(6)" title="Santorini"></div>
+  <span class="c-dest-label" id="c-dest-label">Atenas</span>
+  <button class="c-arrow" id="c-next" onclick="carouselNext()">→</button>
+</div>
+
 
 <!-- ================================ -->
 <!-- SECCIONES FINALES -->
@@ -2591,6 +2773,343 @@ nav a.active {
 
 <script>
 
+</script>
+
+
+<script>
+// ════════════════════════════════════════════════════
+// WEATHER — Open-Meteo (free, no key required)
+// ════════════════════════════════════════════════════
+const WMO_CODES = {
+  0:  {icon:'☀️', desc:'Despejado'},
+  1:  {icon:'🌤️',desc:'Mayormente despejado'},
+  2:  {icon:'⛅', desc:'Parcialmente nublado'},
+  3:  {icon:'☁️', desc:'Nublado'},
+  45: {icon:'🌫️',desc:'Niebla'},
+  48: {icon:'🌫️',desc:'Niebla con escarcha'},
+  51: {icon:'🌦️',desc:'Llovizna ligera'},
+  53: {icon:'🌦️',desc:'Llovizna moderada'},
+  61: {icon:'🌧️',desc:'Lluvia ligera'},
+  63: {icon:'🌧️',desc:'Lluvia moderada'},
+  65: {icon:'🌧️',desc:'Lluvia intensa'},
+  80: {icon:'🌦️',desc:'Chubascos ligeros'},
+  81: {icon:'🌧️',desc:'Chubascos moderados'},
+  95: {icon:'⛈️', desc:'Tormenta eléctrica'},
+};
+function getWmo(code) {
+  return WMO_CODES[code] || {icon:'🌡️', desc:'Variable'};
+}
+
+async function fetchWeather(el) {
+  const lat  = el.dataset.lat;
+  const lon  = el.dataset.lon;
+  const date = el.dataset.date;
+  if (!lat || !lon || !date) return;
+
+  const today   = new Date(); today.setHours(0,0,0,0);
+  const target  = new Date(date + 'T00:00:00');
+  const isPast  = target < today;
+
+  let url, rainKey;
+  if (isPast) {
+    url     = `https://archive-api.open-meteo.com/v1/archive?latitude=${lat}&longitude=${lon}&daily=temperature_2m_max,temperature_2m_min,weathercode,precipitation_sum,windspeed_10m_max,uv_index_max,sunrise,sunset&timezone=auto&start_date=${date}&end_date=${date}`;
+    rainKey = 'precipitation_sum';
+  } else {
+    url     = `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&daily=temperature_2m_max,temperature_2m_min,weathercode,precipitation_probability_max,windspeed_10m_max,uv_index_max,sunrise,sunset&timezone=auto&start_date=${date}&end_date=${date}`;
+    rainKey = 'precipitation_probability_max';
+  }
+
+  try {
+    const res  = await fetch(url);
+    const data = await res.json();
+    const d    = data.daily;
+    if (!d || !d.temperature_2m_max || !d.temperature_2m_max.length) throw new Error('no data');
+
+    const tmax  = Math.round(d.temperature_2m_max[0]);
+    const tmin  = Math.round(d.temperature_2m_min[0]);
+    const wmo   = d.weathercode[0];
+    const wind  = Math.round(d.windspeed_10m_max[0]);
+    const wInfo = getWmo(wmo);
+    const rainVal = d[rainKey] ? d[rainKey][0] : null;
+    const rainTxt = isPast
+      ? (rainVal !== null ? `${rainVal.toFixed(1)} mm` : '—')
+      : (rainVal !== null ? `${rainVal}% lluvia` : '—');
+    const uvRaw   = d.uv_index_max ? Math.round(d.uv_index_max[0]) : null;
+    const uvWarn  = uvRaw >= 8 ? '🔴 Extremo' : uvRaw >= 6 ? '🟠 Alto' : uvRaw >= 3 ? '🟡 Moderado' : '🟢 Bajo';
+    const fmtTime = iso => iso ? iso.slice(11,16) : '—';
+    const sunrise = fmtTime(d.sunrise ? d.sunrise[0] : null);
+    const sunset  = fmtTime(d.sunset  ? d.sunset[0]  : null);
+    const label   = isPast ? 'Datos reales registrados' : 'Previsión meteorológica';
+
+    el.classList.remove('loading');
+    el.innerHTML = `
+      <span class="weather-icon">${wInfo.icon}</span>
+      <div class="weather-temps">
+        <span class="weather-max">${tmax}°C</span>
+        <span class="weather-min">${tmin}°C mín</span>
+      </div>
+      <div class="weather-desc">
+        <span class="weather-label">${label}</span>
+        ${wInfo.desc}
+        <div class="weather-extras">
+          <span class="weather-extra">💧 ${rainTxt}</span>
+          <span class="weather-extra">💨 ${wind} km/h</span>
+          ${uvRaw !== null ? `<span class="weather-extra">☀️ UV ${uvRaw} · ${uvWarn}</span>` : ''}
+        </div>
+        <div class="weather-extras" style="margin-top:3px">
+          <span class="weather-extra">🌅 ${sunrise}</span>
+          <span class="weather-extra">🌇 ${sunset}</span>
+        </div>
+      </div>`;
+  } catch(e) {
+    el.classList.remove('loading');
+    el.innerHTML = `<span class="weather-icon">🌡️</span><span class="weather-error">No se pudo cargar el tiempo</span>`;
+  }
+}
+
+// Load all widgets staggered
+document.addEventListener('DOMContentLoaded', () => {
+  document.querySelectorAll('.weather-widget[data-lat]').forEach((w, i) => {
+    setTimeout(() => fetchWeather(w), i * 400);
+  });
+});
+
+// ════════════════════════════════════════════════════
+// LOCAL TIME per destination
+// ════════════════════════════════════════════════════
+const DEST_TZ = {
+  atenas:'Europe/Athens', estambul:'Europe/Istanbul',
+  mykonos:'Europe/Athens', creta:'Europe/Athens',
+  rodas:'Europe/Athens', santorini:'Europe/Athens',
+};
+function updateLocalTimes() {
+  Object.entries(DEST_TZ).forEach(([dest, tz]) => {
+    const el = document.getElementById('local-time-' + dest);
+    if (!el) return;
+    el.textContent = '🕐 ' + new Date().toLocaleTimeString('es-ES', {
+      timeZone: tz, hour:'2-digit', minute:'2-digit', hour12:false
+    }) + ' hora local';
+  });
+}
+updateLocalTimes();
+setInterval(updateLocalTimes, 30000);
+</script>
+
+
+<script>
+// ════════════════════════════════════════════════════
+// CAROUSEL
+// ════════════════════════════════════════════════════
+const DEST_ORDER = ['atenas','dardanelos','estambul','mykonos','creta','rodas','santorini'];
+const DEST_NAMES = {
+  atenas:'Atenas', dardanelos:'Dardanelos', estambul:'Estambul',
+  mykonos:'Mykonos', creta:'Creta', rodas:'Rodas', santorini:'Santorini'
+};
+
+let currentSlideIdx = 0;
+const track  = document.getElementById('carousel-track');
+const dots   = document.querySelectorAll('.c-dot');
+const label  = document.getElementById('c-dest-label');
+const btnPrev = document.getElementById('c-prev');
+const btnNext = document.getElementById('c-next');
+
+function carouselGoTo(idx, animate=true) {
+  // Infinite: wrap around
+  const total = DEST_ORDER.length;
+  idx = ((idx % total) + total) % total;
+  currentSlideIdx = idx;
+
+  if (!animate) track.style.transition = 'none';
+  track.style.transform = `translateX(-${idx * 100}vw)`;
+  if (!animate) setTimeout(() => { track.style.transition = ''; }, 50);
+
+  // Update dots
+  dots.forEach((d, i) => d.classList.toggle('active', i === idx));
+  // Update label
+  if (label) label.textContent = DEST_NAMES[DEST_ORDER[idx]] || '';
+  // Update nav
+  updateNavActive(DEST_ORDER[idx]);
+  // Update dock
+  buildDockForDest(DEST_ORDER[idx]);
+  // Update maps btn if any
+  if (typeof updateMapsBtn === 'function') updateMapsBtn(DEST_ORDER[idx]);
+  // Arrow states (always enabled for infinite)
+  if (btnPrev) btnPrev.disabled = false;
+  if (btnNext) btnNext.disabled = false;
+}
+
+function carouselNext() {
+  carouselGoTo(currentSlideIdx + 1);
+}
+function carouselPrev() {
+  carouselGoTo(currentSlideIdx - 1);
+}
+
+// ── KEYBOARD ──
+document.addEventListener('keydown', e => {
+  if (e.key === 'ArrowRight') carouselNext();
+  if (e.key === 'ArrowLeft')  carouselPrev();
+});
+
+// ── TOUCH SWIPE ──
+let touchStartX = 0, touchStartY = 0, touchMoved = false;
+document.addEventListener('touchstart', e => {
+  touchStartX = e.touches[0].clientX;
+  touchStartY = e.touches[0].clientY;
+  touchMoved = false;
+}, {passive: true});
+
+document.addEventListener('touchmove', e => {
+  const dx = Math.abs(e.touches[0].clientX - touchStartX);
+  const dy = Math.abs(e.touches[0].clientY - touchStartY);
+  if (dx > dy && dx > 10) touchMoved = true;
+}, {passive: true});
+
+document.addEventListener('touchend', e => {
+  if (!touchMoved) return;
+  const dx = e.changedTouches[0].clientX - touchStartX;
+  const dy = Math.abs(e.changedTouches[0].clientY - touchStartY);
+  const slide = document.querySelector('.carousel-slide');
+  // Only swipe horizontally if not scrolling vertically inside slide
+  if (Math.abs(dx) > 50 && dy < 80) {
+    if (dx < 0) carouselNext();
+    else carouselPrev();
+  }
+}, {passive: true});
+
+// ── NAV ACTIVE ──
+const navLinks = document.querySelectorAll('nav a');
+function updateNavActive(destId) {
+  navLinks.forEach(link => {
+    const href = link.getAttribute('href')?.replace('#', '');
+    link.classList.toggle('active', href === destId);
+    if (href === destId) {
+      const nav = link.closest('nav');
+      if (nav) nav.scrollTo({left: link.offsetLeft - nav.offsetWidth/2 + link.offsetWidth/2, behavior:'smooth'});
+    }
+  });
+}
+
+// ── NAV LINK CLICKS → go to slide ──
+navLinks.forEach(link => {
+  link.addEventListener('click', e => {
+    const href = link.getAttribute('href')?.replace('#', '');
+    const idx  = DEST_ORDER.indexOf(href);
+    if (idx !== -1) {
+      e.preventDefault();
+      carouselGoTo(idx);
+    }
+  });
+});
+
+// ── DOT CLICKS ──
+dots.forEach((dot, i) => {
+  dot.addEventListener('click', () => carouselGoTo(i));
+});
+
+// ════════════════════════════════════════════════════
+// DOCK — per destination sections
+// ════════════════════════════════════════════════════
+const destinations = {
+  atenas:    {label:'Atenas',      sections:['historia','queVer','ruta','patrimonio','gastro','fotos','consejos','valoracion']},
+  dardanelos:{label:'Dardanelos',  sections:[]},
+  estambul:  {label:'Estambul',    sections:['historia','queVer','ruta','gastro','fotos','consejos','valoracion']},
+  mykonos:   {label:'Mykonos',     sections:['historia','queVer','ruta','gastro','fotos','consejos','valoracion']},
+  creta:     {label:'Creta',       sections:['historia','queVer','ruta','gastro','fotos','consejos','valoracion']},
+  rodas:     {label:'Rodas',       sections:['historia','queVer','ruta','gastro','fotos','consejos','valoracion']},
+  santorini: {label:'Santorini',   sections:['historia','queVer','ruta','gastro','fotos','consejos','valoracion']},
+};
+const sectionMeta = {
+  historia:   {icon:'🏛', label:'Historia'},
+  queVer:     {icon:'📍', label:'Qué ver'},
+  ruta:       {icon:'🗺', label:'Ruta'},
+  patrimonio: {icon:'🏺', label:'Arte'},
+  gastro:     {icon:'🍽', label:'Comida'},
+  fotos:      {icon:'📷', label:'Fotos'},
+  consejos:   {icon:'💡', label:'Tips'},
+  valoracion: {icon:'⭐', label:'Score'},
+};
+
+const dock      = document.getElementById('dest-dock');
+const dockLabel = document.getElementById('dock-label');
+const dockBtns  = document.getElementById('dock-buttons');
+
+function scrollToEl(el) {
+  // Find which slide this element is in
+  const slide = el.closest('.carousel-slide');
+  if (slide) {
+    const NAV = 52;
+    const PAD = 16;
+    const top = el.getBoundingClientRect().top + slide.scrollTop - NAV - PAD;
+    slide.scrollTo({top, behavior:'smooth'});
+  }
+}
+
+function buildDockForDest(destId) {
+  const config = destinations[destId];
+  if (!config) return;
+
+  dockLabel.textContent = config.label;
+  dockBtns.innerHTML = '';
+
+  if (!config.sections.length) return;
+
+  config.sections.forEach(sec => {
+    const meta = sectionMeta[sec];
+    if (!meta) return;
+    const sectionId = `${destId}-${sec}`;
+    const el = document.getElementById(sectionId);
+    if (!el) return;
+
+    const btn = document.createElement('a');
+    btn.className = 'dock-btn';
+    btn.href = '#' + sectionId;
+    btn.dataset.section = sectionId;
+    btn.innerHTML = `<span class="dock-icon">${meta.icon}</span><span class="dock-txt">${meta.label}</span>`;
+    btn.addEventListener('click', e => {
+      e.preventDefault();
+      scrollToEl(el);
+    });
+    dockBtns.appendChild(btn);
+  });
+}
+
+// Update active dock button based on scroll within current slide
+function updateActiveDockBtn(slide, destId) {
+  const config = destinations[destId];
+  if (!config || !config.sections.length) return;
+
+  let activeSec = null;
+  const scrollY = slide.scrollTop + slide.clientHeight * 0.3;
+
+  config.sections.forEach(sec => {
+    const el = document.getElementById(`${destId}-${sec}`);
+    if (el && el.offsetTop <= scrollY) activeSec = `${destId}-${sec}`;
+  });
+
+  dockBtns.querySelectorAll('.dock-btn').forEach(btn => {
+    btn.classList.toggle('active-section', btn.dataset.section === activeSec);
+  });
+}
+
+// Listen for scroll inside each slide
+document.querySelectorAll('.carousel-slide').forEach(slide => {
+  slide.addEventListener('scroll', () => {
+    const destId = slide.dataset.dest;
+    updateActiveDockBtn(slide, destId);
+  }, {passive: true});
+});
+
+// ── SWIPE HINT on first visit ──
+if (!localStorage.getItem('carousel-seen')) {
+  const hint = document.getElementById('swipe-hint');
+  setTimeout(() => { hint.classList.add('show'); }, 1000);
+  setTimeout(() => { hint.classList.remove('show'); localStorage.setItem('carousel-seen','1'); }, 4000);
+}
+
+// ── INIT ──
+carouselGoTo(0, false);
+buildDockForDest('atenas');
 </script>
 
 </body>
