@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Crucero Mediterráneo — Guía Cultural Profunda</title>
+<title>Crucero por el Egeo — Guía Cultural</title>
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Inter:wght@300;400;500&display=swap');
 
@@ -798,6 +798,32 @@
     height: 380px; border-radius: 16px;
     overflow: hidden;
     border: 1px solid rgba(255,255,255,0.1);
+    position: relative;
+    z-index: 1;
+  }
+  /* Keep all Leaflet UI below the fixed nav */
+  .leaflet-top,
+  .leaflet-bottom {
+    z-index: 50 !important;
+  }
+  .leaflet-pane {
+    z-index: 40 !important;
+  }
+  .leaflet-tile-pane {
+    z-index: 41 !important;
+  }
+  .leaflet-overlay-pane {
+    z-index: 42 !important;
+  }
+  .leaflet-marker-pane,
+  .leaflet-tooltip-pane,
+  .leaflet-popup-pane {
+    z-index: 43 !important;
+  }
+  /* Prevent map from leaking above nav on scroll */
+  .map-section {
+    position: relative;
+    z-index: 1;
   }
   @media (max-width: 600px) { #cruise-map { height: 280px; } }
 
@@ -851,14 +877,14 @@
   <link rel="apple-touch-icon" href="apple-touch-icon.png">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-  <meta name="apple-mobile-web-app-title" content="Mare Nostrum">
+  <meta name="apple-mobile-web-app-title" content="Egeo">
   <meta name="theme-color" content="#1a3a5c">
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
 </head>
 <body>
 
 <nav>
-  <span class="nav-title">Mare Nostrum</span>
+  <span class="nav-title">Egeo</span>
   <span class="nav-sep">·</span>
   <a href="#atenas">Atenas</a>
   <a href="#dardanelos">Dardanelos</a>
@@ -873,8 +899,8 @@
 
 <!-- HERO -->
 <div class="hero">
-  <div class="hero-sub">Guía cultural profunda · Junio 2026</div>
-  <h1>Crucero por el <em>Mare Nostrum</em><br>Grecia · Turquía · El Egeo</h1>
+  <div class="hero-sub">Guía cultural · Junio 2026</div>
+  <h1>Crucero por el <em>Egeo</em><br>Grecia · Turquía · El Egeo</h1>
   <p style="color:rgba(255,255,255,0.5);font-size:13px;margin:1rem 0 2.5rem;font-style:italic;">Del Pireo a Santorini · 8 jornadas · Historia, arqueología y cultura mediterránea</p>
   <div class="route-line">
     <div class="route-stop"><div class="route-dot"></div><span>El Pireo<br>Atenas</span><span class="date">19 jun</span></div>
@@ -2406,7 +2432,7 @@
 </div>
 
 <footer>
-  <p>Guía cultural profunda · Crucero <span>Mare Nostrum</span> · Junio 2025</p>
+  <p>Guía cultural profunda · Crucero <span>Egeo</span> · Junio 2025</p>
   <p style="margin-top:0.4rem;font-size:11px;opacity:0.6;">Del Pireo a Santorini · Historia, arqueología y cultura mediterránea</p>
 </footer>
 
@@ -2916,7 +2942,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 <!-- PWA INSTALL BANNER -->
 <div id="pwa-banner" style="display:none">
-  <img class="pwa-icon" src="apple-touch-icon.png" alt="Mare Nostrum">
+  <img class="pwa-icon" src="apple-touch-icon.png" alt="Egeo">
   <div class="pwa-text">
     <div class="pwa-title">Instalar guía del crucero</div>
     <div class="pwa-sub">Accede sin internet, como una app</div>
@@ -3039,7 +3065,7 @@ function scrollToSection(id) {
     center: [38.5, 26.5],
     zoom: 5,
     zoomControl: true,
-    scrollWheelZoom: false,
+    scrollWheelZoom: false, keyboard: false,
   });
 
   L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
